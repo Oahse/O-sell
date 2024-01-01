@@ -1,0 +1,10 @@
+/* OpenSans.css */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-SemiBold.ttf') format('truetype'); /* Adjust the file path */
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  /* Define @font-face rules for other font variations if applicable */
+  

@@ -1,0 +1,86 @@
+.header-bg {
+  background-color: #faf5d1;
+}
+.header-link {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    padding: 0.375rem 0.75rem;
+    margin-left: 4px;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor:pointer;
+    border-radius: 5px;
+    color: black;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+}
+/* Hover/focus styles for the warning button */
+.header-link:hover,
+.header-link:focus {
+    color: black;
+    font-weight: 600;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+.header-link:active {
+    color: black;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+.container-flex{
+   display: flex;
+}
+.links{
+  margin-right:8px;
+}
+
+.notification-icon {
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor:pointer;
+  border-radius: 5px;
+  color: black;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.search-icon {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  margin-left: 2px;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor:pointer;
+  border-radius: 5px;
+  color: black;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+}
