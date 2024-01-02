@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container,Navbar, Nav} from 'react-bootstrap';
 import { BrowserRouter as Router, Route ,Link } from "react-router-dom";
-import { faContactBook, faHelmetSafety,faShoppingBag, faCaretRight, faHome, faInfoCircle, faWrench, faUser, faSignIn, faSignOut, faGear} from '@fortawesome/free-solid-svg-icons';
+import { faContactBook, faHelmetSafety,faShoppingBag, faCaretDown, faHome, faInfoCircle, faWrench, faUser, faSignIn, faSignOut, faGear} from '@fortawesome/free-solid-svg-icons';
 
 import Item from './Item';
 import './MobileSideBar.css';
@@ -31,15 +31,14 @@ const SideNavBarItem = (props) => {
                 currentAccordionItem.style.visibility="visible";
               }
             const item = document.getElementById(value+'-caret');
-            item.style.transform='rotate(90deg)';
+            item.style.transform='rotate(-90deg)';
         }
     };
     const onclick = () => {
         console.log('text')
     }
     return(
-        <div className=''>
-            <div className="d-flex flex-column flex-shrink-0 p-2 bg-light">
+        <div className="d-flex flex-column flex-shrink-0 p-2 bg-light">
                 <span className="space"></span>
                 <Item lefticonname={faHome} iconcolor='dark' text="Home" onClick={onclick} className="item"/>
                 <Item lefticonname={faInfoCircle} iconcolor='dark' text="About" onClick={onclick} className="item"/>
@@ -50,13 +49,12 @@ const SideNavBarItem = (props) => {
                 <Item lefticonname={faSignIn} iconcolor='dark' text="Sign in" onClick={onclick} className="item"/>
                 <span className="separator"></span>
                 
-                <Item id='settings' lefticonname={faGear} righticonname={faCaretRight} iconcolor='dark' text="Settings" onClick={() => toggleaccordion('settings')} className="item"/>
+                <Item id='settings' lefticonname={faGear} righticonname={faCaretDown} iconcolor='dark' text="Settings" onClick={() => toggleaccordion('settings')} className="item"/>
                 <div id='accordion' className='accordion' >
                     <Item lefticonname={faHelmetSafety} iconcolor='dark' text="Find Engineers" onClick={onclick} className="item accordionitem"/>
                     <Item lefticonname={faShoppingBag} iconcolor='dark' text="Find Products" onClick={onclick} className="item accordionitem" />
                 </div>
             </div>
-        </div>
     )
 }
 const SideNavBar = (props) => {

@@ -3,7 +3,7 @@
     width: 0%;
     position: fixed;
     z-index: 1;
-    top: 0;
+    top: 54;
     left: 0;
     background-color: whitesmoke;
     overflow-x: hidden;
@@ -19,6 +19,7 @@
     margin: 2px;
     font-size: 1rem;
     line-height: 1.5;
+    background-color: transparent;
 }
 .accordion{
   transition: 0.5s;

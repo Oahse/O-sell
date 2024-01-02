@@ -11,10 +11,10 @@ function Item(props) {
     const Id =`${id}-caret`;
 
     return (
-        <Button variant='warning' onClick={onClick} className={`${styles.item} ${_class}`} style={linkstyles}>
+        <Button id={id} variant='warning' onClick={onClick} className={`${styles.item} ${_class}`} style={linkstyles}>
             <Icon name={lefticonname} color={iconcolor} />
-            {text} 
-            <Icon id={Id} name={righticonname} color={iconcolor} col="ms-auto"/> 
+            <span className='m-1 mt-0 mb-0'>{text}</span>
+            <Icon id={Id} name={righticonname} color={iconcolor} className="ms-auto"/> 
         </Button>
     );
 }
