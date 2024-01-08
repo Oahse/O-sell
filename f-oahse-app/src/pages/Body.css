@@ -1,5 +1,4 @@
 ._body{
-    position: absolute;
-    top: 25px;
+    margin-top: 25px;
     /* Other styles */
 }

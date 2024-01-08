@@ -1,5 +1,10 @@
-.maincontent{
-    margin: auto;
+.maincontent,
+.get-started-btn,
+.grid-services{
+    display: flex;
+    justify-content: center;
 }
 .maincontentimage{
+    opacity: 70%;
+    width: 25%;
 }

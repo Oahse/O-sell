@@ -11,12 +11,19 @@ import imageSrc from '../assets/test-gb.png'; // Import the image file
 import './LandingPage.css';
 const LandingPage = () => {
   return (
-      <div id='_body' className="_body m-1">
-        <div className='maincontent'>
-            {/* Insert the image using an <img> tag */}
-            <img src={imageSrc} alt="Description" className='maincontentimage mt-5' />
-        </div>
+    <div id='_body' className="_body m-1">
+      <div className='maincontent mt-4 mb-0'>
+        <img src={imageSrc} alt="Description" className='maincontentimage mt-5 rounded' />
       </div>
+      <div className='get-started-btn mt-0'>
+        <Btn href="#signup" text="Get Started" className="" />
+      </div>
+      <div className='grid-services'>
+         dd
+      </div>
+        
+    </div>
+
   );
 };
 
