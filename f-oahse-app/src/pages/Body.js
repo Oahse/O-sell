@@ -10,10 +10,13 @@ import Icon from '../components/Icon';
 import logo from '../logo.svg';
 import './Body.css';
 const Body = () => {
+  const linkstyles = {
+      fontFamily: 'Open Sans, sans-serif'
+  };
   return (
-      <div id='_body' className="_body m-1">
+      <div id='_body' className="_body" style={{linkstyles}}>
         <SideNavBar/>
-        <div className='main-content'>
+        <div className='main'>
           <LandingPage/>
         </div>
       </div>

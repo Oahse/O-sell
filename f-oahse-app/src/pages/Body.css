@@ -1,4 +1,6 @@
 ._body{
     margin-top: 25px;
-    /* Other styles */
+    position: relative;
+    height: 100%;
+    
 }

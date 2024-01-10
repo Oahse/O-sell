@@ -9,7 +9,7 @@ import Body from './Body';
 function Home() {
     const name = "Home"
     return (
-        <div>
+        <div className='home'>
             <Header parent={name} />
             <Body/>
         </div>

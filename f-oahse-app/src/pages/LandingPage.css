@@ -1,10 +1,79 @@
-.maincontent,
-.get-started-btn,
-.grid-services{
-    display: flex;
-    justify-content: center;
+.mySwiper{
+    margin-top: 20px;  
 }
-.maincontentimage{
-    opacity: 70%;
-    width: 25%;
+
+.swiper {
+    width: 100%;  
+  }
+  
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    height: 350px;
+}
+  
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+}
+  .swiper-button-next,
+  .swiper-button-prev{
+    color: black;
+    padding: 4px;
+    
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+  }
+  .swiper-button-next:hover,
+  .swiper-button-next:focus {
+    color: black;
+    background-color: white;
+    border-color: #ffc107;
+  }
+  .swiper-button-prev:hover,
+  .swiper-button-prev:focus {
+    color: black;
+    background-color: white;
+    border-color: #ffc107;
+  }
+  .swiper-button-prev:active {
+    color: black;
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+  .swiper-button-next:active {
+    color: black;
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+ 
+  .swiper-pagination-bullets .swiper-pagination-bullet{
+    background-color: black;
+  }
+  .swiper-pagination-bullets .swiper-pagination-bullet-active{
+    background-color: #ffc107;
+  }
+
+.landing-container{
+    position: absolute;
+    top: 270px;
+    z-index: 1;
+    margin: 0px;
+}
+
+.card{
+    border-radius: 2px;
+    background-color: whitesmoke;
+    border: 0px solid white;
+}
+.card-title{
+    font-weight: bold;
+}
+.landing-btn-link{
+    margin: 0px;
 }
