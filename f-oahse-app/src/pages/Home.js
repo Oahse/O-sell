@@ -61,7 +61,7 @@ function Home() {
     return (
         <div className='home'>
             <Header parent={name} iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} margin={margin} />
-            <Body  bgimageheight={bgimageheight}/>
+            <Body iconColor={iconColor}  bgimageheight={bgimageheight}/>
             <Footer className='footer' top = {bgimageheight+window.innerHeight+30}/>
         </div>
     );

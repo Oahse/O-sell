@@ -12,7 +12,7 @@ import Icon from './Icon';
 import logo from '../logo.svg';
 import './Body.css';
 const Body = (props) => {
-  const {bgimageheight}=props;
+  const {bgimageheight, iconColor}=props;
   const [isMobile, setIsMobile] = useState(false);
   const linkstyles = {
       fontFamily: 'Open Sans, sans-serif'
@@ -40,7 +40,7 @@ const Body = (props) => {
 
   return (
       <div id='_body' className="_body" style={{linkstyles}} >
-        <SideNavBar/>
+        <SideNavBar iconColor={iconColor}/>
         <div className='main'>
             <img src={CIPAC_cover_photo} alt="showcase" width="100%" id='bgimage' />
             
