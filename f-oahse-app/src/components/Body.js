@@ -28,7 +28,18 @@ const Body = (props) => {
             <img src={CIPAC_cover_photo} alt="showcase" width="100%" id='bgimage' />
             <div className='image-text row p-4'>
               <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8  float-left'>
-                
+                <h2>Your Engineering Services <br/>
+                    Made Easier,
+                    Made Better,
+                </h2>
+                <small>
+                  At the Comfort of your space,  get in-touch with  <br/>
+                  professional engineers in seconds, <br/>
+                  Get easier access to tradespersons around you in minutes  <br/>
+                  for your on-time delivery of services; <br/>
+                  and skip the traffic to get your technical supplies delivered  <br/>
+                  to you at your door-step <br/>
+                </small>
               </div>
               <div className='col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-right' style={{marginTop:'100px'}}>
                 <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-1' />
