@@ -13,6 +13,7 @@ import logo from '../logo.svg';
 import './Body.css';
 const Body = (props) => {
   const {bgimageheight}=props;
+  const [isMobile, setIsMobile] = useState(false);
   const linkstyles = {
       fontFamily: 'Open Sans, sans-serif'
   };
@@ -21,31 +22,69 @@ const Body = (props) => {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
+  useEffect(() => {
+      const checkIfMobile = () => {
+          const width = window.innerWidth;
+          setIsMobile(width <= 767); // Adjust threshold as needed
+      };
+      checkIfMobile();
+      window.addEventListener('resize', checkIfMobile);
+
+
+      return () => {
+      window.removeEventListener('resize', checkIfMobile);
+      };
+
+      
+  }, []);
+
   return (
-      <div id='_body' className="_body" style={{linkstyles}}>
+      <div id='_body' className="_body" style={{linkstyles}} >
         <SideNavBar/>
         <div className='main'>
             <img src={CIPAC_cover_photo} alt="showcase" width="100%" id='bgimage' />
-            <div className='image-text row p-4'>
-              <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8  float-left'>
-                <h2>Your Engineering Services <br/>
-                    Made Easier,
-                    Made Better,
-                </h2>
-                <small>
-                  At the Comfort of your space,  get in-touch with  <br/>
-                  professional engineers in seconds, <br/>
-                  Get easier access to tradespersons around you in minutes  <br/>
-                  for your on-time delivery of services; <br/>
-                  and skip the traffic to get your technical supplies delivered  <br/>
-                  to you at your door-step <br/>
-                </small>
-              </div>
-              <div className='col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-right' style={{marginTop:'100px'}}>
-                <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-1' />
-                <IconButton icon={faAppStore} href="#" text="App Store" className='m-1' />
-              </div>
-            </div>
+            
+              
+              {isMobile ? 
+                  (<div className='image-text row p-4 mt-5 mb-5'>
+                      <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 mb-5  float-left'>
+                          <h2>Your Engineering Services <br/>
+                              Made Easier,
+                              Made Better,
+                              <div className='mt-2' style={{display:'flex',flex:1,flexDirection:'row', justifyContent:'space-between'}}>
+                                <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-0' />
+                                <IconButton icon={faAppStore} href="#" text="App Store" className='m-0' />
+                              </div>
+                          </h2>
+                          
+                      </div>
+                      
+                    </div>
+                  ):
+                  (<div className='image-text row p-4'>
+                      <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8  float-left'>
+                        <h2>Your Engineering Services <br/>
+                            Made Easier,
+                            Made Better,
+                        </h2>
+                        <small>
+                          At the Comfort of your space,  get in-touch with  <br/>
+                          professional engineers in seconds, <br/>
+                          Get easier access to tradespersons around you in minutes  <br/>
+                          for your on-time delivery of services; <br/>
+                          and skip the traffic to get your technical supplies delivered  <br/>
+                          to you at your door-step <br/>
+                        </small>
+                    </div>
+                    <div className='col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-right' style={{marginTop:'100px'}}>
+                      <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-1' />
+                      <IconButton icon={faAppStore} href="#" text="App Store" className='m-1' />
+                    </div>
+                  </div>
+                  )
+              }
+              
+            
             
             <div className="landing-container row" style={{top:bgimageheight}}>
               <div className="col row p-2 m-0">

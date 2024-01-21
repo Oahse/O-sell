@@ -74,9 +74,10 @@ function Footer(props) {
         <hr />
 
         <Row>
-          <Col><small> 
-            <span className='bottom'>© </span>
-            COPYRIGHT {currentYear} Oahse (COMPANY NO. 08145843) 44 CRANTOCK ROAD, LONDON, SE6 2QP </small></Col>
+          <Col className='col-12 text-center'><small> 
+            <span className='bottom text-center'>© </span>
+            COPYRIGHT {currentYear} Oahse (COMPANY NO. 08145843) 44 CRANTOCK ROAD, LONDON, SE6 2QP </small>
+          </Col>
 
           <Col className='text-center'>
             <small><a href='/' className='bottom'>Legal & Compliance</a></small>

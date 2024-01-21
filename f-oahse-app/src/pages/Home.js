@@ -38,6 +38,7 @@ function Home() {
     const handleResize = () => {
         var bgimg = document.getElementById('bgimage');
         setBgImageHeight(bgimg.height-30);
+        console.log(window.outerHeight);
     };
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -51,11 +52,17 @@ function Home() {
         };
 
     }, []);
+    // Get the height of the window
+    var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+    // Log the window height to the console
+    console.log("Window Height:",window.innerHeight,bgimageheight+window.innerHeight);
+
     return (
         <div className='home'>
             <Header parent={name} iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} margin={margin} />
             <Body  bgimageheight={bgimageheight}/>
-            <Footer className='footer' top = {bgimageheight+window.innerHeight}/>
+            <Footer className='footer' top = {bgimageheight+window.innerHeight+30}/>
         </div>
     );
 };
