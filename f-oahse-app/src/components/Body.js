@@ -114,8 +114,8 @@ const Body = (props) => {
               </div>
               <div className='needed'>
                 <div>
-                  <h4>What do you need?</h4>
-                  <div class="horizontal-scroller" style={{width:window.innerWidth-50}}>
+                  <h4 className='px-4'>What do you need?</h4>
+                  <div class="horizontal-scroller" style={{width:window.innerWidth-60}}>
                   
                     <div class="scroll-content">
                       <div class="scroll-item">Item 1</div>
