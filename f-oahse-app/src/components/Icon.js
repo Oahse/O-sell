@@ -32,14 +32,14 @@ function Icon(props) {
             iconStyles['--icon-color'] = '#ffc107'; // Yellow color code for 'warning'
             iconStyles['--icon-hover-color'] = '#d39e00'; // Darker yellow for hover color
             iconStyles['--icon-active-color'] = '#212529'; // Black for active color
-        } else if (color === "dark") {
+        } else if (color === "dark"||color==='black') {
             // For color 'dark'
             iconStyles['--icon-color'] = '#343a40'; // Dark gray color code for 'dark'
             iconStyles['--icon-hover-color'] = '#1d2124'; // Darker gray for hover color
             iconStyles['--icon-active-color'] = 'whitesmoke'; // Light gray for active color
-        } else if (color === "light") {
+        } else if (color === "light"||color ==='white') {
             // For color 'light'
-            iconStyles['--icon-color'] = '#f8f9fa'; // Light gray color code for 'light'
+            iconStyles['--icon-color'] = 'white'; // Light gray color code for 'light'
             iconStyles['--icon-hover-color'] = '#dae0e5'; // Lighter gray for hover color
             iconStyles['--icon-active-color'] = '#212529'; // Black for active color
         }
