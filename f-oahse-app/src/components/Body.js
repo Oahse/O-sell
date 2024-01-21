@@ -43,8 +43,6 @@ const Body = (props) => {
         <SideNavBar iconColor={iconColor}/>
         <div className='main'>
             <img src={CIPAC_cover_photo} alt="showcase" width="100%" id='bgimage' />
-            
-              
               {isMobile ? 
                   (<div className='image-text row p-4 mt-5 mb-5'>
                       <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 mb-5  float-left'>

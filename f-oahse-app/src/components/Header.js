@@ -67,7 +67,7 @@ const Header = (props) => {
     return (
         <div>
             {isMobile ? (
-                    <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight} justify-content='between' style={{margin:margin, padding:'8px'}}>
+                    <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight} justify-content='between' style={{margin:margin, padding:'8px', backgroundColor:navbarBg}}>
                         <Navbar.Brand href="#home" style={linkstyles}>
                             <img alt="" src={logo} width="50" height="30" className="d-inline-block align-top"/>{' '}
                             {isSmallMobile ? (<span> </span>):(<span style={{'color':iconColor, 'fontWeight':'bold'}}>Oahse</span>)}
@@ -90,9 +90,9 @@ const Header = (props) => {
                             <span style={{'color':iconColor,'fontWeight':'bold'}}>Oahse</span>
                         </Navbar.Brand>
                         <div className="ms-auto links">
-                            <Nav.Link href="#home" className="header-link" style={linkstyles}>Home</Nav.Link>
+                            <Nav.Link href="/" className="header-link" style={linkstyles}>Home</Nav.Link>
                             <Nav.Link href="#about" className="header-link" style={linkstyles}>About</Nav.Link>
-                            <Nav.Link href="#services" className="header-link" style={linkstyles}>Services</Nav.Link>
+                            <Nav.Link href="/services/" className="header-link" style={linkstyles}>Services</Nav.Link>
                             <Nav.Link href="#contact" className="header-link" style={linkstyles}>Contact Us</Nav.Link>
                             <Btn href="#signup" text="Login" />
                             <Btn href="#signup" text="Sign Up" />
