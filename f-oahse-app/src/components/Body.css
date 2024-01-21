@@ -1,0 +1,122 @@
+
+._body{
+    position: relative;
+    height: 100%; 
+}
+main{
+    min-height: 80vh;
+    position: relative;
+}
+
+.showcase{
+    
+    position: relative;
+}
+
+.showcase img{
+    width: 100%;
+    height: auto;
+    filter: brightness(20%);
+}
+
+
+.showcase a{
+    text-decoration: none;
+    color: inherit;
+    margin-right: 20px; 
+}
+.image-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:100%;
+    padding: 8px;
+    color: white; /* Optional: Set the text color */
+  }
+.landing-container{
+    position: absolute;
+    top: 550px;
+    z-index: 1;
+    margin: 0px;
+}
+
+.card{
+    border-radius: 2px;
+    background-color: #d9d9d9;
+    border: 0px solid white;
+    width : 100%;
+    padding: 0px;
+}
+.card-text{
+  height:250px;
+  
+}
+/* Media query for screens with a maximum width of 767px (typical for mobile screens) */
+@media (max-width: 767px) {
+  .card-text {
+    height: auto; /* Adjust the height or other styles for mobile screens */
+  }
+}
+.card-title{
+    font-weight: bold;
+}
+.landing-btn-link{
+    margin: 0px;
+}
+
+.horizontal-scroller {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 20px;
+    margin: 8px;
+    background-color: #d9d9d9;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+  }
+  .horizontal-scroller::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  
+  .scroll-content {
+    display: inline-block;
+  }
+  
+  .scroll-item {
+    display: inline-block;
+    min-width: 200px;
+    height: 100px;
+    background-color: #3498db;
+    color: #ffffff;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 100px;
+    
+  }
+
+
+.earn-with-oahse .card{
+    background-color: white;
+}
+.earn-with-oahse .card-title{
+    align-items: center;
+}
+.earn-with-oahse .card-title span{
+    color: #ffc107;
+}
+.titles{
+    justify-content: space-between;
+}
+.earn-title{
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: transparent;
+    color: black;
+}
+.earn-title:hover,
+.earn-title:focus,
+.earn-title:active{
+    background-color: #ffc107;
+}
+
