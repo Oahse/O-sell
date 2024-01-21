@@ -26,8 +26,8 @@ function Home() {
                             to you at your door-step.
                         </p>
                         <div class="my-5">
-                            <a href="https://www.google.com" target="_blank" rel="noopener noreferrer"> <Button variant='outline-warning' className='rounded-5' >Google Play   <i class="bi bi-google-play"></i></Button> </a>
-                            <a href="https://www.google.com" target="_blank" rel="noopener noreferrer"> <Button variant='outline-warning' className='rounded-5' >App store  <i class="bi bi-apple"></i></Button></a>
+                            <Button variant='outline-warning' size="lg" className='rounded-5' href="https://www.google.com" target="_blank" rel="noopener noreferrer" >Google Play   <i class="bi bi-google-play"></i></Button>
+                            <Button variant='outline-warning' size="lg" className='rounded-5' href="https://www.google.com" target="_blank" rel="noopener noreferrer">App store  <i class="bi bi-apple"></i></Button>
                         </div>
                     </div>
                 
