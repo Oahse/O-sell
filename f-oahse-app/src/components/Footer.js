@@ -6,12 +6,12 @@ import Icon from './Icon';
 import google from '../assets/google_play.png';
 import apple from '../assets/apple.png'
 import {faGooglePlay, faAppStore, faApple} from '@fortawesome/free-brands-svg-icons'
-function Footer(props) {
-  const { top } = props;
+function Footer() {
+
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className='py-4' style={{ top: top }}>
+    <footer className='py-4'>
       <Container>
         <Row>
             <Col className='py-3'>

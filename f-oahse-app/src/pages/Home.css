@@ -1,2 +1,104 @@
 
+.mini-navbar{
+  margin-top: 60px;
+}
+
+.swiper {
+  width: 100%;
+  height: 200px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
   
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px; /* Adjust the gap as needed */
+}
+
+.grid-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px; /* Optional: Add border-radius for rounded corners */
+}
+.horizontal-scroller {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 8px;
+  margin: 8px;
+  background-color: #ffffff;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+}
+.horizontal-scroller::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+
+.scroll-content {
+  display: inline-block;
+}
+
+.-scroll-item {
+  display: inline-block;
+  min-width: 140px;
+  max-width: 140px;
+  height: 200px;
+  background-color: #d9d9d9;
+  color: #000000;
+  margin-right: 10px;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 4px;
+  
+}
+.-scroll-item img {
+  width: 130px;
+  height:94px;
+}
+.-scroll-item-one {
+  display: inline-block;
+  height: 200px;
+  background-color: #d9d9d9;
+  color: #000000;
+  margin-right: 10px;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 4px;
+}
+.-scroll-item-one img {
+  width: 300px;
+  height:200px;
+}
+.option-content {
+  display: inline-block;
+  padding: 0;
+}
+
+.-option-item {
+  display: inline-block;
+  min-width: 140px;
+  max-width: 140px;
+  height: 0px;
+  color: #000000;
+  margin-right: 10px;
+  text-align: center;
+  border-radius: 4px;
+  
+}

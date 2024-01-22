@@ -91,8 +91,8 @@ const Header = (props) => {
                         </Navbar.Brand>
                         <div className="ms-auto links">
                             <Nav.Link href="/" className="header-link" style={linkstyles}>Home</Nav.Link>
-                            <Nav.Link href="#about" className="header-link" style={linkstyles}>About</Nav.Link>
-                            <Nav.Link href="/services/" className="header-link" style={linkstyles}>Services</Nav.Link>
+                            <Nav.Link href="/about/" className="header-link" style={linkstyles}>About</Nav.Link>
+                            <Nav.Link href="/find/" className="header-link" style={linkstyles}>Find</Nav.Link>
                             <Nav.Link href="#contact" className="header-link" style={linkstyles}>Contact Us</Nav.Link>
                             <Btn href="#signup" text="Login" />
                             <Btn href="#signup" text="Sign Up" />
