@@ -1,25 +1,14 @@
-import logo from '../logo.svg';
-import React, { useState, useEffect, useRef } from 'react';
+import {React, useState, useEffect, useRef,faGooglePlay, faAppStore,Swiper, SwiperSlide,Navigation } from '../components/all_imports';
 import './Home.css';
 import '../setting/opensanregular.css'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import {faGooglePlay, faAppStore} from '@fortawesome/free-brands-svg-icons'
 import SideNavBar from '../components/MobileSideBar';
-import CIPAC_cover_photo from '../assets/CIPAC_cover_photo .jpg';
 import Btn from '../components/Button';
 import IconButton from '../components/Iconbutton';
-import Icon from '../components/Icon';
-import carousel_img1 from '../assets/carousel_img1.jpg';
-import DropDown from '../components/DropDown';
-import { Swiper, SwiperSlide } from 'swiper/react';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-
-// import required modules
-import { Navigation } from 'swiper/modules';
 import Search from '../components/Search';
 
 
@@ -27,7 +16,6 @@ function Home (props){
     const name = "Services";
     const [iconColor, setIconColor] = useState('black');
     const [navbarBg, setNavbarBg] = useState('light');
-    const [bgimageheight, setBgImageHeight] =useState(162);
     const linkstyles = {
         fontFamily: 'Open Sans, sans-serif',
         color:iconColor
@@ -72,21 +60,26 @@ function Home (props){
             <div className='mini-navbar ms-auto'>
                 <Search items={['helo','hehere']} />
             </div>
-            <div>
+            <div className='mb-5'>
                 <SideNavBar iconColor={iconColor}/>
                 <Swiper navigation={true} modules={[Navigation]} className="carousel" loop={true}>
                     {products.map((product, index) => (
                             <SwiperSlide><img src={product.image} alt='' />
                             <div className='image-text row p-4'>
-                                <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8  float-left'>
-                                <h2>Your Engineering Services <br/>
-                                    Made Easier,
-                                    Made Better,
-                                </h2>
+                                <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8  float-left mt-5 mb-0' style={{marginTop:'100px'}}>
+                                  <h2>Your Engineering Services <br/>
+                                      Made Easier,
+                                      Made Better,
+                                  </h2>
                                 </div>
-                                <div className='col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-right' style={{marginTop:'100px'}}>
-                                    <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-1' />
-                                    <IconButton icon={faAppStore} href="#" text="App Store" className='m-1' />
+                                <div className='col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-right row mb-4' style={{marginTop:'50px'}}>
+                                    <div className='col-6 col-sm-6 col-md-12 col-lg-12 col-xl-12'>
+                                      <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-1' />
+                                    </div>
+                                    <div className='col-6 col-sm-6 col-md-12 col-lg-12 col-xl-12'>
+                                      <IconButton icon={faAppStore} href="#" text="App Store" className='m-1' />
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -102,11 +95,11 @@ function Home (props){
                         ))}
                     </div>
                 </div>
-                <div className="col row p-2 m-0">
+                <div className="col row p-0 m-0">
                 <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
                   <div className="card">
                     <div className="card-body">
-                      <h5 className="card-title">Trending</h5>
+                      <h6 className="card-title ms-0">Trending</h6>
                       <div className="image-grid mb-3">
                             <img src="https://picsum.photos/200/150?random=2" alt="Book 1" className="grid-image" />
                             <img src="https://picsum.photos/200/150?random4" alt="Book 2" className="grid-image" />
@@ -120,7 +113,7 @@ function Home (props){
                 <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
                   <div className="card">
                     <div className="card-body">
-                      <h5 className="card-title">Top Ranking</h5>
+                      <h6 className="card-title ms-0">Top Ranking</h6>
                       <div className="image-grid mb-3">
                             <img src="https://picsum.photos/200/150?random=7" alt="Book 1" className="grid-image" />
                             <img src="https://picsum.photos/200/150?random=8" alt="Book 2" className="grid-image" />
@@ -134,7 +127,7 @@ function Home (props){
                 <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
                   <div className="card">
                     <div className="card-body">
-                      <h5 className="card-title">Recommended</h5>
+                      <h6 className="card-title ms-0">Recommended</h6>
                       <div className="image-grid mb-3">
                             <img src="https://picsum.photos/200/150?random=11" alt="Book 1" className="grid-image" />
                             <img src="https://picsum.photos/200/150?random=12" alt="Book 2" className="grid-image" />
@@ -149,7 +142,7 @@ function Home (props){
                 <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
                   <div className="card ">
                     <div className="card-body">
-                      <h5 className="card-title">Unexpected</h5>
+                      <h6 className="card-title ms-0">Unexpected</h6>
                       <div className="image-grid mb-3">
                             <img src="https://picsum.photos/200/150?random=15" alt="Book 1" className="grid-image" />
                             <img src="https://picsum.photos/200/150?random=16" alt="Book 2" className="grid-image" />
@@ -163,21 +156,21 @@ function Home (props){
                 
                 
               </div>
-                <div>
-                    <h4 className='px-2 m-2 mt-4'>Brands</h4>
-                    <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
-                        <div class="scroll-content">
-                            {companyBrands.map((companyBrand, index) => (
-                                <div key={index} className="-scroll-item-one ">
-                                    <img src={companyBrand.logo} alt=''/>
-                                    
-                                    <h6 className='mb-0 mt-1'>{companyBrand.brand}</h6>
+              <div>
+                <h4 className='px-2 m-2 mt-4'>Brands</h4>
+                <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
+                    <div class="scroll-content">
+                        {companyBrands.map((companyBrand, index) => (
+                            <div key={index} className="-scroll-item-one ">
+                                <img src={companyBrand.logo} alt=''/>
                                 
-                                </div>
-                            ))}
-                        </div>
+                                <h6 className='mb-0 mt-1'>{companyBrand.brand}</h6>
+                            
+                            </div>
+                        ))}
                     </div>
                 </div>
+              </div>
                 <div>
                     <h4 className='px-2 m-2 mt-4'>New Arrivals</h4>
                     <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
@@ -196,24 +189,7 @@ function Home (props){
                     </div>
                 </div>
             </div>
-            <div className='earn-with-oahse'>
-                <div className="card  d-flex justify-content-center">
-                      <div className="card-body ">
-                        
-                        <h4 className="card-title  d-flex justify-content-center">Earn with <span className="ml-5"> Oahse</span></h4>
-
-                        <div className='titles  d-flex justify-content-center'>
-                            <Btn className="earn-title" text="Engineer"/>
-                            <Btn className="earn-title" text="Company"/>
-                            <Btn className="earn-title" text="Vendor"/>
-                        </div>
-                        {
-                          
-                        }
-                        
-                      </div>
-                  </div>
-              </div>
+            
             <Footer className='footer'/>
         </div>
     );

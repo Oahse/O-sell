@@ -117,7 +117,24 @@ function About() {
                   )
               }
               
-            
+              <div className='earn-with-oahse container-fluid'>
+                <div className="card  d-flex justify-content-center">
+                      <div className="card-body ">
+                        
+                        <h4 className="card-title  d-flex justify-content-center">Earn with <span className="ml-5"> Oahse</span></h4>
+
+                        <div className='titles  d-flex justify-content-center'>
+                            <Btn className="earn-title" text="Engineer"/>
+                            <Btn className="earn-title" text="Company"/>
+                            <Btn className="earn-title" text="Vendor"/>
+                        </div>
+                        {
+                          
+                        }
+                        
+                      </div>
+                  </div>
+              </div> 
         </div>
             <Footer className='footer'/>
         </div>

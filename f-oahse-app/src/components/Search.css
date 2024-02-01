@@ -1,7 +1,7 @@
 .search-bar {
   display: flex;
   align-items:center;
-  width: 99%;
+  
   margin: 8px;
   border: 2px solid #d9d9d9;
   border-radius: 4px;
@@ -9,7 +9,6 @@
 
 .search-input {
   flex: 1;
-  margin-right: 8px; /* Adjust spacing between input and dropdown */
   box-shadow: none;
   border: none; /* Remove the border */
   outline: none; /* Remove the outline */
@@ -23,7 +22,6 @@
 
 .dropdown-container {
   flex: 0 0 auto; /* Prevent the dropdown from growing */
-  margin-right: 4px; /* Adjust spacing between dropdown and search icon */
   box-shadow: none;
   border: none;
   outline: none; /* Remove the outline */
@@ -33,5 +31,6 @@
   flex: 0 0 auto; /* Prevent the search icon from growing */
   align-self: center;
   height:100%;
+  width: auto;
 
 }

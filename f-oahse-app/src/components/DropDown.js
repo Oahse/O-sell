@@ -33,7 +33,6 @@ const DropDown = (props) => {
                 onChange={handleSelectChange}
                 style={{ width: selectWidth }}
             >
-                <option>Engineers</option>
                 {items.map((item, index) => (
                     <option key={index} value={item}>
                         {item}

@@ -1,16 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
-import { createRoot } from 'react-dom/client';
-import { Container,Navbar, Nav, Button} from 'react-bootstrap';
+import { React, useState, useEffect, useRef, faTimes, 
+        faBars, faBell,Navbar, Nav,logo} from '../components/all_imports';
 
-import { BrowserRouter as Router, Switch, Route ,Link } from "react-router-dom";
-import { faBars, faTimes,faSearch, faCaretDown} from '@fortawesome/free-solid-svg-icons';
-import { faBell, } from '@fortawesome/free-regular-svg-icons';
 import Btn from './Button';
 import Icon from './Icon';
-import DropDown from './DropDown';
-import SearchBar from './Search';
-import logo from '../logo.svg';
 import './Header.css';
 
 
