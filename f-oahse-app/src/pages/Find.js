@@ -143,22 +143,21 @@ function Find(props){
             <SideNavBar iconColor={iconColor}/>
             <Map className='mb-2' items={filteredData} />
             <div>
-              <h6 className='ms-1 mt-1'>Engineers</h6>
-              <div class="-map-horizontal-scroller" style={{width:window.innerWidth-30}}>
-                      <div class="-map-scroll-content">
-                          {filteredData.map((person, index) => (
-                              <div key={index} className="-map-scroll-item-one ">
-                                  <img src={person.picture} alt=''/>
-                                  
-                                  <h6 className='mb-0 mt-1'>{person.name}</h6>
-                                  <h6 className='mb-0 mt-1 fw-bold' >{person.profession}</h6>
-                              
-                              </div>
-                          ))}
+              <h6 className='ms-3 mt-1'>Engineers</h6>
+              <div className="d-flex justify-content-center"> {/* Center horizontally */}
+                <div className="-map-horizontal-scroller" style={{ width: window.innerWidth - 30 }}>
+                  <div className="-map-scroll-content">
+                    {filteredData.map((person, index) => (
+                      <div key={index} className="-map-scroll-item-one">
+                        <img src={person.picture} alt='' />
+                        <h6 className='mb-0 mt-1'>{person.name}</h6>
+                        <h6 className='mb-0 mt-1 fw-bold'>{person.profession}</h6>
                       </div>
+                    ))}
                   </div>
+                </div>
               </div>
-            
+            </div>
             <Footer className='footer'/>
         </div>
     );

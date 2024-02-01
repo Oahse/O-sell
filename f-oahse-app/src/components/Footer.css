@@ -19,7 +19,9 @@ footer{
 
 .store-list-item {
     padding: 8px;
-    margin: 4px;
+    margin: 0px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 .store-list-item a{
     text-decoration: none;

@@ -12,7 +12,7 @@ function Footer() {
       <Container>
         <Row>
             <Col className='py-3'>
-                <h3>Oahse</h3>
+                <h3 className='text-warning'>Oahse</h3>
             </Col>
         </Row>
         <Row className='text-center'>
@@ -52,18 +52,18 @@ function Footer() {
 
 
           <Col>
-            <div className='footer-list'>
-                <div className='store-list-item'>
+            <ul className='footer-list list-unstyled text-left'>
+                <li className='store-list-item'>
                     <Link className='store' to="https://www.google.com" target="_blank" rel="noopener noreferrer" >
-                        <img src={google}/>Google Play
+                      <img src={google}/>Google
                     </Link>
-                </div>
-                <div className='store-list-item'>
+                </li>
+                <li className='store-list-item'>
                     <Link className='store' to="https://www.google.com" target="_blank" rel="noopener noreferrer">
-                    <img src={apple}/> Apple Store  
+                      <img src={apple}/> Apple 
                     </Link>
-                </div>
-            </div>
+                </li>
+            </ul>
 
           </Col>
         </Row>
