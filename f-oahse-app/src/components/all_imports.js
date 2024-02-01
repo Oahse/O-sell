@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import ReactDOM from 'react-dom';
-import { Container,Navbar, Nav, Button} from 'react-bootstrap';
+import { Container,Navbar, Nav, Button, Col, Row} from 'react-bootstrap';
 
 import { BrowserRouter as Router, Switch, Route ,Link } from "react-router-dom";
 import { faBell, } from '@fortawesome/free-regular-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faList ,faBars, faTimes , faCaretDown, faCaretLeft, faCaretRight, faEye, faCommentAlt} from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faList ,faBars, faTimes , faCaretDown, faCaretLeft, faCaretRight, faEye, faCommentAlt,faMapMarkerAlt, faCartShopping} from '@fortawesome/free-solid-svg-icons';
 import logo from '../logo.svg';
 import { faGooglePlay, faAppStore } from '@fortawesome/free-brands-svg-icons'
 import CIPAC_cover_photo from '../assets/CIPAC_cover_photo .jpg';
@@ -41,9 +41,11 @@ export {
   Navigation,
   Navbar, 
   Nav,
+  Col,
+  Row,
   Router, 
   Route ,
   Link,
   createRoot,
-  ReactDOM, faCaretLeft, faCaretRight
+  ReactDOM, faCaretLeft, faCaretRight,faMapMarkerAlt,faCartShopping
 };

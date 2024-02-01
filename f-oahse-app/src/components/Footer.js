@@ -1,11 +1,8 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import './Footer.css'; // Ensure this is the correct path to your CSS file
-import IconButton from './Iconbutton';
-import Icon from './Icon';
+import {React,Link,faGooglePlay, faAppStore, faApple,Container, Row, Col} from './all_imports';
 import google from '../assets/google_play.png';
 import apple from '../assets/apple.png'
-import {faGooglePlay, faAppStore, faApple} from '@fortawesome/free-brands-svg-icons'
+
 function Footer() {
 
   const currentYear = new Date().getFullYear();
@@ -22,34 +19,34 @@ function Footer() {
           <Col>
             <ul className='footer-list list-unstyled text-left'>
               <li><h4 className='text-white footer-listitem'>Company</h4></li>
-              <li><a href='/' className='text-white footer-listitem'>About Us</a></li>
-              <li><a href='/' className='text-white footer-listitem'>Careers</a></li>
-              <li><a href='/' className='text-white footer-listitem'>News room</a></li>
-              <li><a href='/' className='text-white footer-listitem'>Blog</a></li>
-              <li><a href='/' className='text-white footer-listitem'>Investors</a></li>
+              <li><Link to='/about/' className='text-white footer-listitem'>About Us</Link></li>
+              <li><Link href='/' className='text-white footer-listitem'>Careers</Link></li>
+              <li><Link href='/' className='text-white footer-listitem'>News room</Link></li>
+              <li><Link href='/' className='text-white footer-listitem'>Blog</Link></li>
+              <li><Link href='/' className='text-white footer-listitem'>Investors</Link></li>
             </ul>
           </Col>
 
           <Col>
             <ul className='footer-list list-unstyled text-left'>
               <li><h4 className='text-white footer-listitem'>Partnership</h4></li>
-              <li><a href='/' className='text-white footer-listitem'>Vendors</a></li>
-              <li><a href='/' className='text-white footer-listitem'>Tradespersons</a></li>
-              <li><a href='/' className='text-white footer-listitem'>Engineers</a></li>
-              <li><a href='/' className='text-white footer-listitem'>Engineering Companies</a></li>
-              <li><a href='/' className='text-white footer-listitem'>Franchise</a></li>
-              <li><a href='/' className='text-white footer-listitem'>Influencers</a></li>
+              <li><Link to='/find/' className='text-white footer-listitem'>Vendors</Link></li>
+              <li><Link to='/find/' className='text-white footer-listitem'>Tradespersons</Link></li>
+              <li><Link to='/find/' className='text-white footer-listitem'>Engineers</Link></li>
+              <li><Link to='/find/' className='text-white footer-listitem'>Engineering Companies</Link></li>
+              <li><Link to='/find/' className='text-white footer-listitem'>Franchise</Link></li>
+              <li><Link to='/find/' className='text-white footer-listitem'>Influencers</Link></li>
             </ul>
           </Col>
 
           <Col>
             <ul className='footer-list list-unstyled text-left'>
                 <li><h4 className='text-white footer-listitem'>Products</h4></li>
-                <li><a href='/' className='text-white footer-listitem'>Supply</a></li>
-                <li><a href='/' className='text-white footer-listitem'>E-Commerce</a></li>
-                <li><a href='/' className='text-white footer-listitem'>Consultancy</a></li>
-                <li><a href='/' className='text-white footer-listitem'>Maintenance</a></li>
-                <li><a href='/' className='text-white footer-listitem'>Engineering</a></li>
+                <li><Link to='/find/' className='text-white footer-listitem'>Supply</Link></li>
+                <li><Link to='/find/' className='text-white footer-listitem'>E-Commerce</Link></li>
+                <li><Link to='/find/' className='text-white footer-listitem'>Consultancy</Link></li>
+                <li><Link to='/find/' className='text-white footer-listitem'>Maintenance</Link></li>
+                <li><Link to='/find/' className='text-white footer-listitem'>Engineering</Link></li>
             </ul>
             </Col>
 
@@ -57,14 +54,14 @@ function Footer() {
           <Col>
             <div className='footer-list'>
                 <div className='store-list-item'>
-                    <a className='store' href="https://www.google.com" target="_blank" rel="noopener noreferrer" >
+                    <Link className='store' to="https://www.google.com" target="_blank" rel="noopener noreferrer" >
                         <img src={google}/>Google Play
-                    </a>
+                    </Link>
                 </div>
                 <div className='store-list-item'>
-                    <a className='store' href="https://www.google.com" target="_blank" rel="noopener noreferrer">
+                    <Link className='store' to="https://www.google.com" target="_blank" rel="noopener noreferrer">
                     <img src={apple}/> Apple Store  
-                    </a>
+                    </Link>
                 </div>
             </div>
 
@@ -80,9 +77,9 @@ function Footer() {
           </Col>
 
           <Col className='text-center'>
-            <small><a href='/' className='bottom'>Legal & Compliance</a></small>
-            <small><a href='/' className='bottom'>Cookies</a></small>
-            <small><a href='/' className='bottom'>Security</a></small>
+            <small><Link to='/' className='bottom'>Legal & Compliance</Link></small>
+            <small><Link to='/' className='bottom'>Cookies</Link></small>
+            <small><Link to='/' className='bottom'>Security</Link></small>
           </Col>
         </Row>
       </Container>

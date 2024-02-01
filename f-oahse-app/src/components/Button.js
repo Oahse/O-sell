@@ -1,12 +1,13 @@
-import { Container,Navbar, Nav, Button  } from 'react-bootstrap';
+import {React, Link} from './all_imports';
 import styles from './Button.css';
+
 function Btn(props) {
-    const { href,text, onClick, className, style} = props; // Destructure props to extract specific values
+    const { to, text, onClick, className, style } = props; // Destructure props to extract specific values
 
     return (
-        <Button href={href} onClick={onClick} variant='warning' className={`${styles.btn} ${className}`} style={style}>
+        <Link to={to} onClick={onClick} variant='warning' className={`btn ${styles.btn} ${className}`} style={style}>
             {text}
-        </Button>
+        </Link>
     );
 }
 export default Btn;

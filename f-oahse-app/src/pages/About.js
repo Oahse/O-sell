@@ -78,6 +78,7 @@ function About() {
             <Header parent={name} iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} margin={margin} />
             <div >
             <img src={CIPAC_cover_photo} alt="showcase" width="100%" id='bgimage' />
+            <SideNavBar iconColor={iconColor}/>
               {isMobile ? 
                   (<div className='image-text row p-4 mt-5 mb-5'>
                       <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 mb-5  float-left'>
@@ -85,8 +86,8 @@ function About() {
                               Made Easier,
                               Made Better,
                               <div className='mt-2' style={{display:'flex',flex:1,flexDirection:'row', justifyContent:'space-between'}}>
-                                <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-0' />
-                                <IconButton icon={faAppStore} href="#" text="App Store" className='m-0' />
+                                <IconButton icon={faGooglePlay} to="#" text="Google Play" className='m-0' />
+                                <IconButton icon={faAppStore} to="#" text="App Store" className='m-0' />
                               </div>
                           </h2>
                           
@@ -110,8 +111,8 @@ function About() {
                         </small>
                     </div>
                     <div className='col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-right' style={{marginTop:'100px'}}>
-                      <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-1' />
-                      <IconButton icon={faAppStore} href="#" text="App Store" className='m-1' />
+                      <IconButton icon={faGooglePlay} to="#" text="Google Play" className='m-1' />
+                      <IconButton icon={faAppStore} to="#" text="App Store" className='m-1' />
                     </div>
                   </div>
                   )
@@ -124,9 +125,9 @@ function About() {
                         <h4 className="card-title  d-flex justify-content-center">Earn with <span className="ml-5"> Oahse</span></h4>
 
                         <div className='titles  d-flex justify-content-center'>
-                            <Btn className="earn-title" text="Engineer"/>
-                            <Btn className="earn-title" text="Company"/>
-                            <Btn className="earn-title" text="Vendor"/>
+                            <Btn to='/find/' className="earn-title" text="Engineer"/>
+                            <Btn to='/find/' className="earn-title" text="Company"/>
+                            <Btn to='/find/' className="earn-title" text="Vendor"/>
                         </div>
                         {
                           

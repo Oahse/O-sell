@@ -1,0 +1,21 @@
+
+.mini-navbar{
+    margin-top: 60px;
+  }
+  
+  .card-body{
+    height: auto;
+    max-width: 320px;
+    background-color: #d9d9d9;
+  }
+  .find-image {
+    width: 100%;
+    height: auto;
+    border-radius: 2px; /* Optional: Add border-radius for rounded corners */
+  }
+  .card-link{
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  

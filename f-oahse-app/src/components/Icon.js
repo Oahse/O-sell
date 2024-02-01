@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Icon.css';
 
 function Icon(props) {
-    const {id,name, onClick, size, className, color} =props;
+    const {to,id,name, onClick, size, className, color} =props;
     const iconStyles ={'--icon-color':'#ffc107',
                         '--icon-hover-color':'#d39e00',
                         '--icon-active-color':'whitesmoke'
@@ -45,7 +45,7 @@ function Icon(props) {
         }
     }
   return (
-    <FontAwesomeIcon id={id} icon={name} onClick={onClick} size = {Size} className={`${styles.icon} icon ${ClassName}`} style={iconStyles}/>
+    <FontAwesomeIcon to={to} id={id} icon={name} onClick={onClick} size = {Size} className={`${styles.icon} icon ${ClassName}`} style={iconStyles}/>
   );
 }
 

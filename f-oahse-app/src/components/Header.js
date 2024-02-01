@@ -1,5 +1,5 @@
 import { React, useState, useEffect, useRef, faTimes, 
-        faBars, faBell,Navbar, Nav,logo} from '../components/all_imports';
+        faBars, faBell,Navbar, Nav,logo, Link,faMapMarkerAlt,faCartShopping} from '../components/all_imports';
 
 import Btn from './Button';
 import Icon from './Icon';
@@ -67,15 +67,16 @@ const Header = (props) => {
                             {isSmallMobile ? (<span> </span>):(<span style={{'color':iconColor, 'fontWeight':'bold'}}>Oahse</span>)}
                         </Navbar.Brand>
                         <div className="ms-auto d-flex align-items-center">
-                            <Nav.Link href="#contact" className="notification-icon mt-1" style={linkstyles}>
-                                <Icon name={faBell} onClick={() => toggleSidebar('notify')} color={iconColor}/>
+                            <Link to="/products/cart/" className="notification-icon mt-1" style={linkstyles}>
+                                <Icon name={faCartShopping} to="/find/" color={iconColor}/>
                                 <span id ='badge'className="badge">10+</span>
-
-                            </Nav.Link>
+                            </Link>
+                            
+                            <Link to="/find/" style={linkstyles}>
+                                <Icon name={faMapMarkerAlt} color='danger'/>
+                            </Link>
                             {isOpen ? (<Icon name={faTimes} onClick={() => toggleSidebar()} color={iconColor}/>):(<Icon name={faBars} onClick={() => toggleSidebar()} color={iconColor}/>) }
-
                         </div>
-                        
                     </Navbar>
                 ) : (
                     <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight}  justify-content='between' style={{margin:margin, padding:'8px'}}>
@@ -84,12 +85,13 @@ const Header = (props) => {
                             <span style={{'color':iconColor,'fontWeight':'bold'}}>Oahse</span>
                         </Navbar.Brand>
                         <div className="ms-auto links">
-                            <Nav.Link href="/" className="header-link" style={linkstyles} onClick={()=>setactive(this)} >Home</Nav.Link>
-                            <Nav.Link href="/about/" className="header-link" style={linkstyles}>About</Nav.Link>
-                            <Nav.Link href="/find/" className="header-link" style={linkstyles}>Find</Nav.Link>
-                            <Nav.Link href="/contact/" className="header-link" style={linkstyles}>Contact Us</Nav.Link>
-                            <Btn href="#signup" text="Login" />
-                            <Btn href="#signup" text="Sign Up" />
+                            <Link to="/" className="header-link" style={linkstyles} onClick={()=>setactive(this)} >Home</Link>
+                            <Link to="/about/" className="header-link" style={linkstyles}>About</Link>
+                            <Link to="/find/" className="header-link" style={linkstyles}>Find</Link>
+                            <Link to="/products/" className="header-link" style={linkstyles}>Products</Link>
+                            <Link to="/contact/" className="header-link" style={linkstyles}>Contact Us</Link>
+                            <Btn to="/signup/" text="Login" />
+                            <Btn to="/signup/" text="Sign Up" />
                         </div>
                     </Navbar>
               )}

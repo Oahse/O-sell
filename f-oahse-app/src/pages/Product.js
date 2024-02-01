@@ -1,5 +1,5 @@
 import { React, useState, useEffect, useRef, faEye, faCommentAlt, Link} from '../components/all_imports';
-import './Find.css';
+import './Product.css';
 import '../setting/opensanregular.css'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -11,7 +11,7 @@ import Pagination from '../components/Pagination';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-function Find(props){
+function Product(props){
     const name = "Services";
     const [iconColor, setIconColor] = useState('black');
     const [navbarBg, setNavbarBg] = useState('light');
@@ -84,4 +84,4 @@ function Find(props){
         </div>
     );
 }
-export default Find;
+export default Product;

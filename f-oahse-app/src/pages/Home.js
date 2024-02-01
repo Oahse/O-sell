@@ -74,10 +74,10 @@ function Home (props){
                                 </div>
                                 <div className='col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-right row mb-4' style={{marginTop:'50px'}}>
                                     <div className='col-6 col-sm-6 col-md-12 col-lg-12 col-xl-12'>
-                                      <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-1' />
+                                      <IconButton icon={faGooglePlay} href="www.google.com" text="Google Play" className='m-1' />
                                     </div>
                                     <div className='col-6 col-sm-6 col-md-12 col-lg-12 col-xl-12'>
-                                      <IconButton icon={faAppStore} href="#" text="App Store" className='m-1' />
+                                      <IconButton icon={faAppStore} href="www.apple.com" text="App Store" className='m-1' />
                                     </div>
                                     
                                 </div>
@@ -106,7 +106,7 @@ function Home (props){
                             <img src="https://picsum.photos/200/150?random=5" alt="Book 3" className="grid-image" />
                             <img src="https://picsum.photos/200/150?random=6" alt="Book 4" className="grid-image" />
                         </div>
-                      <Btn href="#" text="See more" className='mb-0 ml-0' />
+                      <Btn to="#" text="See more" className='mb-0 ml-0' />
                     </div>
                   </div>
                 </div>
@@ -120,7 +120,7 @@ function Home (props){
                             <img src="https://picsum.photos/200/150?random=9" alt="Book 3" className="grid-image" />
                             <img src="https://picsum.photos/200/150?random=10" alt="Book 4" className="grid-image" />
                         </div>
-                      <Btn href="#" text="See more" />
+                      <Btn to="#" text="See more" />
                     </div>
                   </div>
                 </div>
@@ -134,7 +134,7 @@ function Home (props){
                             <img src="https://picsum.photos/200/150?random=13" alt="Book 3" className="grid-image" />
                             <img src="https://picsum.photos/200/150?random=14" alt="Book 4" className="grid-image" />
                         </div>
-                      <Btn href="#" text="See more" />
+                      <Btn to="#" text="See more" />
                     </div>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ function Home (props){
                             <img src="https://picsum.photos/200/150?random=17" alt="Book 3" className="grid-image" />
                             <img src="https://picsum.photos/200/150?random=18" alt="Book 4" className="grid-image" />
                         </div>
-                      <Btn href="#" text="See more" />
+                      <Btn to="#" text="See more" />
                     </div>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ function Home (props){
                                 <h6 className='mb-0'>{product.name}</h6>
                                 <h5 className='mt-1'>
                                     {product.price}<br />
-                                    <Btn href="#" text="See more" className='m-2' />
+                                    <Btn to="#" text="See more" className='m-2' />
                                 </h5>
                                 </div>
                             ))}
