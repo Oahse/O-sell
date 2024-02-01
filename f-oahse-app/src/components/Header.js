@@ -40,7 +40,9 @@ const Header = (props) => {
         var nwidth = document.getElementById('badge')
         console.log(nwidth);
     }
-
+    const setactive = (e) => {
+        console.log(e);
+    }
     useEffect(() => {
         const checkIfMobile = () => {
             const width = window.innerWidth;
@@ -90,10 +92,10 @@ const Header = (props) => {
                             <span style={{'color':iconColor,'fontWeight':'bold'}}>Oahse</span>
                         </Navbar.Brand>
                         <div className="ms-auto links">
-                            <Nav.Link href="/" className="header-link" style={linkstyles}>Home</Nav.Link>
+                            <Nav.Link href="/" className="header-link" style={linkstyles} onClick={()=>setactive(this)} >Home</Nav.Link>
                             <Nav.Link href="/about/" className="header-link" style={linkstyles}>About</Nav.Link>
                             <Nav.Link href="/find/" className="header-link" style={linkstyles}>Find</Nav.Link>
-                            <Nav.Link href="#contact" className="header-link" style={linkstyles}>Contact Us</Nav.Link>
+                            <Nav.Link href="/contact/" className="header-link" style={linkstyles}>Contact Us</Nav.Link>
                             <Btn href="#signup" text="Login" />
                             <Btn href="#signup" text="Sign Up" />
                         </div>

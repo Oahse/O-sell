@@ -1,15 +1,41 @@
-import Icon from "./Icon";
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './Search.css';
-const SearchBar= (props) => {
-    const {style, formwidth, placeholder, className} =props;
-    return(
-        <div className={`search-icon ms-1 p-0 ${className}`} style={style}>
-            <div class="d-flex form-inputs" >
-                <input class="form-control" type="text" placeholder={placeholder}/>
-                <Icon name={faSearch} color='dark' className="icon"/>
+import DropDown from './DropDown';
+import Icon from './Icon';
+
+const Search = (props) => {
+    const { items } = props;
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleInputChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const handleSearch = () => {
+        // Implement your search functionality here using searchQuery
+        console.log('Search query:', searchQuery);
+    };
+
+    return (
+        <div className="search-bar">
+            <div className="dropdown-container  bg-warning">
+                <DropDown text="Categories" items={items} />
+            </div>
+            <input
+                type="text"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={handleInputChange}
+                className="search-input"
+            />
+            
+            <div className="search-icon-container">
+                <Icon name={faSearch} onClick={handleSearch} color='black'/>
             </div>
         </div>
-    )
+    );
 }
-export default SearchBar;
+
+export default Search;

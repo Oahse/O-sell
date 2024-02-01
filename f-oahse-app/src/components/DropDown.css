@@ -1,27 +1,9 @@
-
-.dropdown-btn{
-    margin: 0px;
+.custom-dropdown,
+.form-select,
+ .form-select:focus {
+  box-shadow: none;
+  border: none;
+  outline: none; /* Remove the outline */
+  background-color: #d9d9d9;
+  border-radius: 0px;
 }
-  .dropdown-btn .item .icon{
-    margin-left: 10px;
-  }
-  .dropdown-btn-accordion{
-    transition: 0.5s;
-    margin-top: 0px;
-    border-radius: 5px;
-    padding: 0px;
-    background-color: whitesmoke;
-    height: 0px;
-    top: 100px;
-    position: fixed;
-    z-index: 1;
-    overflow-x: hidden;
-    transition: 0.5s;
-    
-  }
-  .dropdown-btn-accordion .accordionitem{
-    margin: 0px;
-    transition: 0.25s;
-    visibility: hidden;
-  }
-  

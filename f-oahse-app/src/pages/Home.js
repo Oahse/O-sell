@@ -20,6 +20,7 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Navigation } from 'swiper/modules';
+import Search from '../components/Search';
 
 
 function Home (props){
@@ -69,7 +70,7 @@ function Home (props){
         <div className='service'>
             <Header parent={name} iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} />
             <div className='mini-navbar ms-auto'>
-                <DropDown text="Categories" items={['helo','hehere']}/>
+                <Search items={['helo','hehere']} />
             </div>
             <div>
                 <SideNavBar iconColor={iconColor}/>
