@@ -1,9 +1,10 @@
-import { React, useState, useEffect, useRef, faEye, faCommentAlt, Link} from '../components/all_imports';
+import { React, useState, useEffect, useRef, faEye, faCommentAlt,Link} from '../components/all_imports';
 import './Find.css';
 import '../setting/opensanregular.css'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideNavBar from '../components/MobileSideBar';
+import Btn from '../components/Button';
 import { Map } from '../map/Map';
 import Search from '../components/Search';
 import Pagination from '../components/Pagination';
@@ -59,7 +60,22 @@ function Find(props){
                 <Search items={['ddcdcc','helo','hehere']} onClick={handleSearch} onKeyDown={handleSearch} value=" "/>
             </div>
             <SideNavBar iconColor={iconColor}/>
-            <Map/>
+            <Map className='mb-2'/>
+            <div>
+              <h6 className='ms-1 mt-1'>Engineers</h6>
+              <div class="-map-horizontal-scroller" style={{width:window.innerWidth}}>
+                      <div class="-map-scroll-content">
+                          {filteredData.map((companyBrand, index) => (
+                              <div key={index} className="-map-scroll-item-one ">
+                                  <img src={companyBrand.logo} alt=''/>
+                                  
+                                  <h6 className='mb-0 mt-1'>{companyBrand.brand}</h6>
+                              
+                              </div>
+                          ))}
+                      </div>
+                  </div>
+              </div>
             
             <Footer className='footer'/>
         </div>
