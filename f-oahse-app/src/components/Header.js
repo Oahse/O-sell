@@ -68,7 +68,7 @@ const Header = (props) => {
                         </Navbar.Brand>
                         <div className="ms-auto d-flex align-items-center">
                             <Link to="/products/cart/" className="notification-icon mt-1" style={linkstyles}>
-                                <Icon name={faCartShopping} to="/find/" color={iconColor}/>
+                                <Icon name={faCartShopping} to="/products/cart/" color={iconColor}/>
                                 <span id ='badge'className="badge">10+</span>
                             </Link>
                             

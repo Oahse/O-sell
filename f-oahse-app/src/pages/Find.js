@@ -4,7 +4,7 @@ import '../setting/opensanregular.css'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideNavBar from '../components/MobileSideBar';
-import Btn from '../components/Button';
+import { Map } from '../map/Map';
 import Search from '../components/Search';
 import Pagination from '../components/Pagination';
 // Import Swiper styles
@@ -53,33 +53,14 @@ function Find(props){
     };
     
     return (
-        <div className='service'>
+        <div className='find'>
             <Header parent={name} iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} />
             <div className='mini-navbar ms-auto'>
                 <Search items={['ddcdcc','helo','hehere']} onClick={handleSearch} onKeyDown={handleSearch} value=" "/>
             </div>
             <SideNavBar iconColor={iconColor}/>
-                
-            <div className="row p-1 m-0">
-              {filteredData.slice(previousPage*postsPerPage, currentPage*postsPerPage).map((item, index) => (
-                <div key={index} className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-2 ms-0">
-                  <Link to={`#card-${index}`} className="card-link">
-                    <div className="card">
-                      <div className="card-body p-1 align-items-center">
-                        <img src={item.logo} alt={item.name} className="find-image" />
-                        <h5 className="card-title">{item.name}</h5>
-                        
-                        <span className="card-text">Desc.: {truncateDescription(item.description, 25)}</span>
-                        <h6 className="card-title">Price: {item.price} </h6>
-                        
-                        {/* Add your button component here */}
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              ))}
-            </div>
-            <Pagination currentPage={currentPage} totalPages={Math.ceil(filteredData.length / postsPerPage)} onPageChange={handlePageChange} />
+            <Map/>
+            
             <Footer className='footer'/>
         </div>
     );

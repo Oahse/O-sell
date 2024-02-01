@@ -53,7 +53,7 @@ function Product(props){
     };
     
     return (
-        <div className='service'>
+        <div className='products'>
             <Header parent={name} iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} />
             <div className='mini-navbar ms-auto'>
                 <Search items={['ddcdcc','helo','hehere']} onClick={handleSearch} onKeyDown={handleSearch} value=" "/>

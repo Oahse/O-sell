@@ -1,55 +1,32 @@
 import React from "react";
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon } from "leaflet";
-import * as parkData from "./data/skateboard-parks.json";
+
+import locationIcon from "../assets/pin-location.svg"; // Import the engineer icon
 import "./Map.css";
 
 const Mapicon = new Icon({
-  iconUrl: "/skateboarding.svg",
-  iconSize: [25, 25]
+  iconUrl: locationIcon,
+  iconSize: [50, 50], // Adjust the size according to your icon
 });
 
-const CustomMap=()=> {
-  const [activePark, setActivePark] = React.useState(null);
+const Map = (props) => {
+  const { className, style } = props;
+  const position = [51.505, -0.09]; // Specify the position of the marker
 
   return (
-    <Map center={[45.4, -75.7]} zoom={12}>
+    <MapContainer center={position} zoom={13} scrollWheelZoom={true} className={className} style={style}>
       <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-
-      {parkData.features.map(park => (
-        <Marker
-          key={park.properties.PARK_ID}
-          position={[
-            park.geometry.coordinates[1],
-            park.geometry.coordinates[0]
-          ]}
-          onClick={() => {
-            setActivePark(park);
-          }}
-          icon={Mapicon}
-        />
-      ))}
-
-      {activePark && (
-        <Popup
-          position={[
-            activePark.geometry.coordinates[1],
-            activePark.geometry.coordinates[0]
-          ]}
-          onClose={() => {
-            setActivePark(null);
-          }}
-        >
-          <div>
-            <h2>{activePark.properties.NAME}</h2>
-            <p>{activePark.properties.DESCRIPTIO}</p>
-          </div>
+      <Marker position={position} icon={Mapicon}> {/* Add Marker component with position and icon props */}
+        <Popup>
+          A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
-      )}
-    </Map>
+      </Marker>
+    </MapContainer>
   );
-}
-export { CustomMap,Mapicon };
+};
+
+export { Map, Mapicon };
