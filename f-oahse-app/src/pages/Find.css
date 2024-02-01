@@ -40,6 +40,7 @@
 .-map-scroll-item-one {
   display: inline-block;
   height: auto;
+  max-width: 150px;
   max-height: 100px;
   background-color: #d9d9d9;
   color: #000000;

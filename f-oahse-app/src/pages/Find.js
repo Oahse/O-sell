@@ -22,17 +22,98 @@ function Find(props){
     };
     
     const DATA = [
-        { name: "Nike", logo: "https://picsum.photos/200/150?random=11", description: "A global sportswear and equipment brand.",price: "$1000" },
-        { name: "Apple", logo: "https://picsum.photos/200/150?random=12", description: "A multinational technology company.",price: "$1000" },
-        { name: "Samsung", logo: "https://picsum.photos/200/150?random=13", description: "A South Korean conglomerate.",price: "$1000" },
-        { name: "Coca-Cola", logo: "https://picsum.photos/200/150?random=14", description: "A world-renowned beverage brand.",price: "$1000" },
-        { name: "Toyota", logo: "https://picsum.photos/200/150?random=15", description: "A Japanese automotive manufacturer.",price: "$1000" },
-        { name: "Amazon", logo: "https://picsum.photos/200/150?random=16", description: "An American multinational technology company.",price: "$1000" },
-        { name: "Microsoft", logo: "https://picsum.photos/200/150?random=17", description: "A global technology corporation.",price: "$1000" },
-        { name: "Adidas", logo: "https://picsum.photos/200/150?random=18", description: "A multinational corporation that designs and manufactures sportswear and accessories.",price: "$1000" },
-        { name: "McDonald's", logo: "https://picsum.photos/200/150?random=19", description: "A global fast-food restaurant chain.",price: "$1000" },
-        { name: "Google", logo: "https://picsum.photos/200/150?random=20", description: "A multinational technology company specializing in Internet-related services and products.",price: "$1000" },
-      ];
+      { 
+          name: "John Doe", 
+          profession: "Software Engineer", 
+          degree: "Computer Science", 
+          age: 32, 
+          picture: "https://randomuser.me/api/portraits/men/1.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      },
+      { 
+          name: "Jane Doe", 
+          profession: "Doctor", 
+          degree: "Medicine", 
+          age: 29, 
+          picture: "https://randomuser.me/api/portraits/women/2.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      },
+      { 
+          name: "Alice Smith", 
+          profession: "Teacher", 
+          degree: "Education", 
+          age: 35, 
+          picture: "https://randomuser.me/api/portraits/women/3.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      },
+      { 
+          name: "Bob Johnson", 
+          profession: "Mechanical Engineer", 
+          degree: "Mechanical Engineering", 
+          age: 40, 
+          picture: "https://randomuser.me/api/portraits/men/4.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      },
+      { 
+          name: "Emily Brown", 
+          profession: "Nurse", 
+          degree: "Nursing", 
+          age: 27, 
+          picture: "https://randomuser.me/api/portraits/women/5.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      },
+      { 
+          name: "Michael Wilson", 
+          profession: "Architect", 
+          degree: "Architecture", 
+          age: 38, 
+          picture: "https://randomuser.me/api/portraits/men/6.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      },
+      { 
+          name: "Sophia Martinez", 
+          profession: "Psychologist", 
+          degree: "Psychology", 
+          age: 31, 
+          picture: "https://randomuser.me/api/portraits/women/7.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      },
+      { 
+          name: "David Lee", 
+          profession: "Accountant", 
+          degree: "Accounting", 
+          age: 45, 
+          picture: "https://randomuser.me/api/portraits/men/8.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      },
+      { 
+          name: "Olivia Taylor", 
+          profession: "Lawyer", 
+          degree: "Law", 
+          age: 33, 
+          picture: "https://randomuser.me/api/portraits/women/9.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      },
+      { 
+          name: "William Clark", 
+          profession: "Civil Engineer", 
+          degree: "Civil Engineering", 
+          age: 37, 
+          picture: "https://randomuser.me/api/portraits/men/10.jpg", 
+          latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
+          longitude: 3.3792 + Math.random() * 0.5 - 0.25
+      }
+  ];
+  
     
     const [filteredData, setFilteredData] = useState(DATA);
     
@@ -60,16 +141,17 @@ function Find(props){
                 <Search items={['ddcdcc','helo','hehere']} onClick={handleSearch} onKeyDown={handleSearch} value=" "/>
             </div>
             <SideNavBar iconColor={iconColor}/>
-            <Map className='mb-2'/>
+            <Map className='mb-2' items={filteredData} />
             <div>
               <h6 className='ms-1 mt-1'>Engineers</h6>
-              <div class="-map-horizontal-scroller" style={{width:window.innerWidth}}>
+              <div class="-map-horizontal-scroller" style={{width:window.innerWidth-30}}>
                       <div class="-map-scroll-content">
-                          {filteredData.map((companyBrand, index) => (
+                          {filteredData.map((person, index) => (
                               <div key={index} className="-map-scroll-item-one ">
-                                  <img src={companyBrand.logo} alt=''/>
+                                  <img src={person.picture} alt=''/>
                                   
-                                  <h6 className='mb-0 mt-1'>{companyBrand.brand}</h6>
+                                  <h6 className='mb-0 mt-1'>{person.name}</h6>
+                                  <h6 className='mb-0 mt-1 fw-bold' >{person.profession}</h6>
                               
                               </div>
                           ))}
