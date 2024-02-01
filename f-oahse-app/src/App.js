@@ -7,7 +7,7 @@ import './App.css';
 // import 'swiper/css/effect-fade';
 // import 'swiper/css/navigation';
 // import 'swiper/css/pagination';
-import { BrowserRouter,HashRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Find from './pages/Find';
 import About from './pages/About';
@@ -21,13 +21,13 @@ function App() {
   const abouturl = ROOT_URL+"/about/";
   console.log(findurl);
   return (
-    <BrowserRouter>
+    <HashRouter>
         <Routes>
             <Route path="/" element={<Home/>} exact ></Route>
             <Route path="/find/" element={<Find/>} ></Route>
             <Route path="/about/" element={<About/>} ></Route>
         </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
