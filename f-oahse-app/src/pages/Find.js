@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideNavBar from '../components/MobileSideBar';
 import Btn from '../components/Button';
+import {useGeolocation} from '../map/maproutes';
 import { Map } from '../map/Map';
 import Search from '../components/Search';
 import Pagination from '../components/Pagination';
@@ -12,7 +13,9 @@ import Pagination from '../components/Pagination';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+
 function Find(props){
+    const { latitude, longitude } = useGeolocation();
     const name = "Services";
     const [iconColor, setIconColor] = useState('black');
     const [navbarBg, setNavbarBg] = useState('light');
@@ -20,8 +23,12 @@ function Find(props){
         fontFamily: 'Open Sans, sans-serif',
         color:iconColor
     };
+    var {profile}=props;
     
-    const DATA = [
+    profile["latitude"] = latitude;
+    profile["longitude"] = longitude;
+    
+    var DATA = [
       { 
           name: "John Doe", 
           profession: "Software Engineer", 
@@ -112,27 +119,14 @@ function Find(props){
           latitude: 6.5244 + Math.random() * 0.5 - 0.25, 
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       }
-  ];
+    ];
+    DATA.unshift(profile);
   
-    
     const [filteredData, setFilteredData] = useState(DATA);
-    
     function handleSearch(searchText) {
         const filtered = DATA.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()));
         setFilteredData(filtered);
       }
-    const truncateDescription = (text, maxLength) => {
-      return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
-    }
-    const [currentPage, setCurrentPage] = useState(1);
-    const [previousPage, setPreviousPage] = useState(0);
-    const [postsPerPage, setPostsPerPage] = useState(4);
-
-    const handlePageChange = (page) => {
-      setCurrentPage(page);
-      setPreviousPage(page-1);
-      // You can perform additional actions here, such as fetching data for the new page.
-    };
     
     return (
         <div className='find'>
@@ -141,7 +135,7 @@ function Find(props){
                 <Search items={['ddcdcc','helo','hehere']} onClick={handleSearch} onKeyDown={handleSearch} value=" "/>
             </div>
             <SideNavBar iconColor={iconColor}/>
-            <Map className='mb-2' items={filteredData} />
+            <Map className='mb-2' items={filteredData} latitude={latitude} longitude={longitude} routecolor="orange"/>
             <div>
               <h6 className='ms-3 mt-1'>Engineers</h6>
               <div className="d-flex justify-content-center"> {/* Center horizontally */}
