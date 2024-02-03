@@ -86,12 +86,12 @@ const Header = (props) => {
                         </Navbar.Brand>
                         <div className="ms-auto links">
                             <Link to="/" className="header-link" style={linkstyles} onClick={()=>setactive(this)} >Home</Link>
-                            <Link to="/about/" className="header-link" style={linkstyles}>About</Link>
-                            <Link to="/find/" className="header-link" style={linkstyles}>Find</Link>
-                            <Link to="/products/" className="header-link" style={linkstyles}>Products</Link>
-                            <Link to="/contact/" className="header-link" style={linkstyles}>Contact Us</Link>
-                            <Btn to="/signup/" text="Login" />
-                            <Btn to="/signup/" text="Sign Up" />
+                            <Link to="/about" className="header-link" style={linkstyles}>About</Link>
+                            <Link to="/find" className="header-link" style={linkstyles}>Find</Link>
+                            <Link to="/products" className="header-link" style={linkstyles}>Products</Link>
+                            <Link to="/contact" className="header-link" style={linkstyles}>Contact Us</Link>
+                            <Btn to="/login" text="Login" />
+                            <Btn to="/signup" text="Sign Up" />
                         </div>
                     </Navbar>
               )}
