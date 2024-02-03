@@ -16,9 +16,11 @@ function SignUpPage() {
         color:iconColor
     };
 
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const [formFile, setFormFile] = useState('')
 
     const submitHandler = (e) =>{
         e.preventDefault()
@@ -47,8 +49,8 @@ function SignUpPage() {
                             required
                             type='text'
                             placeholder='Enter Your First Name'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                         >
 
                         </Form.Control>
@@ -60,8 +62,8 @@ function SignUpPage() {
                             required
                             type='text'
                             placeholder='Enter Your Last Name'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
                         >
 
                         </Form.Control>
@@ -105,7 +107,7 @@ function SignUpPage() {
 
                     <Form.Group as={Col} controlId="formFile" className="mb-3">
                         <Form.Label>License and Certifications</Form.Label>
-                        <Form.Control type="file" />
+                        <Form.Control required type="file" placeholder='License' value={formFile} onChange={(e) => setFormFile(e.target.value)}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3">
