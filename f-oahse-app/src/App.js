@@ -25,10 +25,10 @@ function App() {
     <HashRouter>
         <Routes>
             <Route path="/" element={<Home/>} exact ></Route>
-            <Route path="/find/" element={<Find profile={profile}/>} ></Route>
-            <Route path="/products/" element={<Product/>} ></Route>
-            <Route path="/products/cart/" element={<Product/>} ></Route>
-            <Route path="/about/" element={<About/>} ></Route>
+            <Route path="/find" element={<Find profile={profile}/>} ></Route>
+            <Route path="/products" element={<Product/>} ></Route>
+            <Route path="/products/cart" element={<Product/>} ></Route>
+            <Route path="/about" element={<About/>} ></Route>
         </Routes>
     </HashRouter>
   );
