@@ -7,6 +7,7 @@ import Product from './pages/Product';
 import About from './pages/About';
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage';
+import SignUpForContractorsPage from './pages/SignUpForContractorsPage'
 
 function App() {
   const ROOT_URL="http://localhost:3000"; //"https://oahse.github.io/O-sell/"
@@ -33,6 +34,7 @@ function App() {
             <Route path="/about" element={<About/>} ></Route>
             <Route path="/login" element={<LoginPage/>}></Route>
             <Route path="/signup" element={<SignUpPage/>}></Route>
+            <Route path="/signup-for-contractors" element={<SignUpForContractorsPage/>}></Route>
         </Routes>
     </HashRouter>
   );

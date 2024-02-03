@@ -90,8 +90,18 @@ function LoginPage({location}, props) {
                 Don't Have an account? <Link 
                         to={'/signup'} 
                         >
-                    Register
+                    Sign Up
                 </Link>
+
+                <br/>
+                <Col>
+                    Are you an independant or Corporate Contractor? <Link 
+                            to={'/signup-for-contractors'} 
+                            >
+                        Sign Up Here
+                    </Link>
+                </Col>
+               
             </Col>
         </Row>
     </FormContainer>
