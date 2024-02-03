@@ -1,6 +1,6 @@
 import './App.css';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Find from './pages/Find';
 import Product from './pages/Product';
@@ -22,7 +22,7 @@ function App() {
   };
   //-------------------------------------------------------------
   return (
-    <BrowserRouter>
+    <HashRouter>
         <Routes>
             <Route path="/" element={<Home/>} exact ></Route>
             <Route path="/find/" element={<Find profile={profile}/>} ></Route>
@@ -30,7 +30,7 @@ function App() {
             <Route path="/products/cart/" element={<Product/>} ></Route>
             <Route path="/about/" element={<About/>} ></Route>
         </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
