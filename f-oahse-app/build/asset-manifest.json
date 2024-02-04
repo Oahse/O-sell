@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/O-sell/static/css/main.dadf6b15.css",
-    "main.js": "/O-sell/static/js/main.a152fecc.js",
+    "main.js": "/O-sell/static/js/main.cf4025c7.js",
     "static/js/592.07ae9afa.chunk.js": "/O-sell/static/js/592.07ae9afa.chunk.js",
     "static/media/OpenSans-Regular.ttf": "/O-sell/static/media/OpenSans-Regular.b8cc747a58ffa52b7ff9.ttf",
     "static/media/CIPAC_cover_photo .jpg": "/O-sell/static/media/CIPAC_cover_photo .c9896af6b416cad75641.jpg",
@@ -11,11 +11,11 @@
     "static/media/pin-others-location.svg": "/O-sell/static/media/pin-others-location.d5d3b231e04a579e2f7bc5ae0656e6fe.svg",
     "index.html": "/O-sell/index.html",
     "main.dadf6b15.css.map": "/O-sell/static/css/main.dadf6b15.css.map",
-    "main.a152fecc.js.map": "/O-sell/static/js/main.a152fecc.js.map",
+    "main.cf4025c7.js.map": "/O-sell/static/js/main.cf4025c7.js.map",
     "592.07ae9afa.chunk.js.map": "/O-sell/static/js/592.07ae9afa.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dadf6b15.css",
-    "static/js/main.a152fecc.js"
+    "static/js/main.cf4025c7.js"
   ]
 }
