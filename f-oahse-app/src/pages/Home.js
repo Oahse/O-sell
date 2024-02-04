@@ -86,15 +86,18 @@ function Home (props){
                     ))}
                     
                 </Swiper>
-                <div class="horizontal-scroller m-0" style={{width:window.innerWidth-30, backgroundColor:'transparent',justifyContent:'center'}}>
-                    <div class="option-content p-0">
-                        {categories.map((category, index) => (
-                            <div key={index} className="-option-item p-0 m-0">
-                                <Btn className="s-btn" text={category.name} style={{backgroundColor:'white'}}/>
-                            </div>
-                        ))}
-                    </div>
+                <div className='d-flex justify-content-center'>
+                  <div class="horizontal-scroller m-0" style={{width:window.innerWidth-30, backgroundColor:'transparent',justifyContent:'center'}}>
+                      <div class="option-content p-0">
+                          {categories.map((category, index) => (
+                              <div key={index} className="-option-item p-0 m-0">
+                                  <Btn className="s-btn" text={category.name} style={{backgroundColor:'white'}}/>
+                              </div>
+                          ))}
+                      </div>
+                  </div>
                 </div>
+                
                 <div className="col row p-0 m-0">
                 <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
                   <div className="card">
@@ -157,36 +160,42 @@ function Home (props){
                 
               </div>
               <div>
-                <h4 className='px-2 m-2 mt-4'>Brands</h4>
-                <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
-                    <div class="scroll-content">
-                        {companyBrands.map((companyBrand, index) => (
-                            <div key={index} className="-scroll-item-one ">
-                                <img src={companyBrand.logo} alt=''/>
-                                
-                                <h6 className='mb-0 mt-1'>{companyBrand.brand}</h6>
-                            
-                            </div>
-                        ))}
-                    </div>
+                <h4 className=' m-2 ms-3 mt-4'>Brands</h4>
+                <div className='d-flex justify-content-center'>
+                  <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
+                      <div class="scroll-content">
+                          {companyBrands.map((companyBrand, index) => (
+                              <div key={index} className="-scroll-item-one ">
+                                  <img src={companyBrand.logo} alt=''/>
+                                  
+                                  <h6 className='mb-0 mt-1'>{companyBrand.brand}</h6>
+                              
+                              </div>
+                          ))}
+                      </div>
+                  </div>
                 </div>
+                
               </div>
                 <div>
-                    <h4 className='px-2 m-2 mt-4'>New Arrivals</h4>
-                    <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
-                        <div class="scroll-content">
-                            {products.map((product, index) => (
-                                <div key={index} className="-scroll-item">
-                                <img src={product.image} alt='' />
-                                <h6 className='mb-0'>{product.name}</h6>
-                                <h5 className='mt-1'>
-                                    {product.price}<br />
-                                    <Btn to="#" text="See more" className='m-2' />
-                                </h5>
-                                </div>
-                            ))}
-                        </div>
+                    <h4 className='m-2 ms-3 mt-4'>New Arrivals</h4>
+                    <div className='d-flex justify-content-center'>
+                      <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
+                          <div class="scroll-content">
+                              {products.map((product, index) => (
+                                  <div key={index} className="-scroll-item">
+                                  <img src={product.image} alt='' />
+                                  <h6 className='mb-0'>{product.name}</h6>
+                                  <h5 className='mt-1'>
+                                      {product.price}<br />
+                                      <Btn to="#" text="See more" className='m-2' />
+                                  </h5>
+                                  </div>
+                              ))}
+                          </div>
+                      </div>
                     </div>
+                    
                 </div>
             </div>
             

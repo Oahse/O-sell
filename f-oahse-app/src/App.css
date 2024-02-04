@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+.form-control{
+  outline: none;
+}
+.form-control:focus {
+  box-shadow: none;
+  text-decoration: none;
+  border: 2px solid #ffc107;
+}
