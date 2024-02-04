@@ -37,11 +37,11 @@ function SignUpPage() {
     <div className='signupPage'>
         <Header  iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} />
         <FormContainer>
-            <h1>Sign Up</h1>
+            <h1 className='d-flex justify-content-center'>Sign Up</h1>
             {/* {error &&<Message variant='danger'>{error}</Message>}
             {loading && <Loader/>} */}
 
-            <Form onSubmit={submitHandler}>
+            <Form onSubmit={submitHandler} className='px-2'>
                 <Row>
                     <Form.Group as={Col} controlId='First Name' className="mb-3">
                         <Form.Label>First Name </Form.Label>
@@ -118,7 +118,7 @@ function SignUpPage() {
                         <Form.Check type="checkbox" label="I Agree to the Terms and Conditions of use" />
                     </Form.Group>
 
-                    <Row className='py-3'>
+                    <Row className='py-3 px-2'>
                         <Col>
                             <Button type='submit' variant='warning'>
                                 Sign Up
@@ -130,7 +130,7 @@ function SignUpPage() {
            
             </Form>
 
-            <Row className='py-3'>
+            <Row className='py-3 px-2'>
                 <Col> 
                     
                     <br/>

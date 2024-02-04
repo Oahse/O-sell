@@ -35,12 +35,12 @@ function LoginPage({location}, props) {
   return (
     <div className='loginPage'>
           <Header  iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} />
-        <FormContainer>
-        <h1>Login</h1>
+        <FormContainer >
+        <h1 className='d-flex justify-content-center'>Login</h1>
         {/* {error &&<Message variant='danger'>{error}</Message>}
         {loading && <Loader/>} */}
 
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} className='px-2'>
             <Form.Group controlId='email'>
                 <Form.Label>Email</Form.Label>
                 <Form.Control
@@ -49,6 +49,7 @@ function LoginPage({location}, props) {
                     placeholder='Enter Your Email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className=''
                 >
 
                 </Form.Control>
@@ -67,7 +68,7 @@ function LoginPage({location}, props) {
                 </Form.Control>
             </Form.Group>
 
-            <Row className='py-3'>
+            <Row className='py-3 px-2'>
                 <Col>
                     <Button type='submit' variant='warning'>
                         Log In
@@ -76,7 +77,7 @@ function LoginPage({location}, props) {
             </Row>
         </Form>
 
-        <Row className='py-3'>
+        <Row className='py-3 px-2'>
             <Col> 
                 <Col>
                     <Link
