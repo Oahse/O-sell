@@ -19,6 +19,7 @@ function Find(props){
     const name = "Services";
     const [iconColor, setIconColor] = useState('black');
     const [navbarBg, setNavbarBg] = useState('light');
+    const [showbottom, setShowBottom] = useState(true);
     const linkstyles = {
         fontFamily: 'Open Sans, sans-serif',
         color:iconColor
@@ -135,23 +136,7 @@ function Find(props){
                 <Search items={['ddcdcc','helo','hehere']} onClick={handleSearch} onKeyDown={handleSearch} value=" "/>
             </div>
             <SideNavBar iconColor={iconColor}/>
-            <Map className='mb-2' items={filteredData} latitude={latitude} longitude={longitude} routecolor="orange"/>
-            <div>
-              <h6 className='ms-3 mt-1'>Engineers</h6>
-              <div className="d-flex justify-content-center"> {/* Center horizontally */}
-                <div className="-map-horizontal-scroller" style={{ width: window.innerWidth - 30 }}>
-                  <div className="-map-scroll-content">
-                    {filteredData.map((person, index) => (
-                      <div key={index} className="-map-scroll-item-one">
-                        <img src={person.picture} alt='' />
-                        <h6 className='mb-0 mt-1'>{person.name}</h6>
-                        <h6 className='mb-0 mt-1 fw-bold'>{person.profession}</h6>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Map className='mb-2' items={filteredData} latitude={latitude} longitude={longitude} routecolor="orange" findRadiusMiles={10} showbottom={showbottom} />
             <Footer className='footer'/>
         </div>
     );
