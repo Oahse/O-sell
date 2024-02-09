@@ -4,6 +4,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Find from './pages/Find';
 import Product from './pages/Product';
+import Contact from './pages/Contact';
 import Cart from './pages/Cart';
 import About from './pages/About';
 import LoginPage from './pages/LoginPage'
@@ -33,6 +34,7 @@ function App() {
             <Route path="/products" element={<Product/>} ></Route>
             <Route path="/products/cart" element={<Cart/>} ></Route>
             <Route path="/about" element={<About/>} ></Route>
+            <Route path="/contact" element={<Contact/>} ></Route>
             <Route path="/login" element={<LoginPage/>}></Route>
             <Route path="/signup" element={<SignUpPage/>}></Route>
             <Route path="/signup-for-contractors" element={<SignUpForContractorsPage/>}></Route>

@@ -37,7 +37,7 @@ function SignUpForContractorsPage() {
     <div>
         <Header iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles}/>
         <FormContainer>
-            <h1 className='d-flex justify-content-center'>Sign Up for contractors </h1>
+            <h1 className='d-flex justify-content-center mb-3'>Sign Up for Contractors </h1>
             <Form onSubmit={submitHandler} className='px-2'>
                 <Row>
                     <Form.Group controlId='Company' className='mb-3'>
@@ -106,7 +106,7 @@ function SignUpForContractorsPage() {
                     <Form.Group as={Col} controlId='Category' className="mb-3">
                         <Form.Label>Category</Form.Label>
                         <Form.Select>
-                            <option>Category</option>
+                            <option>--Select--</option>
                             <option value="1">Engineer</option>
                             <option value="2">Technician</option>
                             <option value="3">Superhero</option>
@@ -119,7 +119,7 @@ function SignUpForContractorsPage() {
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <Form.Check type="checkbox" label="All information provided in this form regarding my licences and certifications are true to the best of my knowledge." />
+                        <Form.Check type="checkbox" label="All information provided in this form including my licences and certifications are true to the best of my knowledge." />
                     </Form.Group>
 
                     <Form.Group className="mb-3">
