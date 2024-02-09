@@ -20,14 +20,14 @@ function SignUpPage() {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [formFile, setFormFile] = useState('')
+    // const [formFile, setFormFile] = useState('')
 
     const submitHandler = (e) =>{
         e.preventDefault()
 
-        alert('login successful')
+        alert('Sign Up successful')
 
-        console.log('Login Successful')
+        console.log('Sign Up Successful')
 
         setEmail('')
         setPassword('')
@@ -93,25 +93,6 @@ function SignUpPage() {
                         >
 
                         </Form.Control>
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId='Category' className="mb-3">
-                        <Form.Label>Category</Form.Label>
-                        <Form.Select>
-                            <option>Category</option>
-                            <option value="1">Engineer</option>
-                            <option value="2">Technician</option>
-                            <option value="3">Superhero</option>
-                        </Form.Select>
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="formFile" className="mb-3">
-                        <Form.Label>License and Certifications</Form.Label>
-                        <Form.Control required type="file" placeholder='License' value={formFile} onChange={(e) => setFormFile(e.target.value)}/>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Check type="checkbox" label="All information provided in this form regarding my licences and certifications are true to the best of my knowledge." />
                     </Form.Group>
 
                     <Form.Group className="mb-3">
