@@ -33,7 +33,7 @@ function ContactPage() {
         } else {
         setNavbarBg('transparent');
         setIconColor('white');
-        setMargin('20px');
+        setMargin('10px');
         
         }
     };
