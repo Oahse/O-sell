@@ -1,5 +1,5 @@
 import { React, useState, useEffect, useRef, faTimes, 
-        faBars, faBell,Navbar, Nav,logo, Link,faMapMarkerAlt,faCartShopping} from '../components/all_imports';
+        faBars, faBell,Navbar, Nav,logo, Link,faMapMarkerAlt,faCartShopping, NavDropdown} from '../components/all_imports';
 
 import Btn from './Button';
 import Icon from './Icon';
@@ -88,7 +88,13 @@ const Header = (props) => {
                             <Link to="/" className="header-link" style={linkstyles} onClick={()=>setactive(this)} >Home</Link>
                             <Link to="/about" className="header-link" style={linkstyles}>About</Link>
                             <Link to="/find" className="header-link" style={linkstyles}>Find</Link>
-                            <Link to="/products" className="header-link" style={linkstyles}>Products</Link>
+                            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                                <NavDropdown.Item href="/#find">Technicians</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2"> Engineers</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                            </NavDropdown> */}
+                            <Link to="/products" className="header-link" style={linkstyles}>Store</Link>
                             <Link to="/contact" className="header-link" style={linkstyles}>Contact Us</Link>
                             <Btn to="/login" text="Login" />
                             <Btn to="/signup" text="Sign Up" />

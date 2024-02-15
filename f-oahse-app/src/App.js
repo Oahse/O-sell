@@ -1,15 +1,15 @@
 import './App.css';
-
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Find from './pages/Find';
 import Product from './pages/Product';
-import Contact from './pages/Contact';
+import ContactPage from './pages/ContactPage';
 import Cart from './pages/Cart';
 import About from './pages/About';
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage';
 import SignUpForContractorsPage from './pages/SignUpForContractorsPage'
+
 
 function App() {
   const ROOT_URL="http://localhost:3000"; //"https://oahse.github.io/O-sell/"
@@ -34,7 +34,7 @@ function App() {
             <Route path="/products" element={<Product/>} ></Route>
             <Route path="/products/cart" element={<Cart/>} ></Route>
             <Route path="/about" element={<About/>} ></Route>
-            <Route path="/contact" element={<Contact/>} ></Route>
+            <Route path="/contact" element={<ContactPage/>} ></Route>
             <Route path="/login" element={<LoginPage/>}></Route>
             <Route path="/signup" element={<SignUpPage/>}></Route>
             <Route path="/signup-for-contractors" element={<SignUpForContractorsPage/>}></Route>

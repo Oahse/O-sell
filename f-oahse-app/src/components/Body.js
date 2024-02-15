@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container,Navbar, Nav} from 'react-bootstrap';
+import { Container,Navbar, Nav, Row, Col }  from 'react-bootstrap';
 
 import { BrowserRouter as Router, Switch, Route ,Link } from "react-router-dom";
 import { faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -48,14 +48,14 @@ const Body = (props) => {
                       <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 mb-5  float-left'>
                           <h2>Your Engineering Services <br/>
                               Made Easier,
-                              Made Better,
+                              Made Better
+                            </h2>
                               <div className='mt-2' style={{display:'flex',flex:1,flexDirection:'row', justifyContent:'space-between'}}>
                                 <IconButton icon={faGooglePlay} href="#" text="Google Play" className='m-0' />
                                 <IconButton icon={faAppStore} href="#" text="App Store" className='m-0' />
                               </div>
-                          </h2>
                           
-                      </div>
+                        </div>
                       
                     </div>
                   ):

@@ -18,9 +18,8 @@ function About() {
     const [iconColor, setIconColor] = useState('white');
     const [navbarBg, setNavbarBg] = useState('transparent');
     const [margin, setMargin] = useState('20px');
-    const [bgimageheight, setBgImageHeight] =useState(162);
+    const [bgimageheight, setBgImageHeight] = useState(162);
     const [isMobile, setIsMobile] = useState(false);
-    
     const [index, setIndex] = useState(0);
   
     const handleSelect = (selectedIndex) => {
@@ -57,20 +56,21 @@ function About() {
         
         checkIfMobile();
     };
+
     useEffect(() => {
         
         
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', handleResize);
 
-        handleResize();
+        handleResize()
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', handleResize); 
         };
 
-    }, []);
+    },  []);
     
   
     return (
@@ -85,7 +85,7 @@ function About() {
                           <h2>Your Engineering Services <br/>
                               Made Easier,
                               Made Better,
-                              <div className='mt-2' style={{display:'flex',flex:1,flexDirection:'row', justifyContent:'space-between'}}>
+                              <div className='mt-2' style={{display:'flex', flex:1, flexDirection:'row', justifyContent:'space-between'}}>
                                 <IconButton icon={faGooglePlay} to="#" text="Google Play" className='m-0' />
                                 <IconButton icon={faAppStore} to="#" text="App Store" className='m-0' />
                               </div>

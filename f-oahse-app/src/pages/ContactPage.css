@@ -1,0 +1,8 @@
+img{
+    filter: brightness(50%);
+}
+
+.support-text{
+    display: absolute;
+    top: 50%;
+}
