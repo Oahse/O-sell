@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SideNavBar from '../components/MobileSideBar';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import './ContactPage.css';
 import support1 from '../assets/support1.jpg'
@@ -33,21 +34,21 @@ function ContactPage() {
         } else {
         setNavbarBg('transparent');
         setIconColor('white');
-        setMargin('10px');
+        setMargin('0px');
         
         }
     };
 
-    // const checkIfMobile = () => {
-    //     const width = window.innerWidth;
-    //     setIsMobile(width <= 767); // Adjust threshold as needed
-    // };
-    // const handleResize = () => {
-    //     var bgimg = document.getElementById('bgimage');
-    //     setBgImageHeight(bgimg.height-30);
+    const checkIfMobile = () => {
+        const width = window.innerWidth;
+        setIsMobile(width <= 767); // Adjust threshold as needed
+    };
+    const handleResize = () => {
+        var bgimg = document.getElementById('bgimage');
+        setBgImageHeight(bgimg.height-30);
         
-    //     checkIfMobile();
-    // };
+        checkIfMobile();
+    };
 
     useEffect(() => {
         
@@ -66,16 +67,27 @@ function ContactPage() {
 
   return (
     <div>
-        <Header  iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} margin={margin}/>
-        <img src={support1} alt='support' width='100%' />
-        <div  className='support-text' style={{display: 'absolute', top: '50px',  }}>
-            <div className='text-center'>
+        <Header className="" iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} margin={margin}/>
+        <SideNavBar iconColor={iconColor}/>
+        
+        <div  className='supportPage' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div>
+                <img src={support1} alt='support' width='100%' style={{filter: "brightness(50%)"}}/>
+            </div>
+       
+            <div className='text-center ' style={{position: 'absolute', color: 'white', }}>
                 <h1>Support</h1>
                 <p>lorem ipsum dolor nunvult element d'ecole</p>
             </div>
         </div>     
 
         <Container>
+            <Row className='py-3 text-center'>
+                <Col>
+                    <h2>Need help with any of our services?</h2>
+                    <p>Here are various ways to connect with us.</p>
+                </Col>
+            </Row>
             <Row className='py-3'>
                 <Col>
                     <Card className='text-center p-5 mb-3'>
