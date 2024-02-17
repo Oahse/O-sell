@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/O-sell/static/css/main.dadf6b15.css",
-    "main.js": "/O-sell/static/js/main.e5003fb7.js",
+    "main.css": "/O-sell/static/css/main.82bba98d.css",
+    "main.js": "/O-sell/static/js/main.fd2df6ad.js",
     "static/js/592.07ae9afa.chunk.js": "/O-sell/static/js/592.07ae9afa.chunk.js",
     "static/media/OpenSans-Regular.ttf": "/O-sell/static/media/OpenSans-Regular.b8cc747a58ffa52b7ff9.ttf",
     "static/media/CIPAC_cover_photo .jpg": "/O-sell/static/media/CIPAC_cover_photo .c9896af6b416cad75641.jpg",
+    "static/media/support1.jpg": "/O-sell/static/media/support1.df00a9f2d7db53f04b45.jpg",
     "static/media/carousel_img1.jpg": "/O-sell/static/media/carousel_img1.fdccaedeea986eae9006.jpg",
     "static/media/pin-location.svg": "/O-sell/static/media/pin-location.9a051b2975a682806876c4a996375901.svg",
     "static/media/logo.svg": "/O-sell/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "static/media/pin-others-location.svg": "/O-sell/static/media/pin-others-location.d5d3b231e04a579e2f7bc5ae0656e6fe.svg",
     "index.html": "/O-sell/index.html",
-    "main.dadf6b15.css.map": "/O-sell/static/css/main.dadf6b15.css.map",
-    "main.e5003fb7.js.map": "/O-sell/static/js/main.e5003fb7.js.map",
+    "main.82bba98d.css.map": "/O-sell/static/css/main.82bba98d.css.map",
+    "main.fd2df6ad.js.map": "/O-sell/static/js/main.fd2df6ad.js.map",
     "592.07ae9afa.chunk.js.map": "/O-sell/static/js/592.07ae9afa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dadf6b15.css",
-    "static/js/main.e5003fb7.js"
+    "static/css/main.82bba98d.css",
+    "static/js/main.fd2df6ad.js"
   ]
 }
