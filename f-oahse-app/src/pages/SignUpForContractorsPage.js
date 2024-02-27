@@ -145,6 +145,13 @@ function SignUpForContractorsPage() {
                             >
                         Log in
                     </Link>
+
+                    <br/>
+                Regular User? <Link 
+                        to={'/signup'} 
+                        >
+                    Sign Up here
+                </Link>
                 </Col>
             </Row>
         </FormContainer>

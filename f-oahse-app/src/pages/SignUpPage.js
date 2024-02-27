@@ -120,6 +120,14 @@ function SignUpPage() {
                             >
                         Log in
                     </Link>
+                    <br/>
+                <Col>
+                    Are you an independant or Corporate Contractor? <Link 
+                            to={'/signup-for-contractors'} 
+                            >
+                        Sign Up Here
+                    </Link>
+                </Col>
                 </Col>
             </Row>
         </FormContainer>

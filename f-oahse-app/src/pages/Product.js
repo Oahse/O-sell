@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef, faEye, faCommentAlt, Link, Navigation, faGooglePlay, faAppStore, Swiper, SwiperSlide,} from '../components/all_imports';
+import { React, useState, useEffect, useRef, faEye, faCommentAlt, Link, Navigation, faGooglePlay, faAppStore, Swiper, SwiperSlide, Container,} from '../components/all_imports';
 import './Product.css';
 import '../setting/opensanregular.css'
 import Header from '../components/Header';
@@ -121,118 +121,122 @@ function Product(props){
                     ))}
                     
                 </Swiper>
-                <div className='d-flex justify-content-center'>
-                  <div class="horizontal-scroller m-0" style={{width:window.innerWidth-30, backgroundColor:'transparent',justifyContent:'center'}}>
-                      <div class="option-content p-0">
-                          {categories.map((category, index) => (
-                              <div key={index} className="-option-item p-0 m-0">
-                                  <Btn className="s-btn" text={category.name} style={{backgroundColor:'white'}}/>
-                              </div>
-                          ))}
-                      </div>
-                  </div>
-                </div>
-                
-                <div className="col row p-0 m-0">
-                <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
-                  <div className="card">
-                    <div className="card-body">
-                      <h6 className="card-title ms-0">Trending</h6>
-                      <div className="image-grid mb-3">
-                            <img src="https://picsum.photos/200/150?random=2" alt="Book 1" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random4" alt="Book 2" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=5" alt="Book 3" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=6" alt="Book 4" className="grid-image" />
-                        </div>
-                      <Btn to="#" text="See more" className='mb-0 ml-0' />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
-                  <div className="card">
-                    <div className="card-body">
-                      <h6 className="card-title ms-0">Top Ranking</h6>
-                      <div className="image-grid mb-3">
-                            <img src="https://picsum.photos/200/150?random=7" alt="Book 1" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=8" alt="Book 2" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=9" alt="Book 3" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=10" alt="Book 4" className="grid-image" />
-                        </div>
-                      <Btn to="#" text="See more" />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
-                  <div className="card">
-                    <div className="card-body">
-                      <h6 className="card-title ms-0">Recommended</h6>
-                      <div className="image-grid mb-3">
-                            <img src="https://picsum.photos/200/150?random=11" alt="Book 1" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=12" alt="Book 2" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=13" alt="Book 3" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=14" alt="Book 4" className="grid-image" />
-                        </div>
-                      <Btn to="#" text="See more" />
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
-                  <div className="card ">
-                    <div className="card-body">
-                      <h6 className="card-title ms-0">Unexpected</h6>
-                      <div className="image-grid mb-3">
-                            <img src="https://picsum.photos/200/150?random=15" alt="Book 1" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=16" alt="Book 2" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=17" alt="Book 3" className="grid-image" />
-                            <img src="https://picsum.photos/200/150?random=18" alt="Book 4" className="grid-image" />
-                        </div>
-                      <Btn to="#" text="See more" />
-                    </div>
-                  </div>
-                </div>
-                
-                
-              </div>
-              <div>
-                <h4 className=' m-2 ms-3 mt-4'>Brands</h4>
-                <div className='d-flex justify-content-center'>
-                  <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
-                      <div class="scroll-content">
-                          {companyBrands.map((companyBrand, index) => (
-                              <div key={index} className="-scroll-item-one ">
-                                  <img src={companyBrand.logo} alt=''/>
-                                  
-                                  <h6 className='mb-0 mt-1'>{companyBrand.brand}</h6>
-                              
-                              </div>
-                          ))}
-                      </div>
-                  </div>
-                </div>
-                
-              </div>
-                <div>
-                    <h4 className='m-2 ms-3 mt-4'>New Arrivals</h4>
+                <Container fluid>     
                     <div className='d-flex justify-content-center'>
-                      <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
-                          <div class="scroll-content">
-                              {products.map((product, index) => (
-                                  <div key={index} className="-scroll-item">
-                                  <img src={product.image} alt='' />
-                                  <h6 className='mb-0'>{product.name}</h6>
-                                  <h5 className='mt-1'>
-                                      {product.price}<br />
-                                      <Btn to="#" text="See more" className='m-2' />
-                                  </h5>
-                                  </div>
-                              ))}
-                          </div>
-                      </div>
+                    <div class="horizontal-scroller m-0" style={{width:window.innerWidth-30, backgroundColor:'transparent',justifyContent:'center'}}>
+                        <div class="option-content p-0">
+                            {categories.map((category, index) => (
+                                <div key={index} className="-option-item p-0 m-0">
+                                    <Btn className="s-btn" text={category.name} style={{backgroundColor:'white'}}/>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <div className="col row p-0 m-0">
+                    <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
+                    <div className="card">
+                        <div className="card-body">
+                        <h6 className="card-title ms-0">Trending</h6>
+                        <div className="image-grid mb-3">
+                                <img src="https://picsum.photos/200/150?random=2" alt="Book 1" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random4" alt="Book 2" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=5" alt="Book 3" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=6" alt="Book 4" className="grid-image" />
+                            </div>
+                        <Btn to="#" text="See more" className='mb-0 ml-0' />
+                        </div>
+                    </div>
+                    </div>
+                    <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
+                    <div className="card">
+                        <div className="card-body">
+                        <h6 className="card-title ms-0">Top Ranking</h6>
+                        <div className="image-grid mb-3">
+                                <img src="https://picsum.photos/200/150?random=7" alt="Book 1" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=8" alt="Book 2" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=9" alt="Book 3" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=10" alt="Book 4" className="grid-image" />
+                            </div>
+                        <Btn to="#" text="See more" />
+                        </div>
+                    </div>
+                    </div>
+                    <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
+                    <div className="card">
+                        <div className="card-body">
+                        <h6 className="card-title ms-0">Recommended</h6>
+                        <div className="image-grid mb-3">
+                                <img src="https://picsum.photos/200/150?random=11" alt="Book 1" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=12" alt="Book 2" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=13" alt="Book 3" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=14" alt="Book 4" className="grid-image" />
+                            </div>
+                        <Btn to="#" text="See more" />
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <div className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-3">
+                    <div className="card ">
+                        <div className="card-body">
+                        <h6 className="card-title ms-0">Unexpected</h6>
+                        <div className="image-grid mb-3">
+                                <img src="https://picsum.photos/200/150?random=15" alt="Book 1" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=16" alt="Book 2" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=17" alt="Book 3" className="grid-image" />
+                                <img src="https://picsum.photos/200/150?random=18" alt="Book 4" className="grid-image" />
+                            </div>
+                        <Btn to="#" text="See more" />
+                        </div>
+                    </div>
+                    </div>
+                    
+                    
+                </div>
+                <div>
+                    <h4 className=' m-2 ms-3 mt-4'>Brands</h4>
+                    <div className='d-flex justify-content-center'>
+                    <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
+                        <div class="scroll-content">
+                            {companyBrands.map((companyBrand, index) => (
+                                <div key={index} className="-scroll-item-one ">
+                                    <img src={companyBrand.logo} alt=''/>
+                                    
+                                    <h6 className='mb-0 mt-1'>{companyBrand.brand}</h6>
+                                
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                     </div>
                     
                 </div>
+                    <div>
+                        <h4 className='m-2 ms-3 mt-4'>New Arrivals</h4>
+                        <div className='d-flex justify-content-center'>
+                        <div class="horizontal-scroller" style={{width:window.innerWidth-30}}>
+                            <div class="scroll-content">
+                                {products.map((product, index) => (
+                                    <div key={index} className="-scroll-item">
+                                    <img src={product.image} alt='' />
+                                    <h6 className='mb-0'>{product.name}</h6>
+                                    <h5 className='mt-1'>
+                                        {product.price}<br />
+                                        <Btn to="#" text="See more" className='m-2' />
+                                    </h5>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        </div>
+                        
+                    </div>
+                </Container>
             </div>
+            <Container>
+            
                 
             <div className="row p-1 m-0">
               {filteredData.slice(previousPage*postsPerPage, currentPage*postsPerPage).map((item, index) => (
@@ -254,6 +258,7 @@ function Product(props){
               ))}
             </div>
             <Pagination currentPage={currentPage} totalPages={Math.ceil(filteredData.length / postsPerPage)} onPageChange={handlePageChange} />
+            </Container>
             <Footer className='footer'/>
         </div>
     );
