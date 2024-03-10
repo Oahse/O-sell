@@ -38,9 +38,11 @@ const HomePage = ({ name}) => {
         imgHeight = '72vh';
         cardHeight = '10rem';
       } else if (windowWidth <= 375) {
-        imgHeight = '74vh';
-        cardHeight = '10rem';
-        if (window.outerHeight <= 813) {
+        
+        if (window.outerHeight <= 670) {
+          imgHeight = '74vh';
+          cardHeight = '10rem';
+        }else if(window.outerHeight <= 813) {
           imgHeight = '60vh';
           cardHeight = '6rem';
         }
@@ -88,10 +90,16 @@ const HomePage = ({ name}) => {
         }
       } else if (windowWidth <= 1400) {
         console.log(window.outerHeight+'------===-------')
-        imgHeight = '34vh';
-        cardHeight = '10rem';
+        
+        if (window.outerHeight <= 720) {
+          imgHeight = '60vh';
+          cardHeight = '10rem';
+        }else{
+          imgHeight = '34vh';
+          cardHeight = '10rem';
+        }
       }else {
-        imgHeight = '20vh';
+        imgHeight = '40vh';
         cardHeight = '10rem';
       }
       
@@ -129,7 +137,7 @@ const HomePage = ({ name}) => {
                 bordered={false}
               >
                 <p style={{ fontWeight: 'bold', fontSize: '1rem', minHeight: cardheight }}>
-                  "I am a software engineer with a passion for building beautiful, functional, and scalable applications. A web Developer, Python Developer, React Lover, C Programmer. Object-Oriented Languages. A music enthusiast"
+                  {window.outerWidth}{window.outerHeight} "I am a software engineer with a passion for building beautiful, functional, and scalable applications. A web Developer, Python Developer, React Lover, C Programmer. Object-Oriented Languages. A music enthusiast"
                 </p>
                 
               </Card>
@@ -147,9 +155,27 @@ const HomePage = ({ name}) => {
         </Content>
       </div>
       <Content style={{}}>
-          
+        <div classname="clients" style={{display: 'flex', justifyContent: 'center', marginTop:'1rem'}}>
+        <Row gutter={16}>
+          <Col span={8}>
+            <Card title="Card title" bordered={true}>
+              Card content
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card title="Card title" bordered={false}>
+              Card content
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card title="Card title" bordered={false}>
+              Card content
+            </Card>
+          </Col>
+        </Row>
+        </div>
 
-        </Content>
+      </Content>
       
       <FooterComponent name={name} />
     </Layout>

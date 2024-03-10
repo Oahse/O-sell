@@ -141,12 +141,12 @@
   color: aqua !important;
 }
 .ant-menu-title-content a:hover{
-  color: #ffc400 !important;
+  color: #ffc107 !important;
 }
 
 .ant-btn {
-  border-color: #ffc400;
-  background-color: #ffc400;
+  border-color: #ffc107;
+  background-color: #ffc107;
   cursor: pointer;
 }
 
@@ -154,7 +154,7 @@
 .ant-btn:hover {
   color: black  !important;
   background-color: white !important;
-  border-color: #ffc400 !important;
+  border-color: #ffc107 !important;
 }
 
 /* Styles for the button icon on hover */
@@ -168,7 +168,7 @@
 .ant-input:hover,
 .ant-input:focus {
   box-shadow: none !important;
-  border-color: #ff6827 !important;
+  border-color: #ffc107 !important;
 }
 
 .ant-pagination-item:hover,
@@ -177,7 +177,7 @@
   background-color: #ffefb8 !important;
 }
 .ant-pagination-item-active {
-  border-color: #ffc400 !important;
+  border-color: #ffc107 !important;
 }
 .ant-pagination-item-active a {
   color: black !important; /* Change text color of active pagination item to black */
@@ -186,5 +186,79 @@
   color: #ffefb8 !important; /* Change color of ellipsis to match background */
 }
 .ant-pagination-item-link-icon {
-  color: #ffc400 !important; /* Change color of pagination icon */
+  color: #ffc107 !important; /* Change color of pagination icon */
+}
+
+
+
+.ant-layout-footer{
+  background: #1E1E1E;
+  color: white;
+}
+.footer-title{
+  font-size: 30px;
+  color: #ffc107;
+  margin:0px;
+}
+.footer-list{
+  text-decoration: none;
+  list-style-type: none;
+  margin-left:-40px;
+}
+
+.footer-list-header{
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.footer-listitem{
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-self: left;
+  width:fit-content;
+  margin: 2px;
+  color:#fff;
+  font-size: 14px;
+}
+.footer-listitem:hover{
+  color: #ffc107;
+}
+.footer-listitem:active{
+  color: #ffc107;
+}
+
+.store{
+  text-decoration: none;
+  color: white;
+  padding: 6px;
+  margin: 6px;
+  width: '100%';
+  min-width: 120px;
+  border:1px solid white;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+}
+.store :hover{
+  border-color: #ffc107 !important;
+  color: #ffc107 !important;
+}
+
+.store img {
+  width: 40px;
+  margin-right: 4px;
+}
+
+.bottom{
+  text-decoration: none;
+  color: #ffc107;
+  margin-right: 8px;
+  align-self: center;
+}
+.bottom:hover{
+  color:#fff;
+}
+.bottom-col small{
+  align-self: center;
 }
