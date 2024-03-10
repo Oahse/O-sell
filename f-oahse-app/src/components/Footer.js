@@ -3,10 +3,10 @@ import React from 'react';
 import { Layout} from 'antd';
 const { Footer } = Layout;
 
-const FooterComponent = ({myname}) => {
+const FooterComponent = ({name}) => {
   return (
     <Footer style={{ textAlign: 'center' }}>
-        {myname} ©{new Date().getFullYear()}
+        {name} ©{new Date().getFullYear()}
     </Footer>
   );
 };
