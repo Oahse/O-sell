@@ -1,109 +1,47 @@
-import { React, useState, useEffect, useRef, faTimes, 
-        faBars, faBell,Navbar, Nav,logo, Link,faMapMarkerAlt,faCartShopping, NavDropdown} from '../components/all_imports';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Layout, Menu } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
 
-import Btn from './Button';
-import Icon from './Icon';
-import './Header.css';
+const { Header } = Layout;
 
-
-const Header = (props) => {
-    const {iconColor, navbarBg, linkstyles, margin}=props;
-
-    const navbarheight = useRef(null);
-    const [isOpen, setIsOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
-    const [isSmallMobile, setIsSmallMobile] = useState(false);
-
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
-        // Render the SideNavBar component into the body_container element
-        const container = document.getElementById("sidebar");
-        if (container.style.width === '70%'){
-            container.style.width = '0%';
-            container.style.transition ='2';
-        }
-        else{
-            container.style.width = '70%';
-            container.style.transition ='2';
-        }
-    };
-
-    const updatenotificationwidth = () =>{
-        var nwidth = document.getElementById('badge')
-        console.log(nwidth);
-    }
-    const setactive = (e) => {
-        console.log(e);
-    }
-    useEffect(() => {
-        const checkIfMobile = () => {
-            const width = window.innerWidth;
-            setIsMobile(width <= 767); // Adjust threshold as needed
-        };
-        checkIfMobile();
-        window.addEventListener('resize', checkIfMobile);
-
-        const checkIfSmallMobile = () => {
-            const width = window.innerWidth;
-            setIsSmallMobile(width <= 330); // Adjust threshold as needed
-        };
-        checkIfSmallMobile();
-        window.addEventListener('resize', checkIfSmallMobile);
-
-        return () => {
-        window.removeEventListener('resize', checkIfMobile);
-        window.removeEventListener('resize', checkIfSmallMobile);
-        };
-
-        
-    }, []);
-
-    return (
-        <div>
-            {isMobile ? (
-                    <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight} justify-content='between' style={{margin:margin, padding:'8px', backgroundColor:navbarBg}}>
-                        <Navbar.Brand href="#home" style={linkstyles}>
-                            <img alt="" src={logo} width="50" height="30" className="d-inline-block align-top"/>{' '}
-                            {isSmallMobile ? (<span> </span>):(<span style={{'color':iconColor, 'fontWeight':'bold'}}>Oahse</span>)}
-                        </Navbar.Brand>
-                        <div className="ms-auto d-flex align-items-center">
-                            <Link to="/products/cart/" className="notification-icon mt-1" style={linkstyles}>
-                                <Icon name={faCartShopping} to="/products/cart/" color={iconColor}/>
-                                <span id ='badge'className="badge">10+</span>
-                            </Link>
-                            
-                            <Link to="/find/" style={linkstyles}>
-                                <Icon name={faMapMarkerAlt} color='danger'/>
-                            </Link>
-                            {isOpen ? (<Icon name={faTimes} onClick={() => toggleSidebar()} color={iconColor}/>):(<Icon name={faBars} onClick={() => toggleSidebar()} color={iconColor}/>) }
-                        </div>
-                    </Navbar>
-                ) : (
-                    <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight}  justify-content='between' style={{margin:margin, padding:'8px'}}>
-                        <Navbar.Brand href="#home" style={linkstyles}>
-                            <img alt="" src={logo} width="50" height="30" className="d-inline-block align-top"/>{' '}
-                            <span style={{'color':iconColor,'fontWeight':'bold'}}>Oahse</span>
-                        </Navbar.Brand>
-                        <div className="ms-auto links">
-                            <Link to="/" className="header-link" style={linkstyles} onClick={()=>setactive(this)} >Home</Link>
-                            <Link to="/about" className="header-link" style={linkstyles}>About</Link>
-                            <Link to="/find" className="header-link" style={linkstyles}>Find</Link>
-                            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="/#find">Technicians</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2"> Engineers</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown> */}
-                            <Link to="/products" className="header-link" style={linkstyles}>Store</Link>
-                            <Link to="/contact" className="header-link" style={linkstyles}>Contact Us</Link>
-                            <Btn to="/login" text="Login" />
-                            <Btn to="/signup" text="Sign Up" />
-                        </div>
-                    </Navbar>
-              )}
-        </div>
-    );
+const links = {
+  'Skills': '/skills',
+  'Projects': '/projects',
+  'Experience': '/experience',
+  'Education': '/education',
+  'Resume': '/resume',
 };
 
-  
-  export default Header;
+const HeaderComponent = ({ myname }) => {
+  const [nameColor, setNameColor] = useState('#000'); // Initial color
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Generate a random color
+      const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+      setNameColor(randomColor);
+    }, 3500); // Change color every 3.5 seconds
+
+    return () => clearInterval(intervalId); // Cleanup interval on unmount
+  }, []);
+
+  return (
+    <Header style={{ display: 'flex', alignItems: 'center', backgroundColor: "white" }}>
+      <Link to="/" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginRight: '24px', minWidth: '120px', color: nameColor }}>{myname}</Link>
+      <Menu
+        theme="light"
+        mode="horizontal"
+        defaultSelectedKeys={['2']}
+        style={{ flex: 1, minWidth: 0 }}
+        expandIcon={<MenuOutlined style={{ fontSize: '1.5rem', marginRight: '24px' }} />}
+      >
+        {Object.entries(links).map(([label, link]) => (
+          <Menu.Item key={label} ><Link to={link}>{label}</Link></Menu.Item>
+        ))}
+      </Menu>
+    </Header>
+  );
+};
+
+export default HeaderComponent;

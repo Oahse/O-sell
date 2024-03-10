@@ -1,46 +1,52 @@
-.App {
-  text-align: center;
+/* Styles for the default state of the button */
+.ant-menu-item-active::after {
+  color: aqua !important;
+}
+.ant-menu-title-content a:hover{
+  color: #ffc400 !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.ant-btn {
+  border-color: #ffc400;
+  background-color: #ffc400;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Styles for the button on hover ant-btn-primary */
+.ant-btn:hover {
+  color: black  !important;
+  background-color: white !important;
+  border-color: #ffc400 !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Styles for the button icon on hover */
+.ant-btn:hover .anticon,
+.ant-btn:focus .anticon,
+.ant-btn:active .anticon {
+  color: black !important; /* Change icon color to black on hover, focus, and active */
 }
 
-.App-link {
-  color: #61dafb;
+/* Styles for the input border on hover */
+.ant-input:hover,
+.ant-input:focus {
+  box-shadow: none !important;
+  border-color: #ff6827 !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ant-pagination-item:hover,
+.ant-pagination-next:hover,
+.ant-pagination-previous:hover {
+  background-color: #ffefb8 !important;
 }
-.form-control{
-  outline: none;
+.ant-pagination-item-active {
+  border-color: #ffc400 !important;
 }
-.form-control:focus {
-  box-shadow: none;
-  text-decoration: none;
-  border: 2px solid #ffc107;
+.ant-pagination-item-active a {
+  color: black !important; /* Change text color of active pagination item to black */
+}
+.ant-pagination-item-ellipsis {
+  color: #ffefb8 !important; /* Change color of ellipsis to match background */
+}
+.ant-pagination-item-link-icon {
+  color: #ffc400 !important; /* Change color of pagination icon */
 }

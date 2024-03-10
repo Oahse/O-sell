@@ -1,9 +1,0 @@
-.custom-dropdown,
-.form-select,
- .form-select:focus {
-  box-shadow: none;
-  border: none;
-  outline: none; /* Remove the outline */
-  background-color: #d9d9d9;
-  border-radius: 0px;
-}
