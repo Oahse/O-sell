@@ -5,8 +5,10 @@ import { LeftOutlined, RightOutlined, MailOutlined, FacebookOutlined, LinkedinOu
 import HeaderComponent from '../components/Navbar';
 import FooterComponent from '../components/Footer';
 import bg from '../assets/CIPAC_cover_photo.jpg';
+import carouselimg from '../assets/supportt.jpg';
 
 const { Content } = Layout;
+const { Meta } = Card;
 
 // Mapping of platform names to their respective icons
 const platformIcons = {
@@ -22,6 +24,35 @@ const platformIcons = {
 const HomePage = ({ name}) => {
     const bimg = bg;
 
+    const landingabout=[
+      {
+        'img':bg,
+        'title':'About Us',
+        'content':'Lorem ipsnt'
+      },
+      {
+        'img':bg,
+        'title':'About Us',
+        'content':'Loreut labor'
+      },
+      {
+        'img':bg,
+        'title':'About Us',
+        'content':'Lorem ipsum '
+      },
+      {
+        'img':bg,
+        'title':'About Us',
+        'content':'Lorem ore et '
+      },
+      {
+        'img':bg,
+        'title':'About Us',
+        'content':'Lorem ipsum '
+      }
+      
+    ]
+
     const [imgheight, SetImgHeight] = useState('40vh');
     const [cardheight, SetCardHeight] = useState('10rem');
     const setHeights = () => {
@@ -32,7 +63,7 @@ const HomePage = ({ name}) => {
         imgHeight = '215vh';
         cardHeight = '10rem';
       } else if (windowWidth <= 330) {
-        imgHeight = '90vh';
+        imgHeight = '93vh';
         cardHeight = '10rem';
       }else if (windowWidth <= 360) {
         imgHeight = '72vh';
@@ -94,6 +125,9 @@ const HomePage = ({ name}) => {
         if (window.outerHeight <= 720) {
           imgHeight = '60vh';
           cardHeight = '10rem';
+        }else if (window.outerHeight <= 820) {
+          imgHeight = '50vh';
+          cardHeight = '10rem';
         }else{
           imgHeight = '34vh';
           cardHeight = '10rem';
@@ -107,6 +141,15 @@ const HomePage = ({ name}) => {
       SetImgHeight(imgHeight);
       SetCardHeight(cardHeight);
     };
+    function truncateContent(content) {
+      
+      if (content.length > 30) {
+        return content.slice(0, 30) + ' ...';
+      } else {
+        return content;
+      }
+    }
+    
     
   
   useEffect(() => {
@@ -155,27 +198,61 @@ const HomePage = ({ name}) => {
         </Content>
       </div>
       <Content style={{}}>
-        <div classname="clients" style={{display: 'flex', justifyContent: 'center', marginTop:'1rem'}}>
-        <Row gutter={16}>
-          <Col span={8}>
-            <Card title="Card title" bordered={true}>
-              Card content
-            </Card>
-          </Col>
-          <Col span={8}>
-            <Card title="Card title" bordered={false}>
-              Card content
-            </Card>
-          </Col>
-          <Col span={8}>
-            <Card title="Card title" bordered={false}>
-              Card content
-            </Card>
-          </Col>
-        </Row>
+        <div classname="landing-clients" style={{overflowX: 'auto'}}>
+          <Row gutter={2} style={{ flexWrap: 'nowrap', margin: '2rem', alignItems:'center' }} >
+            {landingabout.map((item, index) => (
+              <Col key={index}  xs={12} sm={6} md={8} lg={8} style={{maxWidth:'200px', maxHeight:'350px'}}>
+                
+                <Card bordered={true} hoverable={true} style={{ padding: 3, margin: 4}}
+                  cover={<img alt="example" src={bg} height={140} />}
+                >
+                  <Meta title={item.title} description={truncateContent(item.content)} />
+                </Card>
+
+              </Col>
+            ))}
+          </Row>
         </div>
 
       </Content>
+      <Content style={{}} className="landing-brands">
+        <div  style={{ padding: 0, margin: 4, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+          <h2 style={{ fontWeight: 'bold', marginTop: '8px', fontSize: '26px' }}>Services</h2>
+          
+          <Row gutter={16} style={{ alignItems: 'center', justifyContent: 'center' }}>
+            {landingabout.map((item, index) => (
+              <Col key={index} xs={12} sm={12} md={6} lg={4} style={{ marginBottom: '16px' }}>
+                <Card bordered={true} hoverable={true}
+                  cover={<img alt="example" src={bg} height={140} />}
+                >
+                  <Meta title={item.title} description={truncateContent(item.content)} />
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          <Button to='/signup' style={{backgroundColor:"#fff", fontWeight:'bold'}}>Sign Up</Button>
+
+        </div>
+      </Content>
+      <Content style={{}}>
+        <div classname="landing-clients" style={{overflowX: 'auto'}}>
+          <Row gutter={2} style={{ flexWrap: 'nowrap', margin: '2rem', alignItems:'center' }} >
+            {landingabout.map((item, index) => (
+              <Col key={index}  xs={12} sm={6} md={8} lg={8} style={{maxWidth:'200px', maxHeight:'350px'}}>
+                
+                <Card bordered={true} hoverable={true} style={{ padding: 3, margin: 4}}
+                  cover={<img alt="example" src={bg} height={140} />}
+                >
+                  <Meta title={item.title} description={truncateContent(item.content)} />
+                </Card>
+
+              </Col>
+            ))}
+          </Row>
+        </div>
+
+      </Content>
+
       
       <FooterComponent name={name} />
     </Layout>

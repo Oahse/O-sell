@@ -50,9 +50,9 @@ const NavLinks = ({ mode, loggedin }) => {
       </>)
       :
       (<>
-        <Button>Log In</Button>
+        <Button to='/login'>Log In</Button>
         <span style={{margin:'3px'}}></span>
-        <Button>Sign Up</Button>
+        <Button to='/signup'>Sign Up</Button>
       </>)
       }
     </div>

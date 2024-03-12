@@ -190,6 +190,9 @@
 }
 
 
+.landing-brands{
+  background-color: #ffc107 ;
+}
 
 .ant-layout-footer{
   background: #1E1E1E;
@@ -240,7 +243,7 @@
   display: inline-flex;
   align-items: center;
 }
-.store :hover{
+.store:hover {
   border-color: #ffc107 !important;
   color: #ffc107 !important;
 }
@@ -256,7 +259,7 @@
   margin-right: 8px;
   align-self: center;
 }
-.bottom:hover{
+.bottom:hover {
   color:#fff;
 }
 .bottom-col small{
