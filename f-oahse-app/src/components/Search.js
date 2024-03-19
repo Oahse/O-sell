@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { SettingOutlined, SearchOutlined } from '@ant-design/icons';
 import { Cascader, Input, Select, Space } from 'antd';
-import './Search.css';
+
 const { Option } = Select;
 const selectBefore =(items, onClick, onKeyDown, value) => (
   <Select defaultValue="hello">
