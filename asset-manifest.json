@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/O-sell/static/css/main.c4275ba2.css",
-    "main.js": "/O-sell/static/js/main.35aa5253.js",
+    "main.css": "/O-sell/static/css/main.bd8e847c.css",
+    "main.js": "/O-sell/static/js/main.e89214f0.js",
     "static/js/592.07ae9afa.chunk.js": "/O-sell/static/js/592.07ae9afa.chunk.js",
     "static/media/localhost_3000_O-sell(iPhone 6_7_8 Plus).png": "/O-sell/static/media/localhost_3000_O-sell(iPhone 6_7_8 Plus).f5019a1cd39123dbbac8.png",
     "static/media/OpenSans-Regular.ttf": "/O-sell/static/media/OpenSans-Regular.b8cc747a58ffa52b7ff9.ttf",
@@ -14,12 +14,12 @@
     "static/media/logo.svg": "/O-sell/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "static/media/pin-others-location.svg": "/O-sell/static/media/pin-others-location.d5d3b231e04a579e2f7bc5ae0656e6fe.svg",
     "index.html": "/O-sell/index.html",
-    "main.c4275ba2.css.map": "/O-sell/static/css/main.c4275ba2.css.map",
-    "main.35aa5253.js.map": "/O-sell/static/js/main.35aa5253.js.map",
+    "main.bd8e847c.css.map": "/O-sell/static/css/main.bd8e847c.css.map",
+    "main.e89214f0.js.map": "/O-sell/static/js/main.e89214f0.js.map",
     "592.07ae9afa.chunk.js.map": "/O-sell/static/js/592.07ae9afa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4275ba2.css",
-    "static/js/main.35aa5253.js"
+    "static/css/main.bd8e847c.css",
+    "static/js/main.e89214f0.js"
   ]
 }
