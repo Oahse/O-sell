@@ -1,36 +1,37 @@
-.search-bar {
-  display: flex;
-  align-items:center;
+/* Styles for the input border on hover */
+.ant-input {
+  border-width: 2px !important;
+}
+.ant-select-selection-item {
+  color: black !important;
+}
+.ant-input:hover,
+.ant-input:focus {
+    box-shadow: none !important;
+    border-color: #ffc107 !important;
+}
+.ant-btn,.ant-input-group-addon {
+  border-width: 2px !important;
+  background-color: #ffc107;
+  cursor: pointer;
+}
+
+/* Styles for the button on hover ant-btn-primary */
+.ant-btn:hover,
+.ant-input-group-addon:hover {
+  color: black  !important;
+  background-color: white !important;
+  border-width: 2px !important;
+  border-color: #ffc107 !important;
+}
+
+/* Styles for the button icon on hover */
+.ant-btn:hover .anticon,
+.ant-btn:focus .anticon,
+.ant-btn:active .anticon,
+.ant-input-group-addon:hover .anticon,
+.ant-input-group-addon:focus .anticon,
+.ant-input-group-addon:active .anticon {
   
-  margin: 8px;
-  border: 2px solid #d9d9d9;
-  border-radius: 4px;
-}
-
-.search-input {
-  flex: 1;
-  box-shadow: none;
-  border: none; /* Remove the border */
-  outline: none; /* Remove the outline */
-  padding: 5px; /* Add padding for better appearance */
-}
-.search-input:active,
-.search-input:focus{
-  border: 0px solid transparent;
-  box-shadow: none;
-}
-
-.dropdown-container {
-  flex: 0 0 auto; /* Prevent the dropdown from growing */
-  box-shadow: none;
-  border: none;
-  outline: none; /* Remove the outline */
-}
-
-.search-icon-container {
-  flex: 0 0 auto; /* Prevent the search icon from growing */
-  align-self: center;
-  height:100%;
-  width: auto;
-
+  color: black !important; /* Change icon color to black on hover, focus, and active */
 }

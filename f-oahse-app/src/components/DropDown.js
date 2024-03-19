@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
+import { Select } from 'antd';
 import './DropDown.css';
+
+const { Option } = Select;
 
 const DropDown = (props) => {
     const { items } = props;
@@ -19,27 +21,28 @@ const DropDown = (props) => {
         document.body.removeChild(tempSelect);
         
         // Set the width of the select element
-        setSelectWidth((width+width/2) + 'px');
+        setSelectWidth((width + width / 2) + 'px');
     }, [selectedItem]);
 
-    const handleSelectChange = (event) => {
-        setSelectedItem(event.target.value);
+    const handleSelectChange = (value) => {
+        setSelectedItem(value);
     };
 
     return (
-        <div className="custom-dropdown ">
-            <Form.Select
-                value={selectedItem}
-                onChange={handleSelectChange}
-                style={{ width: selectWidth }}
-            >
-                {items.map((item, index) => (
-                    <option key={index} value={item}>
-                        {item}
-                    </option>
-                ))}
-            </Form.Select>
-        </div>
+        <Select
+            value={selectedItem}
+            onChange={handleSelectChange}
+            style={{ width: selectWidth }}
+            dropdownStyle={{ backgroundColor: 'white' }} // Customize dropdown menu style
+            optionClassName="custom-option" // Apply custom class for options
+            className='custom-dropdown'
+        >
+            {items.map((item, index) => (
+                <Option key={index} value={item}>
+                    {item}
+                </Option>
+            ))}
+        </Select>
     );
 }
 

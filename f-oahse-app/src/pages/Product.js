@@ -97,7 +97,7 @@ function Product(props){
             <SideNavBar iconColor={iconColor}/>
             <div className='mb-5'>
                 
-                <Swiper navigation={true} modules={[Navigation]} className="carousel" loop={true}>
+                <Swiper navigation={true} modules={[Navigation]} className="carousel" loop={true} style={{width:'90%'}}>
                     {products.map((product, index) => (
                             <SwiperSlide><img src={product.image} alt='' />
                             <div className='image-text row p-4'>

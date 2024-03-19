@@ -59,7 +59,7 @@ const Header = (props) => {
     }, []);
 
     return (
-        <div>
+        <>
             {isMobile ? (
                     <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight} justify-content='between' style={{margin:margin, padding:'8px', backgroundColor:navbarBg}}>
                         <Navbar.Brand href="#home" style={linkstyles}>
@@ -101,7 +101,7 @@ const Header = (props) => {
                         </div>
                     </Navbar>
               )}
-        </div>
+        </>
     );
 };
 

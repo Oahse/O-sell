@@ -8,7 +8,8 @@ import Cart from './pages/Cart';
 import About from './pages/About';
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage';
-import SignUpForContractorsPage from './pages/SignUpForContractorsPage'
+import SignUpForContractorsPage from './pages/SignUpForContractorsPage';
+import ChatRoom from './pages/ChatRoom';
 
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
             <Route path="/login" element={<LoginPage/>}></Route>
             <Route path="/signup" element={<SignUpPage/>}></Route>
             <Route path="/signup-for-contractors" element={<SignUpForContractorsPage/>}></Route>
+            <Route path="/chat/:id" element={<ChatRoom />} ></Route>
+
+
         </Routes>
     </HashRouter>
   );
