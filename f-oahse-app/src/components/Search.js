@@ -1,15 +1,23 @@
-import { React, useState, faSearch, faList} from './all_imports';
-import DropDown from './DropDown';
-import Icon from './Icon';
-import './Search.css';
+import React,{useState} from 'react';
+import { SettingOutlined, SearchOutlined } from '@ant-design/icons';
+import { Cascader, Input, Select, Space } from 'antd';
 
-const Search = (props) => {
-    const { items,islist, onClick,onKeyDown, value, filteroptions, onSelect } = props;
+const { Option } = Select;
+const selectBefore =(items, onClick, onKeyDown, value) => (
+  <Select defaultValue="hello">
+    {items.map((item, index) => (
+      <Option key={index} value={item}>
+        {item}
+      </Option>
+    ))}
+  </Select>
+);
+
+const Search =(props) =>{
+    const { items, onClick, onKeyDown, value } = props;
     const [searchText, setSearchText] = useState(value || ''); // Set initial state from prop
-    const [isOpen, setIsOpen] = useState(false);
 
-    const handleInputChange = (event) => {
-        const newValue = event.target.value;
+    const handleInputChange = (newValue) => {
         setSearchText(newValue);
     };
 
@@ -17,56 +25,27 @@ const Search = (props) => {
         onClick(searchText);
         onKeyDown(searchText);
     };
+
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-          // Trigger search action when Enter key is pressed
-          onKeyDown(searchText);
+            // Trigger search action when Enter key is pressed
+            onKeyDown(searchText);
         }
     };
 
-    function handleFilter(){
-        setIsOpen(!isOpen);
-    }
-    
-    const handleSelect = (option) => {
-        onSelect(option);
-        setIsOpen(false); // Close the dropdown after selection
-    };
     return (
-        <div className="search-bar">
-            <div className="dropdown-container  bg-warning">
-                <DropDown items={items} />
-            </div>
-            <input
-                type="text"
-                placeholder="Search..."
+        <Space direction="vertical" style={{margin:'6px', width:'99%'}}>
+            <Input 
                 value={searchText}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyPress} // Listen for Enter key press
-                className="search-input"
-            />
-            
-            <div className="search-icon-container">
-                <Icon name={faSearch} onClick={handleSearchClick} color='black'/>
-                {islist?
-                (
-                    <span className='dropdown '>
-                        <Icon name={faList} onClick={handleFilter} color='black' className="dropdown-toggle" />
-                        {isOpen && (
-                        <div className="dropdown-menu" style={{zIndex:1000}}>
-                            {filteroptions.map((option, index) => (
-                            <div key={index} className="dropdown-item" onClick={() => handleSelect(option)}>
-                                {option}
-                            </div>
-                            ))}
-                        </div>
-                        )}
-                    </span>
-                    
-                ) 
-                : (<></>)}
-            </div>
-        </div>
+                onChange={(e) => handleInputChange(e.target.value)}
+                onSearch={handleSearchClick}
+                onPressEnter={() => onKeyDown(searchText)} 
+                addonBefore={selectBefore(items)} 
+                addonAfter={<SearchOutlined style={{cursor:'pointer'}} 
+                onClick={handleSearchClick}/>} 
+                defaultValue="Search.." 
+                /> 
+        </Space>
     );
 }
 

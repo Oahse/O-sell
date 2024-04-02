@@ -6,7 +6,12 @@ import  Icon  from "../components/Icon";
 import { faGoogleDrive } from "@fortawesome/free-brands-svg-icons";
 import locationIcon from "../assets/pin-location.svg";
 import pinothersIcon from "../assets/pin-others-location.svg";
+import { Card, Space } from 'antd';
+import {Link} from "react-router-dom";
+
 import "./Map.css";
+
+const { Meta } = Card;
 
 const Mapicon = new micon ({
   iconUrl: locationIcon,
@@ -42,6 +47,7 @@ const distanceBetweenCoordinates = (lat1, lon1, lat2, lon2) => {
 const Map = ({ className, style, items, latitude, longitude, routecolor, findRadiusMiles, showbottom }) => {
   const [zoomLevel, setZoomLevel] = useState(10);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  
   // Function to handle marker click event
   const handleMarkerClick = (index) => {
     setSelectedMarker(index);
@@ -59,6 +65,10 @@ const Map = ({ className, style, items, latitude, longitude, routecolor, findRad
   
   const filtered = items.filter(item => (distanceBetweenCoordinates(latitude, longitude, item.latitude, item.longitude) <= findRadiusMiles))
   const [filteredItems, setFilteredItems] = useState(filtered)
+
+  
+
+  
  
   return (
     <div>
@@ -90,21 +100,22 @@ const Map = ({ className, style, items, latitude, longitude, routecolor, findRad
         </React.Fragment>
       ))}
     </MapContainer>
-      <div className="">
+      <div style={{backgroundColor:'transparent m-0'}}>
         <Icon icon={faGoogleDrive} className="map-icon" />
         {showbottom ?
         <div>
-          <h6 className='ms-3 mt-1'>Engineers ({filteredItems.length-1} results)</h6>
+          <h6 className='ms-3 mt-0'>Engineers ({filteredItems.length-1} results)</h6>
           <div className="d-flex justify-content-center"> {/* Center horizontally */}
-            <div className="-map-horizontal-scroller" style={{ width: window.innerWidth - 30 }}>
-              <div className="-map-scroll-content">
+            <div className="-map-horizontal-scroller " style={{ width: window.innerWidth - 30}}>
+              <div className="-map-scroll-content ms-1">
                 {filteredItems.map((person, index) => 
                   index > 0 &&(
-                    <div key={index} className="-map-scroll-item-one">
-                      <img src={person.picture} alt='' />
-                      <h6 className='mb-0 mt-1'>{person.name}</h6>
-                      <h6 className='mb-0 mt-1 fw-bold'>{person.profession}</h6>
-                    </div>
+                    <Link className="-map-scroll-item-one text-decoration-none" to={{pathname:`/chat/${person.id}`}} state={{person: person}}   key={index}>
+                        <Card hoverable key={index} cover={<img alt={person.name} src={person.picture} />} style={{ height: '20px', cursor: 'pointer',width:'120px', maxWidth:'120px' }} >
+                          <Meta title={person.name} description={person.profession} style={{margin:'-24px'}} />
+                          
+                        </Card>
+                    </Link>
                   )
                 )}
               </div>

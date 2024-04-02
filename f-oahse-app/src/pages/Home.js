@@ -99,9 +99,16 @@ function Home (props){
                                         to you at your door-step <br/>
                                     </p>
                         </Col>
-                    <Col className=''>
-                        <IconButton icon={faGooglePlay} to="#" text="Google Play" className='m-0' />
-                        <IconButton icon={faAppStore} to="#" text="App Store" className='m-0' />
+                    <Col className='' lg={8} md={12} sm={24}>
+                        
+                        <Row style={{ alignItems: 'center', justifyContent: 'center'}} >
+                            <Col className='' lg={8} md={12} sm={24}> {/* Use sm={24} to make it full width on mobile screens */}
+                                <IconButton icon={faGooglePlay} to="#" text="Google Play" className='m-0' />
+                            </Col>
+                            <Col className='' lg={8} md={12} sm={24}> {/* Use sm={24} to make it full width on mobile screens */}
+                                <IconButton icon={faAppStore} to="#" text="App Store" className='m-0' />
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>
@@ -143,7 +150,6 @@ function Home (props){
                 <Row className='py-3'>
                     <Row className='my-3'>
                         <Col className='text-center'><h1>Our Services</h1></Col>
-                        
                     </Row>
 
                     <Row >

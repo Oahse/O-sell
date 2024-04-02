@@ -31,6 +31,7 @@ function Find(props){
     
     var DATA = [
       { 
+            id:'1',
           name: "John Doe", 
           profession: "Software Engineer", 
           degree: "Computer Science", 
@@ -40,6 +41,7 @@ function Find(props){
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       },
       { 
+        id:'2',
           name: "Jane Doe", 
           profession: "Doctor", 
           degree: "Medicine", 
@@ -49,6 +51,7 @@ function Find(props){
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       },
       { 
+        id:'3',
           name: "Alice Smith", 
           profession: "Teacher", 
           degree: "Education", 
@@ -58,6 +61,7 @@ function Find(props){
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       },
       { 
+        id:'4',
           name: "Bob Johnson", 
           profession: "Mechanical Engineer", 
           degree: "Mechanical Engineering", 
@@ -67,6 +71,7 @@ function Find(props){
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       },
       { 
+        id:'5',
           name: "Emily Brown", 
           profession: "Nurse", 
           degree: "Nursing", 
@@ -76,6 +81,7 @@ function Find(props){
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       },
       { 
+        id:'6',
           name: "Michael Wilson", 
           profession: "Architect", 
           degree: "Architecture", 
@@ -85,6 +91,7 @@ function Find(props){
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       },
       { 
+        id:'7',
           name: "Sophia Martinez", 
           profession: "Psychologist", 
           degree: "Psychology", 
@@ -94,6 +101,7 @@ function Find(props){
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       },
       { 
+        id:'8',
           name: "David Lee", 
           profession: "Accountant", 
           degree: "Accounting", 
@@ -103,6 +111,7 @@ function Find(props){
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       },
       { 
+        id:'9',
           name: "Olivia Taylor", 
           profession: "Lawyer", 
           degree: "Law", 
@@ -112,6 +121,7 @@ function Find(props){
           longitude: 3.3792 + Math.random() * 0.5 - 0.25
       },
       { 
+        id:'10',
           name: "William Clark", 
           profession: "Civil Engineer", 
           degree: "Civil Engineering", 
