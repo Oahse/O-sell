@@ -1,0 +1,4 @@
+.gradient-bg{
+    background-image: linear-gradient(to bottom right, whitesmoke, gray, black);
+    /* color: whitesmoke; */
+}

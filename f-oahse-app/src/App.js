@@ -9,6 +9,7 @@ import About from './pages/About';
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage';
 import SignUpForContractorsPage from './pages/SignUpForContractorsPage'
+import ProfilePage from './pages/ProfilePage'
 
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
             <Route path="/login" element={<LoginPage/>}></Route>
             <Route path="/signup" element={<SignUpPage/>}></Route>
             <Route path="/signup-for-contractors" element={<SignUpForContractorsPage/>}></Route>
+            <Route path='/profile' element={<ProfilePage/>}></Route>
+            
         </Routes>
     </HashRouter>
   );
