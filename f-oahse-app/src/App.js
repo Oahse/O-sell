@@ -8,13 +8,9 @@ import Cart from './pages/Cart';
 import About from './pages/About';
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage';
-<<<<<<< HEAD
 import SignUpForContractorsPage from './pages/SignUpForContractorsPage'
-import ProfilePage from './pages/ProfilePage'
-=======
-import SignUpForContractorsPage from './pages/SignUpForContractorsPage';
+import ProfilePage from './pages/ProfilePage';
 import ChatRoom from './pages/ChatRoom';
->>>>>>> 97331c3dd81df5912377ec729f6566fe3577bf45
 
 
 function App() {
@@ -44,14 +40,11 @@ function App() {
             <Route path="/login" element={<LoginPage/>}></Route>
             <Route path="/signup" element={<SignUpPage/>}></Route>
             <Route path="/signup-for-contractors" element={<SignUpForContractorsPage/>}></Route>
-<<<<<<< HEAD
             <Route path='/profile' element={<ProfilePage/>}></Route>
             
-=======
             <Route path="/chat/:id" element={<ChatRoom />} ></Route>
 
 
->>>>>>> 97331c3dd81df5912377ec729f6566fe3577bf45
         </Routes>
     </HashRouter>
   );
