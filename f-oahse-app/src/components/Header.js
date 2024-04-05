@@ -4,6 +4,7 @@ import { React, useState, useEffect, useRef, faTimes,
 import Btn from './Button';
 import Icon from './Icon';
 import './Header.css';
+import { LinkContainer } from 'react-router-bootstrap'
 
 
 const Header = (props) => {
@@ -96,8 +97,25 @@ const Header = (props) => {
                             </NavDropdown> */}
                             <Link to="/products" className="header-link" style={linkstyles}>Store</Link>
                             <Link to="/contact" className="header-link" style={linkstyles}>Contact Us</Link>
+                            {/* {userInfo ? (
+                                <NavDropdown title={userInfo.name} id='username'>
+                                    <LinkContainer to='/profile'>
+                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                    </LinkContainer>
+
+                                    <LinkContainer to='/logout'>
+                                        <NavDropdown.Item>Logout</NavDropdown.Item>
+                                    </LinkContainer>
+                                </NavDropdown>
+                            ) : (
+                                <Btn to="/login" text="Login" />
+                                // <Btn to="/signup" text="Sign Up" />
+                            )} */}
+
+                            <Link to='/profile' className="header-link" style={linkstyles}>Hi, Rufai</Link>
                             <Btn to="/login" text="Login" />
                             <Btn to="/signup" text="Sign Up" />
+
                         </div>
                     </Navbar>
               )}
