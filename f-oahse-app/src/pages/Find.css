@@ -6,7 +6,7 @@
 .card-body{
   height: auto;
   max-width: 320px;
-  background-color: #d9d9d9;
+  background-color: #f9f9f9;
 }
 .find-image {
   width: 100%;
@@ -42,7 +42,7 @@
   height: auto;
   max-width: 150px;
   max-height: 100px;
-  background-color: #d9d9d9;
+  background-color: #f9f9f9;
   color: #000000;
   margin-right: 10px;
   text-align: center;

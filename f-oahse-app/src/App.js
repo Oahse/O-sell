@@ -11,6 +11,7 @@ import SignUpPage from './pages/SignUpPage';
 import SignUpForContractorsPage from './pages/SignUpForContractorsPage'
 import ProfilePage from './pages/ProfilePage';
 import ChatRoom from './pages/ChatRoom';
+import ProductList from './pages/ProductListPage';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/" element={<Home/>} exact ></Route>
             <Route path="/find/" element={<Find profile={profile}/>} ></Route>
             <Route path="/products" element={<Product/>} ></Route>
+            <Route path="/products/list" element={<ProductList/>} ></Route>
             <Route path="/products/cart" element={<Cart/>} ></Route>
             <Route path="/about" element={<About/>} ></Route>
             <Route path="/contact" element={<ContactPage/>} ></Route>

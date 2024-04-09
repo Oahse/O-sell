@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route ,Link } from "react-router-dom";
 import { faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {faGooglePlay, faAppStore} from '@fortawesome/free-brands-svg-icons'
 import SideNavBar from './MobileSideBar';
-import CIPAC_cover_photo from '../assets/CIPAC_cover_photo .jpg';
+import CIPAC_cover_photo from '../assets/CIPAC_cover_photo.jpg';
 import Btn from './Button';
 import IconButton from './Iconbutton';
 import Icon from './Icon';

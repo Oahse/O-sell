@@ -14,7 +14,7 @@ import 'swiper/css/navigation';
 
 
 function Product(props){
-    const name = "Services";
+    const name = "Products";
     const [iconColor, setIconColor] = useState('black');
     const [navbarBg, setNavbarBg] = useState('light');
     const linkstyles = {
@@ -97,7 +97,7 @@ function Product(props){
             <SideNavBar iconColor={iconColor}/>
             <div className='mb-5'>
                 
-                <Swiper navigation={true} modules={[Navigation]} className="carousel" loop={true} style={{width:'90%'}}>
+                <Swiper navigation={true} modules={[Navigation]} className="carousel" loop={true} style={{width:'100%'}}>
                     {products.map((product, index) => (
                             <SwiperSlide><img src={product.image} alt='' />
                             <div className='image-text row p-4'>
@@ -127,7 +127,7 @@ function Product(props){
                         <div class="option-content p-0">
                             {categories.map((category, index) => (
                                 <div key={index} className="-option-item p-0 m-0">
-                                    <Btn className="s-btn" text={category.name} style={{backgroundColor:'white'}}/>
+                                    <Btn   className="s-btn" text={category.name} style={{backgroundColor:'white'}}/>
                                 </div>
                             ))}
                         </div>
@@ -145,7 +145,7 @@ function Product(props){
                                 <img src="https://picsum.photos/200/150?random=5" alt="Book 3" className="grid-image" />
                                 <img src="https://picsum.photos/200/150?random=6" alt="Book 4" className="grid-image" />
                             </div>
-                        <Btn to="#" text="See more" className='mb-0 ml-0' />
+                        <Btn to={{pathname:`/products/list`}} state={{name: name}} text="See more" className='mb-0 ml-0' />
                         </div>
                     </div>
                     </div>
@@ -159,7 +159,7 @@ function Product(props){
                                 <img src="https://picsum.photos/200/150?random=9" alt="Book 3" className="grid-image" />
                                 <img src="https://picsum.photos/200/150?random=10" alt="Book 4" className="grid-image" />
                             </div>
-                        <Btn to="#" text="See more" />
+                        <Btn to={{pathname:`/products/list`}} state={{name: name}} text="See more" />
                         </div>
                     </div>
                     </div>
@@ -173,7 +173,7 @@ function Product(props){
                                 <img src="https://picsum.photos/200/150?random=13" alt="Book 3" className="grid-image" />
                                 <img src="https://picsum.photos/200/150?random=14" alt="Book 4" className="grid-image" />
                             </div>
-                        <Btn to="#" text="See more" />
+                        <Btn to={{pathname:`/products/list`}} state={{name: name}} text="See more" />
                         </div>
                     </div>
                     </div>
@@ -245,10 +245,10 @@ function Product(props){
                     <div className="card">
                       <div className="card-body p-1 align-items-center">
                         <img src={item.logo} alt={item.name} className="find-image" />
-                        <h5 className="card-title">{item.name}</h5>
+                        <p className="card-title m-0">{item.name}</p>
                         
-                        <span className="card-text">Desc.: {truncateDescription(item.description, 25)}</span>
-                        <h6 className="card-title">Price: {item.price} </h6>
+                        <small className="card-text m-0 p-0">{truncateDescription(item.description, 35)}</small><br/>
+                        <small className="card-title text-dark m-0">{item.price} </small>
                         
                         {/* Add your button component here */}
                       </div>

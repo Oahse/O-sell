@@ -1,7 +1,7 @@
-import {React, useState, useEffect, useRef,faGooglePlay, faAppStore,Swiper, SwiperSlide,Navigation, Row, Col, Container } from '../components/all_imports';
+import {React, useState, useEffect, useRef,faGooglePlay, faAppStore,Swiper, SwiperSlide,Navigation, Row, Col, Container, Link } from '../components/all_imports';
 import './Home.css';
 import '../setting/opensanregular.css'
-import CIPAC_cover_photo from '../assets/CIPAC_cover_photo .jpg';
+import CIPAC_cover_photo from '../assets/CIPAC_cover_photo.jpg';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideNavBar from '../components/MobileSideBar';
@@ -23,6 +23,7 @@ function Home (props){
     const [index, setIndex] = useState(0);
     const [bgimageheight, setBgImageHeight] =useState(162);
     const [isMobile, setIsMobile] = useState(false);
+    const [imgheight, SetImgHeight] = useState('40vh');
     const linkstyles = {
         fontFamily: 'Open Sans, sans-serif',
         color:iconColor
@@ -60,9 +61,77 @@ function Home (props){
         checkIfMobile();
     };
 
+    const setHeights = () => {
+        const windowWidth = window.outerWidth;
+        let imgHeight;
+        if (windowWidth <= 240) {
+          imgHeight = '215vh';
+        } else if (windowWidth <= 330) {
+          imgHeight = '93vh';
+        }else if (windowWidth <= 360) {
+          imgHeight = '72vh';
+        } else if (windowWidth <= 375) {
+          
+          if (window.outerHeight <= 670) {
+            imgHeight = '74vh';
+          }else if(window.outerHeight <= 813) {
+            imgHeight = '60vh';
+          }
+        } else if (windowWidth <= 390) {
+          imgHeight = '60vh';
+        } else if (windowWidth <= 416) {
+          imgHeight = '56vh';
+          if (window.outerHeight <= 800) {
+            imgHeight = '64vh';
+          }
+        }else if (windowWidth <= 430) {
+          imgHeight = '53vh';
+        } else if (windowWidth <= 459) {
+          imgHeight = '66vh';
+        } else if (windowWidth <= 574) {
+          imgHeight = '67vh';
+          
+        } else if (windowWidth <= 720) {
+          
+          imgHeight = '60vh';
+        }else if (windowWidth <= 768) {
+          imgHeight = '38vh';
+        } else if (windowWidth <= 820) {
+          imgHeight = '30vh';
+        }else if (windowWidth <= 912) {
+          imgHeight = '30vh';
+        } else if (windowWidth <= 1024) {
+          if (window.outerHeight <= 1200) {
+            
+            imgHeight = '62vh';
+          }else{
+            imgHeight = '28vh';
+          }
+        } else if (windowWidth <= 1400) {
+          console.log(window.outerHeight+'------===-------')
+          
+          if (window.outerHeight <= 720) {
+            imgHeight = '60vh';
+          }else if (window.outerHeight <= 820) {
+            imgHeight = '50vh';
+          }else{
+            imgHeight = '34vh';
+          }
+        }else {
+          imgHeight = '40vh';
+        }
+        
+      
+        SetImgHeight(imgHeight);
+        setIsMobile(window.innerWidth < 768);
+      };
+
     useEffect(() => {
         
-        
+        setHeights();
+    
+        window.addEventListener('resize', setHeights);
+        window.addEventListener('load', setHeights);
         window.addEventListener('scroll', handleScroll);
         // window.addEventListener('resize', handleResize);
 
@@ -71,6 +140,8 @@ function Home (props){
         return () => {
             window.removeEventListener('scroll', handleScroll);
             // window.removeEventListener('resize', handleResize); 
+            window.removeEventListener('resize', setHeights);
+          window.removeEventListener('load', setHeights);
         };
 
     }, []);
@@ -83,78 +154,45 @@ function Home (props){
 
             <div className='showcase-pic' >
             <Container >
-                <Row className='showcase' style={{ alignItems: 'center', justifyContent: 'center'}}>
-                    
-                    <Col className='' lg={8} md={12} sm={12}>
-                                    <h1>Your Engineering Services <br/>
-                                        Made Easier,
-                                        Made Better
-                                    </h1>
-                                    <p>
-                                        At the Comfort of your space,  get in-touch with  <br/>
-                                        professional engineers in seconds, <br/>
-                                        Get easier access to tradespersons around you in minutes  <br/>
-                                        for your on-time delivery of services; <br/>
-                                        and skip the traffic to get your technical supplies delivered  <br/>
-                                        to you at your door-step <br/>
-                                    </p>
-                        </Col>
-                    <Col className='' lg={8} md={12} sm={24}>
-                        
-                        <Row style={{ alignItems: 'center', justifyContent: 'center'}} >
-                            <Col className='' lg={8} md={12} sm={24}> {/* Use sm={24} to make it full width on mobile screens */}
-                                <IconButton icon={faGooglePlay} to="#" text="Google Play" className='m-0' />
-                            </Col>
-                            <Col className='' lg={8} md={12} sm={24}> {/* Use sm={24} to make it full width on mobile screens */}
-                                <IconButton icon={faAppStore} to="#" text="App Store" className='m-0' />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+            <Row className='showcase' style={{ alignItems: 'center', justifyContent: 'center'}}>
+                <Col className='' lg={8} md={12} sm={12}>
+                    <h3>Your Engineering Services <br/>
+                        Made Easier,
+                        Made Better
+                    </h3>
+                    <br/>
+                    <p>
+                        At the Comfort of your space,  get in-touch with  <br/>
+                        professional engineers in seconds, <br/>
+                        Get easier access to tradespersons around you in minutes  <br/>
+                        for your on-time delivery of services; <br/>
+                        and skip the traffic to get your technical supplies delivered  <br/>
+                        to you at your door-step <br/>
+                    </p>
+                </Col>
+                <Col className='' lg={8} md={12} sm={24}>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <IconButton icon={faGooglePlay} to="#" text="Google Play" className='m-0 text-dark' />
+                        <span className='m-2'></span>
+                        <IconButton icon={faAppStore} to="#" text="App Store" className='m-0 text-dark' />
+                    </div>
+                </Col>
+
+            </Row>
+
             </Container>
             </div>
-           
-           
-
-            {/* <div  className='supportPage' style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start',}}>
-                <img src={CIPAC_cover_photo} alt='support' width='100%' style={{filter: "brightness(70%)"}}/>
-
-                <Row style={{position: 'absolute', color: 'white', }}>
-                    <Container>
-                        <Col className=' mb-3' >
-                            <h1>Your Engineering Services <br/>
-                                Made Easier,
-                                Made Better
-                            </h1>
-                            <small>
-                                At the Comfort of your space,  get in-touch with  <br/>
-                                professional engineers in seconds, <br/>
-                                Get easier access to tradespersons around you in minutes  <br/>
-                                for your on-time delivery of services; <br/>
-                                and skip the traffic to get your technical supplies delivered  <br/>
-                                to you at your door-step <br/>
-                            </small>
-                        </Col>
-                
-                        <Col >
-                            <IconButton icon={faGooglePlay} to="#" text="Google Play" className='m-0 mb-3' />
-                            <IconButton icon={faAppStore} to="#" text="App Store" className='m-0' />
-                        </Col>
-                    </Container>
-                </Row>
-
-            </div>  */}
 
             <Container>
 
-                <Row className='py-3'>
-                    <Row className='my-3'>
+                <Row className='py-3 ' style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Row className='my-2'>
                         <Col className='text-center'><h1>Our Services</h1></Col>
                     </Row>
 
                     <Row >
                         <Col className='mb-3 d-flex justify-content-center align-items-center'>
-                            <Card style={{ width: '18rem', height: '320px' }} >
+                            <Card style={{ width: '18rem', height: '320px', margin:'8px' }} >
                                 <Card.Body>
                                     <Card.Title>Engineering Services</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -174,7 +212,7 @@ function Home (props){
                         </Col>
 
                         <Col className='mb-3 d-flex justify-content-center align-items-center' >
-                            <Card style={{ width: '18rem', height: '320px' }}>
+                            <Card style={{ width: '18rem', height: '320px',margin:'8px' }}>
                                 <Card.Body>
                                     <Card.Title>Supply/Delivery</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -190,7 +228,7 @@ function Home (props){
                         </Col>
 
                         <Col className='mb-3 d-flex justify-content-center align-items-center'>
-                            <Card style={{ width: '18rem', height: '320px'}}>
+                            <Card style={{ width: '18rem', height: '320px',margin:'8px'}}>
                                 <Card.Body>
                                     <Card.Title>Maintainence Services</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -213,7 +251,7 @@ function Home (props){
 
                 </Row>
 
-                <Row className='py-3 text-center'>
+                <Row className='py-3 text-center' style={{ display: 'flex', justifyContent: 'center' }}>
                     <Col className='text-center py-3 mb-3' lg={12} md={12} sm={12}>
                         <h1>Our Clients</h1>
                     </Col>
@@ -239,7 +277,7 @@ function Home (props){
 
                 </Row>
 
-                <Row className='mb-5'>
+                <Row className='mb-5'style={{ display: 'flex', justifyContent: 'center' }}>
                     <Col className='py-3 text-center' lg={12} md={12} sm={12}>
                         <h1>Earn with us </h1>
                     </Col>
@@ -271,7 +309,7 @@ function Home (props){
                     </Col>
                 </Row>
 
-                <Row style={{backgroundColor: 'grey', color: 'whitesmoke'}} className='rounded-4 text-center mx-3'>
+                <Row style={{backgroundColor: 'grey', color: 'whitesmoke',display: 'flex', justifyContent: 'center' }} className='rounded-4 text-center mx-3'>
                     <Col className='py-3 text-center' lg={12} md={12} sm={12}>
                         <h2>What do you need? Let's supply it</h2>
                     </Col>
@@ -313,15 +351,15 @@ function Home (props){
                     </Col>
                 </Row>
 
-                <Row className='py-3'>
+                <Row className='py-3' style={{ display: 'flex', justifyContent: 'center' }}>
                     <Col className='py-3' lg={12} md={12} sm={12}>
                         <Row>
                             <Col>
-                                <h2>News and Updates</h2>
+                                <Link><h5>News and Updates</h5></Link>
                             </Col>
 
                             <Col className='text-end'>
-                                <h3>View all </h3>
+                                <Link><h5>View all </h5></Link>
                             </Col>
                         </Row>
                        
@@ -331,7 +369,7 @@ function Home (props){
                          <div>
                             <img src={CIPAC_cover_photo} alt='news' width='100%'/>
                         </div>
-                        <h3>SPAWN Engineering Fest 2024</h3>
+                        <h5>SPAWN Engineering Fest 2024</h5>
                         <p>
                             Order your materials from our online store 
                             and experience and on-time supply/ delivery of your quality materials.
@@ -342,7 +380,7 @@ function Home (props){
                          <div>
                             <img src={CIPAC_cover_photo} alt='news' width='100%'/>
                         </div>
-                        <h3>SPAWN Engineering Fest 2024</h3>
+                        <h5>SPAWN Engineering Fest 2024</h5>
                         <p>
                             Order your materials from our online store 
                             and experience and on-time supply/ delivery of your quality materials.
@@ -353,7 +391,7 @@ function Home (props){
                         <div>
                             <img src={CIPAC_cover_photo} alt='news' width='100%'/>
                         </div>
-                        <h3>SPAWN Engineering Fest 2024</h3>
+                        <h5>SPAWN Engineering Fest 2024</h5>
                         <p>
                             Order your materials from our online store 
                             and experience and on-time supply/ delivery of your quality materials.
@@ -361,12 +399,12 @@ function Home (props){
                     </Col>
                 </Row>
 
-                <Row className='text-center rounded-5 py-3 mb-3 mx-3'style={{backgroundColor: 'black', color: 'white'}}>
+                <Row className='text-center rounded-5 py-3 mb-3 mx-3'style={{backgroundColor: 'black', color: 'white',display: 'flex', justifyContent: 'center' }}>
                     <Col className='py-3'>
                         <img src={AppScreen} alt='App' width='200px'/>
                     </Col>
                     <Col className='py-5'>
-                        <h2>It is easier on our App</h2>
+                        <h3>It is easier on our App</h3>
                         <p>Available for Android and iOS devices</p>
                         <a href='/'><Button variant='outline-warning' size='lg' className='rounded-5'>Download the App </Button></a>
                     </Col>

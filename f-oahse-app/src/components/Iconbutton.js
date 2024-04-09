@@ -1,7 +1,7 @@
 import { Button, React, FontAwesomeIcon, Link } from './all_imports';
 
 const IconButton = ({ href,to, onClick, text, icon, iconsize, className, borderRadius,disabled }) => {
-  var borderadius = '50px';
+  var borderadius = '6px';
   if (borderRadius){
     borderadius = borderRadius
   }
@@ -9,7 +9,7 @@ const IconButton = ({ href,to, onClick, text, icon, iconsize, className, borderR
 
   return (
     <div className="d-flex align-items-center">
-      <ButtonComponent href={href} onClick={onClick} variant='warning' className={`btn ${className}`} style={{borderRadius:borderadius}} disabled={disabled}>
+      <ButtonComponent href={href} onClick={onClick} variant='warning' className={`btn ${className} py-1`} style={{borderRadius:borderadius}} disabled={disabled}>
         {text}
         {icon && (
             <span className="m-0">

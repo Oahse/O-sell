@@ -7,10 +7,11 @@ import { BrowserRouter as Router, Switch, Route ,Link } from "react-router-dom";
 import { faBell, } from '@fortawesome/free-regular-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faList ,faBars, faTimes , faCaretDown, faCaretLeft, faCaretRight, faEye, faCommentAlt,faMapMarkerAlt, faCartShopping} from '@fortawesome/free-solid-svg-icons';
+import { faSliders,faSearch, faList ,faBars, faTimes , faCaretDown, faCaretLeft, faCaretRight, faEye, faCommentAlt,faMapMarkerAlt, faCartShopping} from '@fortawesome/free-solid-svg-icons';
+//import { faSliders as faRegularSliders} from '@fortawesome/free-regular-svg-icons'
 import logo from '../logo.svg';
 import { faGooglePlay, faAppStore } from '@fortawesome/free-brands-svg-icons'
-import CIPAC_cover_photo from '../assets/CIPAC_cover_photo .jpg';
+import CIPAC_cover_photo from '../assets/CIPAC_cover_photo.jpg';
 import Carousel_img1 from '../assets/carousel_img1.jpg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -27,6 +28,7 @@ export {
   faBars,
   faTimes,
   faCaretDown,
+  faSliders,
   faEye, faCommentAlt,
   Button,
   FontAwesomeIcon,

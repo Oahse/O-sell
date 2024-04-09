@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Body from '../components/Body';
 import {faGooglePlay, faAppStore} from '@fortawesome/free-brands-svg-icons'
 import SideNavBar from '../components/MobileSideBar';
-import CIPAC_cover_photo from '../assets/CIPAC_cover_photo .jpg';
+import CIPAC_cover_photo from '../assets/CIPAC_cover_photo.jpg';
 import Btn from '../components/Button';
 import IconButton from '../components/Iconbutton';
 import Icon from '../components/Icon';
@@ -19,6 +19,7 @@ import metalogo from '../assets/Meta-Logo2.png'
 import abblogo from '../assets/ABB-LOGO.png'
 import ericsson from '../assets/ericsson-logo.jpg'
 import chevron from '../assets/chevron-logo.png' 
+import { calc } from 'antd/es/theme/internal';
 
 function About() {
     const name = "Home"
@@ -28,6 +29,7 @@ function About() {
     const [margin, setMargin] = useState('20px');
     const [bgimageheight, setBgImageHeight] = useState(162);
     const [isMobile, setIsMobile] = useState(false);
+    const [imgheight, SetImgHeight] = useState('40vh');
     const [index, setIndex] = useState(0);
   
     const handleSelect = (selectedIndex) => {
@@ -64,10 +66,77 @@ function About() {
         
         checkIfMobile();
     };
+    const setHeights = () => {
+        const windowWidth = window.outerWidth;
+        let imgHeight;
+        if (windowWidth <= 240) {
+          imgHeight = '215vh';
+        } else if (windowWidth <= 330) {
+          imgHeight = '93vh';
+        }else if (windowWidth <= 360) {
+          imgHeight = '72vh';
+        } else if (windowWidth <= 375) {
+          
+          if (window.outerHeight <= 670) {
+            imgHeight = '74vh';
+          }else if(window.outerHeight <= 813) {
+            imgHeight = '60vh';
+          }
+        } else if (windowWidth <= 390) {
+          imgHeight = '60vh';
+        } else if (windowWidth <= 416) {
+          imgHeight = '56vh';
+          if (window.outerHeight <= 800) {
+            imgHeight = '64vh';
+          }
+        }else if (windowWidth <= 430) {
+          imgHeight = '53vh';
+        } else if (windowWidth <= 459) {
+          imgHeight = '66vh';
+        } else if (windowWidth <= 574) {
+          imgHeight = '67vh';
+          
+        } else if (windowWidth <= 720) {
+          
+          imgHeight = '60vh';
+        }else if (windowWidth <= 768) {
+          imgHeight = '38vh';
+        } else if (windowWidth <= 820) {
+          imgHeight = '30vh';
+        }else if (windowWidth <= 912) {
+          imgHeight = '30vh';
+        } else if (windowWidth <= 1024) {
+          if (window.outerHeight <= 1200) {
+            
+            imgHeight = '62vh';
+          }else{
+            imgHeight = '28vh';
+          }
+        } else if (windowWidth <= 1400) {
+          console.log(window.outerHeight+'------===-------')
+          
+          if (window.outerHeight <= 720) {
+            imgHeight = '60vh';
+          }else if (window.outerHeight <= 820) {
+            imgHeight = '50vh';
+          }else{
+            imgHeight = '34vh';
+          }
+        }else {
+          imgHeight = '40vh';
+        }
+        
+      
+        SetImgHeight(imgHeight);
+        setIsMobile(window.innerWidth < 768);
+      };
 
     useEffect(() => {
         
-        
+        setHeights();
+    
+        window.addEventListener('resize', setHeights);
+        window.addEventListener('load', setHeights);
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', handleResize);
 
@@ -76,6 +145,8 @@ function About() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', handleResize); 
+            window.removeEventListener('resize', setHeights);
+          window.removeEventListener('load', setHeights);
         };
 
     },  []);
@@ -85,37 +156,34 @@ function About() {
         <div className='about'>
             <Header parent={name} iconColor={iconColor} navbarBg={navbarBg} linkstyles={linkstyles} margin={margin} />
             <SideNavBar iconColor={iconColor}/>
-            <div>
-                <div>
-                    <img src={cover} alt="showcase" width="100%" id='bgimage' />
+            <div >
+                <div >
+                    <img src={cover} alt="showcase" width="100%" id='bgimage'  />
                 </div>
-           
-            
               {isMobile ? 
-                  (<div className='' style={{position: 'absolute', color: 'white', top: '15%', right: '16%'}}>
-                      <div className='  text-center'>
-                          <h2>Your Engineering Services <br/>
-                              Made Easier,
-                              Made Better,
-                          </h2>
-                      </div>
-                      
+                  (<div className='' style={{position: 'absolute', color: 'white', top: '12%',right:'10%',left:'10%', bottom:'15%'}}>
+                        <div className='text-center'>
+                            <h2>Your Engineering Services <br/>
+                                Made Easier,
+                                Made Better,
+                            </h2>
+                        </div>
                     </div>
                   ):
-                  (<div className='image-text row p-4'>
+                  (<div className='image-text row px-4'>
                       <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8  float-left'>
-                        <h2>Your Engineering Services <br/>
+                        <h1>Your Engineering Services <br/>
                             Made Easier,
                             Made Better,
-                        </h2>
-                        <small>
-                          At the Comfort of your space,  get in-touch with  <br/>
-                          professional engineers in seconds, <br/>
-                          Get easier access to tradespersons around you in minutes  <br/>
-                          for your on-time delivery of services; <br/>
-                          and skip the traffic to get your technical supplies delivered  <br/>
-                          to you at your door-step <br/>
-                        </small>
+                        </h1>
+                        <p>
+                            At the Comfort of your space,  get in-touch with  <br/>
+                            professional engineers in seconds, <br/>
+                            Get easier access to tradespersons around you in minutes  <br/>
+                            for your on-time delivery of services; <br/>
+                            and skip the traffic to get your technical supplies delivered  <br/>
+                            to you at your door-step <br/>
+                        </p>
                     </div>
                     <div className='col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-right' style={{marginTop:'100px'}}>
                       <IconButton icon={faGooglePlay} to="#" text="Google Play" className='m-1' />
@@ -125,24 +193,6 @@ function About() {
                   )
               }
               
-              {/* <div className='earn-with-oahse container-fluid'>
-                <div className="card  d-flex justify-content-center">
-                      <div className="card-body ">
-                        
-                        <h4 className="card-title  d-flex justify-content-center">Earn with <span className="ml-5"> Oahse</span></h4>
-
-                        <div className='titles  d-flex justify-content-center'>
-                            <Btn to='/find/' className="earn-title" text="Engineer"/>
-                            <Btn to='/find/' className="earn-title" text="Company"/>
-                            <Btn to='/find/' className="earn-title" text="Vendor"/>
-                        </div>
-                        {
-                          
-                        }
-                        
-                      </div>
-                  </div>
-              </div>  */}
 
               <Container >
                 <Row className='py-5' lg={2} md={2} sm={1} xs={1}>

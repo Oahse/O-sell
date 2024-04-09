@@ -98,3 +98,9 @@
 .ant-pagination-item-link-icon {
     color: #ffc107 !important; /* Change color of pagination icon */
 }
+.ant-space-item{
+  width: 100%;
+}
+.ant-checkbox-checked{
+  color: black !important; /* Change text color of active pagination item to black */
+}
