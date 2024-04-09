@@ -9,7 +9,7 @@ const IconButton = ({ href,to, onClick, text, icon, iconsize, className, borderR
 
   return (
     <div className="d-flex align-items-center">
-      <ButtonComponent href={href} onClick={onClick} variant='warning' className={`btn ${className} py-1`} style={{borderRadius:borderadius}} disabled={disabled}>
+      <ButtonComponent to={to} href={href} onClick={onClick} variant='warning' className={`btn ${className} py-1`} style={{borderRadius:borderadius}} disabled={disabled}>
         {text}
         {icon && (
             <span className="m-0">

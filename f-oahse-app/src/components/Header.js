@@ -63,7 +63,7 @@ const Header = (props) => {
         <>
             {isMobile ? (
                     <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight} justify-content='between' style={{margin:margin, padding:'8px', backgroundColor:navbarBg}}>
-                        <Navbar.Brand href="#home" style={linkstyles}>
+                        <Navbar.Brand href="/" style={linkstyles}>
                             <img alt="" src={logo} width="50" height="30" className="d-inline-block align-top"/>{' '}
                             {isSmallMobile ? (<span> </span>):(<span style={{'color':iconColor, 'fontWeight':'bold'}}>Oahse</span>)}
                         </Navbar.Brand>
@@ -81,7 +81,7 @@ const Header = (props) => {
                     </Navbar>
                 ) : (
                     <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight}  justify-content='between' style={{margin:margin, padding:'8px'}}>
-                        <Navbar.Brand href="#home" style={linkstyles}>
+                        <Navbar.Brand href="/" style={linkstyles}>
                             <img alt="" src={logo} width="50" height="30" className="d-inline-block align-top"/>{' '}
                             <span style={{'color':iconColor,'fontWeight':'bold'}}>Oahse</span>
                         </Navbar.Brand>
@@ -94,7 +94,7 @@ const Header = (props) => {
                             <Link to="/contact" className="header-link" style={linkstyles}>Contact Us</Link>
                             
                             <Link to='/profile' className="header-link" style={linkstyles}>Hi, Rufai</Link>
-                            <Btn to="/login" text="Login" />
+                            <Btn to="/login" text="Login" className='py-1' />
 
                         </div>
                     </Navbar>

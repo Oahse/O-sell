@@ -1,12 +1,10 @@
-import { React, useState, useEffect, useRef, faEye, faCommentAlt, Link, Navigation, faGooglePlay, faAppStore, Swiper, SwiperSlide, Container,} from '../components/all_imports';
+import { React, useState,Link,Container,} from '../components/all_imports';
 import './Product.css';
 import '../setting/opensanregular.css'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideNavBar from '../components/MobileSideBar';
-import Btn from '../components/Button';
-import IconButton from '../components/Iconbutton';
-import { Modal, Checkbox, Input } from 'antd'; // Assuming you're using Ant Design components
+import { Modal, Checkbox} from 'antd'; // Assuming you're using Ant Design components
 
 import Search from '../components/Search';
 import Pagination from '../components/Pagination';
@@ -16,7 +14,7 @@ import 'swiper/css/navigation';
 
 
 function ProductList(props){
-    const name = "Services";
+    const name = "ProductList";
     const [iconColor, setIconColor] = useState('black');
     const [navbarBg, setNavbarBg] = useState('light');
     const linkstyles = {
@@ -96,7 +94,7 @@ function ProductList(props){
                 okText="Apply"
                 cancelText="Cancel"
             >
-                <Checkbox.Group onChange={(checkedValues) => console.log('checked =', checkedValues)}>
+                <Checkbox.Group className='flex-column' onChange={(checkedValues) => console.log('checked =', checkedValues)}>
                     <Checkbox onChange={(e) => handleFilterChange('price', e.target.checked)}>Price</Checkbox>
                     <Checkbox onChange={(e) => handleFilterChange('location', e.target.checked)}>Location</Checkbox>
                     <Checkbox onChange={(e) => handleFilterChange('category', e.target.checked)}>Category</Checkbox>
@@ -115,7 +113,7 @@ function ProductList(props){
             <div className="row p-0 m-0">
               {filteredData.slice(previousPage*postsPerPage, currentPage*postsPerPage).map((item, index) => (
                 <div key={index} className="col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2 mb-2 ms-0 p-1">
-                  <Link to={`#card-${index}`} className="card-link">
+                  <Link to={`/products/${item.name}`} className="card-link">
                     <div className="card m-1">
                       <div className="card-body p-1 align-items-center">
                         <img src={item.logo} alt={item.name} className="find-image" />

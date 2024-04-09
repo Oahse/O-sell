@@ -6,25 +6,16 @@ import logo from '../logo.svg';
 import Item from './Item';
 import './MobileSideBar.css';
 
-const SideNavBarItem = (props) => {
+
+const SideNavBar = (props) => {
+
     const {text, children,iconColor} =props;
     
     const toggleaccordion = (value) => {
         // Render the SideNavBar component into the body_container element
         const container = document.getElementById(value+'-accordion');
         const accordionItems  = document.getElementsByClassName(value+'-accordionitem');
-        if (container.style.height != '0px'){
-            container.style.height = '0px';
-            for (let i = 0; i < accordionItems.length; i++) {
-                const currentAccordionItem = accordionItems[i];
-                currentAccordionItem.style.transition= '0.2s';
-                currentAccordionItem.style.visibility="hidden";
-              }
-            
-            const item = document.getElementById(value+'-caret');
-            item.style.transform='rotate(0deg)';
-        }
-        else{
+        if (container.style.height === '0px'){
             for (let i = 0; i < accordionItems.length; i++) {
                 const currentAccordionItem = accordionItems[i];
                 currentAccordionItem.style.transition= '0.5s';
@@ -37,50 +28,54 @@ const SideNavBarItem = (props) => {
             container.style.height = com_h;
             const item = document.getElementById(value+'-caret');
             item.style.transform='rotate(-90deg)';
+            console.log('cloded');
+            
+        }
+        else{
+            container.style.height = '0px';
+            for (let i = 0; i < accordionItems.length; i++) {
+                const currentAccordionItem = accordionItems[i];
+                currentAccordionItem.style.transition= '0.2s';
+                currentAccordionItem.style.visibility="hidden";
+              }
+            
+            const item = document.getElementById(value+'-caret');
+            item.style.transform='rotate(0deg)';
+            console.log('fdfdfd');
         }
     };
     const onclick = () => {
         console.log('text')
     }
     return(
-        <div className="d-flex flex-column flex-shrink-0 p-2 bg-light">
-            <div className='m-2'>
-                <img alt="" src={logo} width="70" height="50" className="d-inline-block align-top"/>{' '}
-                <span style={{'color':iconColor,fontWeight:'500', fontSize:'35px'}}>Oahse</span>
-            </div>
-            <Item to='/' lefticonname={faHome} iconcolor='dark' text="Home" onClick={onclick} className="item"/>
-            <Item to='/about/' lefticonname={faInfoCircle} iconcolor='dark' text="About" onClick={onclick} className="item"/>
-            <Item id='services' lefticonname={faWrench} righticonname={faCaretDown} iconcolor='dark' text="Services" onClick={() => toggleaccordion('services')} className="item"/>
-            <div id='services-accordion' className='accordion' >
-                <Item  to='/find/' lefticonname={faHelmetSafety} iconcolor='dark' text="Contact Engineers" onClick={onclick} className="item services-accordionitem"/>
-                <Item to='/products/' lefticonname={faShoppingBag} iconcolor='dark' text="Find Products" onClick={onclick} className="item services-accordionitem" />
-            </div>
-            <Item to='/contact/' lefticonname={faContactBook} iconcolor='dark' text="Contact Us" onClick={onclick} className="item"/>
-            <span className="separator"></span>
-            <Item to='/profile/' lefticonname={faUser} iconcolor='dark' text="Profile" onClick={onclick} className="item"/>
-            <Item to='/payments/' id='payments' lefticonname={faGear} righticonname={faCaretDown} iconcolor='dark' text="Payments" onClick={() => toggleaccordion('payments')} className="item"/>
-            <div id='payments-accordion' className='accordion' >
-                <Item to='/recent_transactions/' lefticonname={faReceipt} iconcolor='dark' text="Recent Transactions" onClick={onclick} className="item payments-accordionitem"/>
-                <Item to='/payment_reports/' lefticonname={faShoppingBag} iconcolor='dark' text="Report" onClick={onclick} className="item payments-accordionitem" />
-            </div>
-            <Item to='/login/' lefticonname={faSignIn} iconcolor='dark' text="Sign in" onClick={onclick} className="item"/>
-            <span className="separator"></span>
-
-            <Item to='/settings/' lefticonname={faGear} iconcolor='dark' text="Settings" onClick={onclick} className="item"/>
-       
-        </div>
-    )
-}
-const SideNavBar = (props) => {
-
-    return (
-
         <div className='sidenav' id="sidebar">
-            <div>
-                <SideNavBarItem />
+            <div className="d-flex flex-column flex-shrink-0 p-2 bg-light">
+                <div className='m-2'>
+                    <img alt="" src={logo} width="70" height="50" className="d-inline-block align-top"/>{' '}
+                    <span style={{'color':iconColor,fontWeight:'500', fontSize:'35px'}}>Oahse</span>
+                </div>
+                <Item to='/' lefticonname={faHome} iconcolor='dark' text="Home" onClick={onclick} className="item"/>
+                <Item to='/about/' lefticonname={faInfoCircle} iconcolor='dark' text="About" onClick={onclick} className="item"/>
+                <Item id='services' lefticonname={faWrench} righticonname={faCaretDown} iconcolor='dark' text="Services" onClick={() => toggleaccordion('services')} className="item"/>
+                <div id='services-accordion' className='accordion' style={{height: '0px'}}>
+                    <Item  to='/find/' lefticonname={faHelmetSafety} iconcolor='dark' text="Contact Engineers" onClick={onclick} className="item services-accordionitem"/>
+                    <Item to='/products/' lefticonname={faShoppingBag} iconcolor='dark' text="Find Products" onClick={onclick} className="item services-accordionitem" />
+                </div>
+                <Item to='/contact/' lefticonname={faContactBook} iconcolor='dark' text="Contact Us" onClick={onclick} className="item"/>
+                <span className="separator"></span>
+                <Item to='/profile/' lefticonname={faUser} iconcolor='dark' text="Profile" onClick={onclick} className="item"/>
+                <Item id='payments' lefticonname={faGear} righticonname={faCaretDown} iconcolor='dark' text="Payments" onClick={() => toggleaccordion('payments')} className="item"/>
+                <div id='payments-accordion' className='accordion' style={{height: '0px'}}>
+                    <Item to='/recent_transactions/' lefticonname={faReceipt} iconcolor='dark' text="Recent Transactions" onClick={onclick} className="item payments-accordionitem"/>
+                    <Item to='/payment_reports/' lefticonname={faShoppingBag} iconcolor='dark' text="Report" onClick={onclick} className="item payments-accordionitem" />
+                </div>
+                <Item to='/login/' lefticonname={faSignIn} iconcolor='dark' text="Sign in" onClick={onclick} className="item"/>
+                <span className="separator"></span>
+
+                <Item to='/settings/' lefticonname={faGear} iconcolor='dark' text="Settings" onClick={onclick} className="item"/>
+        
             </div>
-            
-        </div>
+        </div>  
     )
 }
 export default SideNavBar;

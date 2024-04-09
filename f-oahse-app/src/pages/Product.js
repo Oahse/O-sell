@@ -9,6 +9,8 @@ import IconButton from '../components/Iconbutton';
 import Search from '../components/Search';
 import Pagination from '../components/Pagination';
 // Import Swiper styles
+
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 

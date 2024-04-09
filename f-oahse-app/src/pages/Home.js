@@ -305,7 +305,7 @@ function Home (props){
                             and on-time supply/ delivery of your quality materials.
                         </p>
 
-                        <Button className='rounded-5'>Learn More</Button>
+                        <Button className='rounded-2 py-1'>Learn More</Button>
                     </Col>
                 </Row>
 
@@ -406,16 +406,13 @@ function Home (props){
                     <Col className='py-5'>
                         <h3>It is easier on our App</h3>
                         <p>Available for Android and iOS devices</p>
-                        <a href='/'><Button variant='outline-warning' size='lg' className='rounded-5'>Download the App </Button></a>
+                        <a href='/'><Button variant='outline-warning' size='lg' className='rounded-2 py-1'>Download the App </Button></a>
                     </Col>
 
                 </Row>
 
             </Container>
 
-           
-            
-            
             <Footer className='footer'/>
         </div>
     );
