@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: '60vh';
+  max-height: '50vh';
 }
 
 .message-container {
@@ -15,19 +15,21 @@
 .message {
   padding: 8px;
   margin-bottom: 8px;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .sent {
   background-color: #dcf8c6;
-  align-self: flex-end; /* Align messages sent by current user to the right */
-  max-width:'10px';
+  margin-left: auto;
+  max-width:200px;
+  border-bottom-right-radius: 0px;
 }
 
 .received {
   background-color: #f0f0f0;
-  align-self: flex-start; /* Align messages received from other users to the left */
-  width:'20px';
+  margin-right: auto;
+  width:200px;
+  border-bottom-left-radius: 0px;
 }
 
 .sender {

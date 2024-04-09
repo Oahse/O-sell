@@ -23,12 +23,17 @@ function ChatRoom(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleSendMessage = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     if (inputMessage.trim() !== '') {
       setMessages([...messages, { text: inputMessage, sender: 'You' }]);
       setInputMessage('');
     }
   };
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+        handleSendMessage();
+    }
+};
 
   const handleGoBack = () => {
     window.history.back(); // Navigate back
@@ -73,6 +78,8 @@ function ChatRoom(props) {
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onSearch={handleSendMessage}
+                onPressEnter={handleSendMessage}
+                onKeyDown={handleKeyPress}
                 addonAfter={<SendOutlined style={{cursor:'pointer'}}  onClick={handleSendMessage}/>} 
                 defaultValue="Type your message..."
                 /> 
