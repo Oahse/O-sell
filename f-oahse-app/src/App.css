@@ -45,17 +45,28 @@
   border: 2px solid #ffc107;
 }
 /* Styles for the input border on hover */
-.ant-input {
+.ant-input{
   border-width: 2px !important;
 }
 .ant-select-selection-item {
   color: black !important;
 }
+.ant-input-number,
+.ant-input-number-outlined {
+  border-width: 2px !important;
+  border-color: #282c34 !important;
+}
 .ant-input:hover,
-.ant-input:focus {
+.ant-input:focus,
+.ant-input-number-outlined:hover,
+.ant-input-number-outlined:focus,
+.ant-input-number-outlined:active{
     box-shadow: none !important;
     border-color: #ffc107 !important;
+    outline: none;
 }
+
+
 .ant-btn,.ant-input-group-addon {
   border-width: 2px !important;
   background-color: #ffc107;
@@ -95,7 +106,9 @@
 .ant-pagination-item-ellipsis {
     color: #ffe8a1 !important; /* Change color of ellipsis to match background */
 }
-.ant-pagination-item-link-icon {
+.ant-pagination-item-link-icon,
+.anticon-down,
+.anticon-up {
     color: #ffc107 !important; /* Change color of pagination icon */
 }
 .ant-space{

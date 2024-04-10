@@ -1,5 +1,5 @@
 import { React, useState, useEffect, Container, Link } from '../components/all_imports';
-import { Typography, Badge, Space, Breadcrumb, Modal} from 'antd';
+import { Typography, Badge, Space, Breadcrumb, Modal, InputNumber} from 'antd';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideNavBar from '../components/MobileSideBar';
@@ -33,6 +33,12 @@ const ProductDetailsPage = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [startX, setStartX] = useState(0);
     const [endX, setEndX] = useState(0);
+    const [number, setNumber] = useState(0);
+    
+    const onChange = (value) => {
+        setNumber(value);
+    };
+  
     
     const checkx = () => {
         console.log(startX);
@@ -189,6 +195,9 @@ const ProductDetailsPage = () => {
                         <Text strong>Seller:<small>Henrico</small></Text>
                         <p>{product.description}</p>
                         <div className='d-flex justify-content-end ms-auto'>
+                            <div className='m-1'>
+                                <InputNumber min={1} max={100000} defaultValue={1} onChange={onChange} />
+                            </div>
                             <IconButton to="#" text="Add to Cart" className='m-0 text-dark' onClick={handleAddToCart} />
                         </div>
                     </div>
