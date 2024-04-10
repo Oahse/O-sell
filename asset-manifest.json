@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/O-sell/static/css/main.35a893c7.css",
-    "main.js": "/O-sell/static/js/main.8621c468.js",
+    "main.css": "/O-sell/static/css/main.3874a368.css",
+    "main.js": "/O-sell/static/js/main.94c1ea83.js",
     "static/js/592.07ae9afa.chunk.js": "/O-sell/static/js/592.07ae9afa.chunk.js",
     "static/media/car.jpg": "/O-sell/static/media/car.500efef8ed8ec5e90bc0.jpg",
     "static/media/bulb.jpg": "/O-sell/static/media/bulb.5161d7b7bb9ba89ff666.jpg",
@@ -20,12 +20,12 @@
     "static/media/logo.svg": "/O-sell/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "static/media/pin-others-location.svg": "/O-sell/static/media/pin-others-location.d5d3b231e04a579e2f7bc5ae0656e6fe.svg",
     "index.html": "/O-sell/index.html",
-    "main.35a893c7.css.map": "/O-sell/static/css/main.35a893c7.css.map",
-    "main.8621c468.js.map": "/O-sell/static/js/main.8621c468.js.map",
+    "main.3874a368.css.map": "/O-sell/static/css/main.3874a368.css.map",
+    "main.94c1ea83.js.map": "/O-sell/static/js/main.94c1ea83.js.map",
     "592.07ae9afa.chunk.js.map": "/O-sell/static/js/592.07ae9afa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.35a893c7.css",
-    "static/js/main.8621c468.js"
+    "static/css/main.3874a368.css",
+    "static/js/main.94c1ea83.js"
   ]
 }
