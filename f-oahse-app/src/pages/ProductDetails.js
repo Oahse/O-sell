@@ -46,14 +46,15 @@ const ProductDetailsPage = () => {
         // Check start and end points to determine slide direction
         if  (Math.abs(endX - startX)>50){
             if (startX < endX) {
+                
                 try{
                     handleThumbnailClick(handleThumbnailClick(activeIndex-1))
-                }catch(err){console.log(err)}
+                }catch(err){handleThumbnailClick(handleThumbnailClick(0))}
                 // Perform action for sliding left
             } else {
                 try{
                     handleThumbnailClick(activeIndex+1)
-                }catch(err){console.log(err)}
+                }catch(err){handleThumbnailClick(handleThumbnailClick(0))}
                 // Perform action for sliding right
             }
         }  
@@ -196,7 +197,7 @@ const ProductDetailsPage = () => {
                         <p>{product.description}</p>
                         <div className='d-flex justify-content-end ms-auto'>
                             <div className='m-1'>
-                                <InputNumber min={1} max={100000} defaultValue={1} onChange={onChange} />
+                                <InputNumber min={1} max={100000} defaultValue={1} onChange={onChange} controls={true} changeOnWheel={true} />
                             </div>
                             <IconButton to="#" text="Add to Cart" className='m-0 text-dark' onClick={handleAddToCart} />
                         </div>

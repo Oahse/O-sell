@@ -65,6 +65,19 @@
     border-color: #ffc107 !important;
     outline: none;
 }
+.ant-input-number-handler-wrap {
+  display: block; /* Ensure the arrow buttons are displayed as block */
+  opacity: 1 !important;
+}
+.anticon-down,
+.anticon-up {
+  color: #282c34 !important;
+}
+.ant-input-number-handler-wrap:hover .anticon-down,
+.ant-input-number-handler-wrap:hover .anticon-up{
+    color: #ffc107 !important; /* Change color of pagination icon */
+}
+
 
 
 .ant-btn,.ant-input-group-addon {
@@ -107,10 +120,9 @@
     color: #ffe8a1 !important; /* Change color of ellipsis to match background */
 }
 .ant-pagination-item-link-icon,
-.anticon-down,
-.anticon-up {
-    color: #ffc107 !important; /* Change color of pagination icon */
-}
+
+
+
 .ant-space{
   background-color: #f9f9f9 !important;
 }
