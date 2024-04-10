@@ -1,11 +1,12 @@
 import { React, useState, useEffect, Container, Link } from '../components/all_imports';
-import { Typography, Badge, Space, Breadcrumb, Modal, InputNumber} from 'antd';
+import { Typography, Badge, Space, Breadcrumb, Modal, InputNumber as In} from 'antd';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideNavBar from '../components/MobileSideBar';
 import IconButton from '../components/Iconbutton';
 import { useLocation } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import InputNumber from '../components/InputNumber';
 import Bulb from '../assets/bulb.jpg';
 import Car from '../assets/car.jpg';
 import 'swiper/swiper-bundle.css';
@@ -197,7 +198,10 @@ const ProductDetailsPage = () => {
                         <p>{product.description}</p>
                         <div className='d-flex justify-content-end ms-auto'>
                             <div className='m-1'>
-                                <InputNumber min={1} max={100000} defaultValue={1} onChange={onChange} controls={true} changeOnWheel={true} />
+                                <span className='hidden m-0 p-0' style={{visibility:'hidden'}}>
+                                    <In min={1} max={10000} defaultValue={1} onChange={onChange} />
+                                </span>
+                                <InputNumber min={1} max={10000} defaultValue={1} onChange={onChange} />
                             </div>
                             <IconButton to="#" text="Add to Cart" className='m-0 text-dark' onClick={handleAddToCart} />
                         </div>

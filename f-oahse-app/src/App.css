@@ -69,6 +69,14 @@
   display: block; /* Ensure the arrow buttons are displayed as block */
   opacity: 1 !important;
 }
+/* CSS for Mobile */
+@media only screen and (max-width: 767px) {
+  .ant-input-number-handler-up,
+  .ant-input-number-handler-down {
+    display: block; /* Change to block display on mobile */
+    opacity: 1 !important;
+  }
+}
 .anticon-down,
 .anticon-up {
   color: #282c34 !important;
