@@ -1,13 +1,13 @@
 import { React, useState, useEffect, Container, Link } from '../components/all_imports';
-import { Typography, Badge, Space, Breadcrumb, Modal, InputNumber as In} from 'antd';
+import { Typography, Badge, Space, Breadcrumb, Modal} from 'antd';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideNavBar from '../components/MobileSideBar';
 import IconButton from '../components/Iconbutton';
 import { useLocation } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import InputNumber from '../components/InputNumber';
 import Bulb from '../assets/bulb.jpg';
+import InputNumber from '../components/InputNumber';
 import Car from '../assets/car.jpg';
 import 'swiper/swiper-bundle.css';
 import 'swiper/css';
@@ -111,6 +111,7 @@ const ProductDetailsPage = () => {
             window.removeEventListener('resize', checkIfMobile);
         };
     }, []);
+    
 
     return (
         <div>
@@ -188,8 +189,6 @@ const ProductDetailsPage = () => {
                                 
                             </div>
                             }
-                        
-                        
                     </div>
                     <div className='col-md-6 col-sm-12 mt-2'>
                         <Text strong className='lead'>${product.price}</Text><span> </span><small style={{ textDecoration: 'line-through', color: 'red' }}>{product.price}</small>
@@ -197,11 +196,8 @@ const ProductDetailsPage = () => {
                         <Text strong>Seller:<small>Henrico</small></Text>
                         <p>{product.description}</p>
                         <div className='d-flex justify-content-end ms-auto'>
-                            <div className='m-1'>
-                                <span className='hidden m-0 p-0' style={{visibility:'hidden'}}>
-                                    <In min={1} max={10000} defaultValue={1} onChange={onChange} />
-                                </span>
-                                <InputNumber min={1} max={10000} defaultValue={1} onChange={onChange} />
+                            <div className='m-1 p-1'>
+                                <InputNumber min={1} max={10} onChange={onChange} />
                             </div>
                             <IconButton to="#" text="Add to Cart" className='m-0 text-dark' onClick={handleAddToCart} />
                         </div>
