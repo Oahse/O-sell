@@ -37,7 +37,8 @@ const Search = (props) => {
 
   return (
     <Space direction="horizontal" style={{ margin: '6px', width: '99%' }}>
-      <Input
+      {(items||filter)?
+        <Input
         value={searchText}
         onChange={(e) => handleInputChange(e.target.value)}
         onSearch={handleSearchClick}
@@ -48,6 +49,17 @@ const Search = (props) => {
         }
         defaultValue="Search.."
       />
+      :<Input
+        value={searchText}
+        onChange={(e) => handleInputChange(e.target.value)}
+        onSearch={handleSearchClick}
+        onPressEnter={() => onKeyDown(searchText)}
+        addonAfter={
+          <SearchOutlined style={{ cursor: 'pointer' }} onClick={handleSearchClick} />
+        }
+        defaultValue="Search.."
+      />}
+      
     </Space>
   );
 };

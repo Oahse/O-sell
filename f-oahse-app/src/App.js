@@ -13,6 +13,7 @@ import ProfilePage from './pages/ProfilePage';
 import ChatRoom from './pages/ChatRoom';
 import ProductList from './pages/ProductListPage';
 import ProductDetailsPage from './pages/ProductDetails';
+import ProfileReports from './pages/ProfileReports';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
             <Route path="/signup" element={<SignUpPage/>}></Route>
             <Route path="/signup-for-contractors" element={<SignUpForContractorsPage/>}></Route>
             <Route path='/profile' element={<ProfilePage/>}></Route>
+            <Route path='/profile/reports/:id' element={<ProfileReports/>}></Route>
             
             <Route path="/chat/:id" element={<ChatRoom />} ></Route>
 

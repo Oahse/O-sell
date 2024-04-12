@@ -144,3 +144,15 @@
 .swiper-button-next{
   color: #ffc107 !important; /* Change color of pagination icon */
 }
+
+.ant-segmented,
+.ant-segmented-group{
+    background-color: #ffc107 !important;
+}
+.ant-list-item{
+  padding: 2px !important;
+}
+.recharts-wrapper{
+  width:'100%';
+  height:'100%';
+}

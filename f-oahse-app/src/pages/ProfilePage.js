@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from "react-router-dom";
 import Header from '../components/Header';
 import SideNavBar from '../components/MobileSideBar';
 import Footer from '../components/Footer';
@@ -15,13 +16,7 @@ function ProfilePage() {
     const [iconColor, setIconColor] = useState('white');
     const [navbarBg, setNavbarBg] = useState('transparent');
     const [margin, setMargin] = useState('20px');
-    // const [bgimageheight, setBgImageHeight] = useState(162);
-    // const [isMobile, setIsMobile] = useState(false);
-    // const [index, setIndex] = useState(0);
-  
-    // const handleSelect = (selectedIndex) => {
-    //   setIndex(selectedIndex);
-    // };
+
     
     const linkstyles = {
         fontFamily: 'Open Sans, sans-serif',
@@ -43,16 +38,7 @@ function ProfilePage() {
         
         }
     };
-    // const checkIfMobile = () => {
-    //     const width = window.innerWidth;
-    //     setIsMobile(width <= 767); // Adjust threshold as needed
-    // };
-    // const handleResize = () => {
-    //     var bgimg = document.getElementById('bgimage');
-    //     setBgImageHeight(bgimg.height-30);
-        
-    //     checkIfMobile();
-    // };
+
 
     useEffect(() => {
         
@@ -104,8 +90,10 @@ function ProfilePage() {
 
             <Row className='p-3 mb-3 text-center' lg={4} md={4} sm={3}>
                 <Col className='mb-5'>
-                    <h1><i className="bi bi-card-list"></i></h1>
-                    <h4>Orders</h4>
+                    <Link to={`/profile/reports/${110022}`} style={{textDecoration:'none', color:'black'}}>
+                        <h1><i className="bi bi-card-list"></i></h1>
+                        <h4>Reports</h4>
+                    </Link>
                 </Col>
 
                 <Col className='mb-5'>

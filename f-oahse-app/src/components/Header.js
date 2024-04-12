@@ -8,7 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 
 const Header = (props) => {
-    const {iconColor, navbarBg, linkstyles, margin}=props;
+    const {iconColor, navbarBg, linkstyles, margin, profile}=props;
 
     const navbarheight = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -76,6 +76,7 @@ const Header = (props) => {
                             <Link to="/find/" style={linkstyles}>
                                 <Icon name={faMapMarkerAlt} color='danger'/>
                             </Link>
+                            {profile?profile:null}
                             {isOpen ? (<Icon name={faTimes} onClick={() => toggleSidebar()} color={iconColor}/>):(<Icon name={faBars} onClick={() => toggleSidebar()} color={iconColor}/>) }
                         </div>
                     </Navbar>

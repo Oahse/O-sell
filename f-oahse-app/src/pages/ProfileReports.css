@@ -1,0 +1,19 @@
+.gradient-bg{
+    background-image: linear-gradient(to bottom right, whitesmoke, gray, black);
+    /* color: whitesmoke; */
+}
+.segmented-wrapper {
+    position: fixed;
+    top: 58px;
+    left: 2%;
+    left: 50%; /* Move the element to the center horizontally */
+    transform: translateX(-50%); /* Adjust for half of the element's width */
+    z-index: 1000; /* Adjust the z-index as needed */
+    padding: 4px 4px; /* Optional: Add padding for spacing */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: Add a shadow for depth */
+    width: 331px;
+}
+
+.demo-loadmore-list {
+    min-height: 350px;
+  }
