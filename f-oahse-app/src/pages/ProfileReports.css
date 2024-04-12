@@ -11,7 +11,7 @@
     z-index: 1000; /* Adjust the z-index as needed */
     padding: 4px 4px; /* Optional: Add padding for spacing */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: Add a shadow for depth */
-    width: 331px;
+    width: 335px;
 }
 
 .demo-loadmore-list {

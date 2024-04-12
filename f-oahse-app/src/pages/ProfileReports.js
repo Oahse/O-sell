@@ -4,6 +4,7 @@ import SideNavBar from '../components/MobileSideBar';
 import Footer from '../components/Footer';
 import { Segmented, Tabs,Avatar } from 'antd';
 import { Container} from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 import Order from './Orders';
 import ProfileDashboard from './ProfileDashboard';
 import ProfileTransactions from './ProfileTransactions';
@@ -16,11 +17,12 @@ import './ProfileReports.css'
 function ProfileReport() {
 
     const name = "Home"
-    
+    const location = useLocation();
+    console.log(location);
     const [iconColor, setIconColor] = useState('black');
     const [navbarBg, setNavbarBg] = useState('white');
     const [margin, setMargin] = useState('0px');
-    const [alignValue, setAlignValue] = useState('Dashboard');
+    const [alignValue, setAlignValue] = useState(location.state.indexpage);
 
     const DATA = [
         { name: "Nike", logo: "https://picsum.photos/200/150?random=11", description: "A global sportswear and equipment brand.",price: "$1000" },
@@ -70,10 +72,9 @@ function ProfileReport() {
         <SideNavBar iconColor={iconColor}/>
         <Container fluid className='py-3 d-flex flex-column align-items-center'>
             <Segmented
-                    defaultValue="Dashboard"
+                    defaultValue={location.state.indexpage}
                     onChange={(value) => setAlignValue(value)}
                     options={['Orders', 'Dashboard', 'Transactions', 'Reviews']}
-                    style={{}}
                     className="segmented-wrapper"
             />
             <div style={{width:'100%', marginTop:'20px'}}>

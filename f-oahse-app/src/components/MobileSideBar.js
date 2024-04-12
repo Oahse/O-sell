@@ -66,8 +66,8 @@ const SideNavBar = (props) => {
                 <Item to='/profile/' lefticonname={faUser} iconcolor='dark' text="Profile" onClick={onclick} className="item"/>
                 <Item id='payments' lefticonname={faGear} righticonname={faCaretDown} iconcolor='dark' text="Payments" onClick={() => toggleaccordion('payments')} className="item"/>
                 <div id='payments-accordion' className='accordion' style={{height: '0px'}}>
-                    <Item to='/recent_transactions/' lefticonname={faReceipt} iconcolor='dark' text="Recent Transactions" onClick={onclick} className="item payments-accordionitem"/>
-                    <Item to='/payment_reports/' lefticonname={faShoppingBag} iconcolor='dark' text="Report" onClick={onclick} className="item payments-accordionitem" />
+                    <Item to={{pathname:`/profile/reports/${145555}`}} state='Transactions'  lefticonname={faReceipt} iconcolor='dark' text="Transactions" onClick={onclick} className="item payments-accordionitem"/>
+                    <Item to={{pathname:`/profile/reports/${145555}`}} state='Orders' lefticonname={faShoppingBag} iconcolor='dark' text="Report" onClick={onclick} className="item payments-accordionitem" />
                 </div>
                 <Item to='/login/' lefticonname={faSignIn} iconcolor='dark' text="Sign in" onClick={onclick} className="item"/>
                 <span className="separator"></span>

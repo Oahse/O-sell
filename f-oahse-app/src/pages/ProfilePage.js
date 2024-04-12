@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import userimg from '../assets/user.png'
 // import profile from '../assets/profile.JPG'
 import { Container, Row, Col, Button  } from 'react-bootstrap';
+import IconButton from '../components/Iconbutton';
 import './ProfilePage.css'
 
 
@@ -70,7 +71,7 @@ function ProfilePage() {
                     <p><span><i class="bi bi-telephone-fill"></i></span>  +2349012345678</p>
                     <p><span><i class="bi bi-envelope-fill"></i></span>  ocrafiu@ncc.com</p>
 
-                    <Button variant='secondary' className='rounded-5 mt-3'>Edit Profile</Button>
+                    <IconButton text='Edit Profile'/>
                 </Col>
             </Row>
 
@@ -90,7 +91,7 @@ function ProfilePage() {
 
             <Row className='p-3 mb-3 text-center' lg={4} md={4} sm={3}>
                 <Col className='mb-5'>
-                    <Link to={`/profile/reports/${110022}`} style={{textDecoration:'none', color:'black'}}>
+                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Dashboard'}} style={{textDecoration:'none', color:'black'}}>
                         <h1><i className="bi bi-card-list"></i></h1>
                         <h4>Reports</h4>
                     </Link>
@@ -117,8 +118,11 @@ function ProfilePage() {
                 </Col>
 
                 <Col className='mb-5'>
-                     <h1><i className="bi bi-wallet"></i></h1>
-                    <h4>Payment Methods</h4>
+                     
+                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Transactions'}} style={{textDecoration:'none', color:'black'}}>
+                        <h1><i className="bi bi-wallet"></i></h1>
+                        <h4>Payment</h4>
+                    </Link>
                 </Col>
 
                 <Col className='mb-5'>

@@ -48,16 +48,16 @@ function Product(props){
         { brand: "Google", logo: "https://picsum.photos/200/150?random=20", description: "A multinational technology company specializing in Internet-related services and products." },
       ];
 
-      const categories = [
-        { name: "Electonics", logo: "https://picsum.photos/200/150?random=11", description: "A global sportswear and equipment brand." },
-        { name: "Power", logo: "https://picsum.photos/200/150?random=12", description: "A multinational technology company." },
-        { name: "Electricals", logo: "https://picsum.photos/200/150?random=13", description: "A South Korean conglomerate." },
-        { name: "Accessories", logo: "https://picsum.photos/200/150?random=14", description: "A world-renowned beverage brand." },
-        { name: "Technicians", logo: "https://picsum.photos/200/150?random=15", description: "A Japanese automotive manufacturer." },
-        { name: "Engineers", logo: "https://picsum.photos/200/150?random=16", description: "An American multinational technology company." },
-        { name: "Publications", logo: "https://picsum.photos/200/150?random=17", description: "A global technology corporation." },
-        { name: "Books", logo: "https://picsum.photos/200/150?random=18", description: "A multinational corporation that designs and manufactures sportswear and accessories." },
-        ];
+    const categories = [
+    { name: "Electonics", logo: "https://picsum.photos/200/150?random=11", description: "A global sportswear and equipment brand." },
+    { name: "Power", logo: "https://picsum.photos/200/150?random=12", description: "A multinational technology company." },
+    { name: "Electricals", logo: "https://picsum.photos/200/150?random=13", description: "A South Korean conglomerate." },
+    { name: "Accessories", logo: "https://picsum.photos/200/150?random=14", description: "A world-renowned beverage brand." },
+    { name: "Technicians", logo: "https://picsum.photos/200/150?random=15", description: "A Japanese automotive manufacturer." },
+    { name: "Engineers", logo: "https://picsum.photos/200/150?random=16", description: "An American multinational technology company." },
+    { name: "Publications", logo: "https://picsum.photos/200/150?random=17", description: "A global technology corporation." },
+    { name: "Books", logo: "https://picsum.photos/200/150?random=18", description: "A multinational corporation that designs and manufactures sportswear and accessories." },
+    ];
     const DATA = [
         { name: "Nike", logo: "https://picsum.photos/200/150?random=11", description: "A global sportswear and equipment brand.",price: "$1000" },
         { name: "Apple", logo: "https://picsum.photos/200/150?random=12", description: "A multinational technology company.",price: "$1000" },

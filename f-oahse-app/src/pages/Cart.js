@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Button, Input, Pagination, Typography } from 'antd';
 import { SettingOutlined, SearchOutlined } from '@ant-design/icons';
+import IconButton from '../components/Iconbutton';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SideNavBar from '../components/MobileSideBar';
@@ -122,7 +123,7 @@ const CartPage = () => {
                     
                 />
                 <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Button type="primary" style={{ alignSelf: "center" }}>Checkout</Button>
+                    <IconButton to={{pathname:`/profile/payments/${1455}`}} state='1456' text='Checkout' style={{ alignSelf: "center" }} />
                 </div>
 
             </div>

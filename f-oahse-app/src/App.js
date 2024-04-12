@@ -14,6 +14,7 @@ import ChatRoom from './pages/ChatRoom';
 import ProductList from './pages/ProductListPage';
 import ProductDetailsPage from './pages/ProductDetails';
 import ProfileReports from './pages/ProfileReports';
+import PaymentsForm from './pages/PaymentsPage';
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
     <HashRouter>
         <Routes>
             <Route path="/" element={<Home/>} exact ></Route>
-            <Route path="/find/" element={<Find profile={profile}/>} ></Route>
+            <Route path="/find" element={<Find profile={profile}/>} ></Route>
             <Route path="/products" element={<Product/>} ></Route>
             <Route path="/products/list" element={<ProductList/>} ></Route>
             <Route path="/products/cart" element={<Cart/>} ></Route>
@@ -47,10 +48,8 @@ function App() {
             <Route path="/signup-for-contractors" element={<SignUpForContractorsPage/>}></Route>
             <Route path='/profile' element={<ProfilePage/>}></Route>
             <Route path='/profile/reports/:id' element={<ProfileReports/>}></Route>
-            
+            <Route path='/profile/payments/:id' element={<PaymentsForm/>}></Route>
             <Route path="/chat/:id" element={<ChatRoom />} ></Route>
-
-
         </Routes>
     </HashRouter>
   );
