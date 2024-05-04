@@ -1,58 +1,58 @@
-API paths{
+base paths{
 
     user{
-        api/users/
+        base/users/
 
 
-        api/user/login
-        api/user/register 
-        api/user/email_verify
-        api/user/profile 
+        base/user/login
+        base/user/register 
+        base/user/email_verify
+        base/user/profile 
         
     }
 
     supplies/products{
-        /api/products/
-        /api/products/<id>/
-        /api/products/create/
-        /api/products/upload/
+        /base/products/
+        /base/products/<id>/
+        /base/products/create/
+        /base/products/upload/
         
-        /api/products/<update>/<id>/
-        /api/products/delete/<id>/
+        /base/products/<update>/<id>/
+        /base/products/delete/<id>/
 
-        /api/products/<id>/reviews/',    
+        /base/products/<id>/reviews/',    
         
     }
 
     services{
-        api/services/
-        api/services/<id>/
-        api/services/create/
-        api/services/upload/
+        base/services/
+        base/services/<id>/
+        base/services/create/
+        base/services/upload/
         
-        api/services/update/<id>/
-        api/services/delete/<id>/
+        base/services/update/<id>/
+        base/services/delete/<id>/
 
-        api/services/<id>/reviews/', 
+        base/services/<id>/reviews/', 
     }
 
 
     engineers{
-        api/engineers/register
+        base/engineers/register
 
-        api/engineers/
-        api/engineers/<id>
+        base/engineers/
+        base/engineers/<id>
         
-        api/engineers/<id>/uploadimage
-        api/engineers/<id>/update
+        base/engineers/<id>/uploadimage
+        base/engineers/<id>/update
 
-        api/engineers/<id>/delete
+        base/engineers/<id>/delete
 
-        api/engineers/<id>/reviews
+        base/engineers/<id>/reviews
     }
 
     categories{
-        api/categories/
+        base/categories/
     }
 
      orders{

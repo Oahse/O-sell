@@ -74,6 +74,9 @@ class Category(models.Model):
 
     _id = models.AutoField(primary_key=True, editable=False)
 
+    class Meta:
+        verbose_name_plural = 'categories'
+ 
     def __str__(self):
         return self.name
     
@@ -85,6 +88,9 @@ class Profession(models.Model):
     image = models.ImageField(upload_to='engineers/', null=True, blank=True, default='/engineers/placeholder.png')
     about = models.CharField(max_length=500, null=True, blank=True )
     description = models.TextField(null=True, blank=True)
+    nid = models.CharField(max_length=12, null=True, blank=True)
+    verification = models.BooleanField(default=False)
+    certificate_ID = models.CharField(max_length=20, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True )
     createdAt = models.DateTimeField(auto_now_add = True )
 

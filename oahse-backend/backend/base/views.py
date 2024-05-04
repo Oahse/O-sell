@@ -8,10 +8,12 @@ from django.http import JsonResponse
 @api_view (['GET'])
 def getRoutes (request):
     routes = [
-        'api/users',
-       ' api/user/login',
-        'api/user/register',
-        'api/user/email_verify',
-        'api/user/profile',
+        'base/users',
+       ' base/user/login',
+        'base/user/register',
+        'base/user/email_verify',
+        'base/user/profile',
     ]
     return Response (routes)
+
+
