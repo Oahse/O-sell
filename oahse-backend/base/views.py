@@ -1,0 +1,186 @@
+from django.shortcuts import render
+from rest_framework.decorators import api_view, permission_classes 
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.response import Response
+from django.http import JsonResponse
+from base.models import * 
+from base.serializers import *
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView 
+from rest_framework import status 
+
+
+# Create your views here.
+
+@api_view (['GET'])
+def getRoutes (request):
+    routes = [
+        'base/users',
+       ' base/user/login',
+        'base/user/register',
+        'base/user/email_verify',
+        'base/user/profile',
+    ]
+    return Response (routes)
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs) 
+
+        serializer = UserSerializerWithToken(self.user).data
+
+        for k , v in serializer.items():
+            data[k] = v 
+
+        return data 
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+# User view ---------------------------------------------
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated]) 
+def updateUserProfile(request):
+    user = request.user
+    serializer = UserSerializerWithToken(user, many=False)
+
+    data = request.data
+
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email'] 
+    if data['password'] != '':
+        user.password = make_password(data['password'])
+
+    user.save()
+
+    return Response(serializer.data) 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated]) 
+def getUserProfile(request):
+    user = request.user
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data) 
+
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser]) 
+def getUsers(request):
+    users = User.objects.all() 
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data) 
+
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser]) 
+def getUserById(request, pk): 
+    user = User.objects.get(id=pk) 
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data) 
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateUser(request, pk):
+    user = User.objects.get(id=pk)
+    
+
+    data = request.data
+
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email'] 
+    user.is_staff = data['isAdmin']
+
+    user.save()
+
+    serializer = UserSerializer(user, many=False)
+
+    return Response(serializer.data) 
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteUser(request, pk):
+    userForDeletion = User.objects.get(id=pk)
+    userForDeletion.delete()
+    return Response('User was deleted')
+
+
+
+# Product View -------------------------------------------
+
+
+@api_view(['GET'])
+def getProducts(request):
+    products = Product.objects.all()
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data) 
+
+
+
+@api_view(['GET'])
+def getProduct(request, pk):
+    product = Product.objects.get(_id=pk)
+    serializer = ProductSerializer(product, many=False)
+   
+    return Response(serializer.data) 
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def createProduct(request):
+    user = request.user
+
+    product = Product.objects.create(
+        user= user, 
+        name= 'sample name',
+        price= 0, 
+        about= '',
+        description= '',
+        
+    )
+
+    serializer = ProductSerializer(product, many=False)
+    
+    return Response(serializer.data) 
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateProduct(request, pk):
+    data = request.data
+    product = Product.objects.get(_id=pk)
+
+    product.name = data['name']
+    product.price = data['price']
+    product.about = data['about']
+    product.description = data['description']
+
+    product.save() 
+
+    serializer = ProductSerializer(product, many=False)
+   
+    return Response(serializer.data) 
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteProduct(request, pk):
+    product = Product.objects.get(_id=pk)
+    product.delete()
+   
+    return Response('Product Deleted') 
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def uploadProductImage(request): 
+    data = request.data 
+
+    product_id = data['product_id'] 
+    product = Product.objects.get(_id=product_id)
+
+    product.image = request.FILES.get('image')
+    product.save()
+
+    return Response('Image was uploaded')

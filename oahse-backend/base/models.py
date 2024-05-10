@@ -5,7 +5,7 @@ def get_profile_image_filepath(self, filename):
     return f'profile_images/{self.pk}/{'profile_image.png'}'
 
 def get_default_profile_image():
-    return 'assets/user.png'
+    return 'user.png'
 
 #Custom User Model 
 class CustomUserManager(BaseUserManager):
