@@ -28,8 +28,8 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password, first_name, last_name, mobile, **extra_fields):
-        extra_fields.setdefault('is_staff',True)
-        extra_fields.setdefault('is_active',True)
+        extra_fields.setdefault('is_staff',False)
+        extra_fields.setdefault('is_active',False)
         extra_fields.setdefault('is_superuser',False)
         return self._create_user(email, password, first_name, last_name, mobile, password, **extra_fields)
 
@@ -52,7 +52,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     
 
     is_staff = models.BooleanField(default=True) # must needed, otherwise you won't be able to loginto django-admin.
-    is_active = models.BooleanField(default=True) # must needed, otherwise you won't be able to loginto django-admin.
+    is_active = models.BooleanField(default=False) # must needed, otherwise you won't be able to loginto django-admin.
     is_superuser = models.BooleanField(default=False) # this field we inherit from PermissionsMixin.
 
     objects = CustomUserManager()

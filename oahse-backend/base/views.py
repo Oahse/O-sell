@@ -10,6 +10,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status 
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
+from .utils import Util 
+from django.contrib.sites.shortcuts import get_current_site
 
 # Create your views here.
 
@@ -50,12 +52,26 @@ def registerUser(request):
             email = data['email'], 
             password = make_password(data['password']),
         )
+
+        token = UserSerializerWithToken.for_user(user).access_token 
+
+        current_site = get_current_site(request).domain
+        relativeLink = reversed('email-verify')
+        email_body = 'Hello' +user.first_name+ 'Use the link below to verify your account \n' +absurl
+        data = {'email_subject': 'Verify your Email', 'email_body': email_body, 'to_email': user.email}
+        absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
+
+        Util.send_email(data)
         serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
     except:
         message = {'detail': 'User with this Email already exists'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['GET'])
+def verifyEmail():
+    return Response('hello')
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated]) 
