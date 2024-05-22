@@ -48,8 +48,8 @@ AUTH_USER_MODEL = 'base.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-
+    ),
+    'NON_FIELD_ERROR_KEY': 'error'
 }
 
 from datetime import timedelta

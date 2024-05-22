@@ -10,8 +10,8 @@ urlpatterns = [
     # path ('', views.getRoutes, name='Routes'),
 
     path('login', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('register/', views.registerUser, name='register'),
-    path('verify-email', views.verifyEmail, name='email-verify'),
+    path('register/', views.RegisterUser.as_view(), name='register'),
+    # path('verify-email', views.verifyEmail, name='email-verify'),
     path('profile/', views.getUserProfile, name="users-profile"),
     path('profile/update/', views.updateUserProfile, name="users-profile-update"),
     path('', views.getUsers, name="users"),
