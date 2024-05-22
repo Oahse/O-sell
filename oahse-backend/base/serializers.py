@@ -12,21 +12,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', '_id', 'email', 'name', 'password', 'isAdmin']
+        fields = ['id', '_id', 'email', 'name', 'isAdmin']
 
     def get__id(self, obj):
         return obj.id
-
-    def validate(self, attrs):
-        email=attrs.get('email', '')
-        username = attrs.get('username', '')
-
-        if not username.isalnum():
-            raise serializers.ValidationError('This is not a valid format')
-        return attrs
-    
-    def create (self, validated_data):
-        return User.objects.create_user(**validated_data)
     
     def get_isAdmin(self, obj):
         return obj.is_staff

@@ -8,7 +8,7 @@ from base.serializers import UserSerializer, UserSerializerWithToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView 
 from rest_framework import status 
-from rest_framework import generics
+# from rest_framework import generics
 from django.contrib.auth.hashers import make_password
 from base.utils import Util 
 from django.contrib.sites.shortcuts import get_current_site
@@ -31,18 +31,33 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-class RegisterUser(generics.GenericAPIView):
+@api_view(['POST'])
+def registerUser(request):
+    data = request.data 
+    try:
+        user = User.objects.create(
+            first_name= data['first name'],
+            last_name = data['last name'],
+            email = data['email'], 
+            password = make_password(data['password']),
+        )
 
-    serializer_class=UserSerializer
+        # token = UserSerializerWithToken.for_user(user).access_token 
 
-    def post(self, request): 
-        user = request.data
-        serializer =self.serializer_class(data=user)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        # current_site = get_current_site(request).domain
+        # relativeLink = reversed('email-verify')
+        # email_body = 'Hello' +user.first_name+ 'Use the link below to verify your account \n' +absurl
+        # data = {'email_subject': 'Verify your Email', 'email_body': email_body, 'to_email': user.email}
+        # absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
 
-        user_data = serializer.data
-        return Response(user_data, status=status.HTTP_201_CREATED)
+        # Util.send_email(data)
+
+        
+        serializer = UserSerializerWithToken(user, many=False)
+        return Response(serializer.data)
+    except:
+        message = {'detail': 'User with this Email already exists'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])
