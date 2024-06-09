@@ -1,130 +1,165 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view, permission_classes 
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_decode
+from rest_framework import status, viewsets, generics
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
-from django.http import JsonResponse
-from base.models import User
-from base.serializers import UserSerializer, UserSerializerWithToken
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView 
-from rest_framework import status 
-# from rest_framework import generics
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import login, logout
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.hashers import make_password
-from base.utils import Util 
-from django.contrib.sites.shortcuts import get_current_site
 
-# Create your views here.
-
-# User view ---------------------------------------------
-
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs) 
-
-        serializer = UserSerializerWithToken(self.user).data
-
-        for k , v in serializer.items():
-            data[k] = v 
-
-        return data 
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
-
-@api_view(['POST'])
-def registerUser(request):
-    data = request.data 
-    try:
-        user = User.objects.create(
-            first_name= data['first name'],
-            last_name = data['last name'],
-            email = data['email'], 
-            password = make_password(data['password']),
-        )
-
-        # token = UserSerializerWithToken.for_user(user).access_token 
-
-        # current_site = get_current_site(request).domain
-        # relativeLink = reversed('email-verify')
-        # email_body = 'Hello' +user.first_name+ 'Use the link below to verify your account \n' +absurl
-        # data = {'email_subject': 'Verify your Email', 'email_body': email_body, 'to_email': user.email}
-        # absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
-
-        # Util.send_email(data)
-
-        
-        serializer = UserSerializerWithToken(user, many=False)
-        return Response(serializer.data)
-    except:
-        message = {'detail': 'User with this Email already exists'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+from ..models import User
+from ..serializers import (
+    UserSerializer, UserLoginSerializer
+)
+from ..utils import Util
 
 
-@api_view(['PUT'])
-@permission_classes([IsAuthenticated]) 
-def updateUserProfile(request):
-    user = request.user
-    serializer = UserSerializerWithToken(user, many=False)
-
-    data = request.data
-
-    user.first_name = data['name']
-    user.username = data['email']
-    user.email = data['email'] 
-    if data['password'] != '':
-        user.password = make_password(data['password'])
-
-    user.save()
-
-    return Response(serializer.data) 
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated]) 
-def getUserProfile(request):
-    user = request.user
-    serializer = UserSerializer(user, many=False)
-    return Response(serializer.data) 
+def send_verification_email(request, user, email, type, subject):
+    token = default_token_generator.make_token(user)
+    websitetype = 'noreply@yourwebsite.com'
+    Util.send_email(request, user, email, token, websitetype, type, subject)
 
 
-@api_view(['GET'])
-@permission_classes([IsAdminUser]) 
-def getUsers(request):
-    users = User.objects.all() 
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data) 
-
-
-@api_view(['GET'])
-@permission_classes([IsAdminUser]) 
-def getUserById(request, pk): 
-    user = User.objects.get(id=pk) 
-    serializer = UserSerializer(user, many=False)
-    return Response(serializer.data) 
-
-
-@api_view(['PUT'])
-@permission_classes([IsAdminUser])
-def updateUser(request, pk):
-    user = User.objects.get(id=pk)
+class BaseUserViewSet(viewsets.ModelViewSet):
     
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
-    data = request.data
+    def create_user(self, request, serializer):
+        data = request.data
+        user = serializer.save(password=make_password(data['password']))
+        print('user=', user)
+        send_verification_email(request, user, data.get('email'),'email_verification', 'Email Verification')
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'success': True,
+            'message': 'User registered successfully',
+            'userid': user.id,
+            'refresh': str(refresh),
+            'access': str(refresh.access_token)
+        }, status=status.HTTP_201_CREATED)
 
-    user.first_name = data['first name']
-    user.last_name = data['last name']
-    user.email = data['email'] 
-    user.is_staff = data['isAdmin']
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            return self.create_user(request, serializer)
+        return Response({'success': False, 'message': 'Failed to register user', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-    user.save()
+    def retrieve(self, request, pk=None):
+        print(pk,"==============")
+        user = get_object_or_404(self.queryset, pk=pk)
+        serializer = self.get_serializer(user)
+        return Response({'success': True, 'message': 'User details retrieved successfully', 'data': serializer.data})
+    def list(self, request):
+        serializer = self.get_serializer(self.queryset, many=True)
+        return Response({'success': True,'message': 'Users retrieved successfully',  'data': serializer.data})
 
-    serializer = UserSerializer(user, many=False)
+    def update(self, request, pk=None):
+        print('request.data',request.data)
+        user = get_object_or_404(self.queryset, pk=pk)
+        serializer = self.get_serializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'success': True, 'message': 'User updated successfully', 'data': serializer.data})
+        return Response({'success': False, 'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-    return Response(serializer.data) 
+    def destroy(self, request, pk=None):
+        user = get_object_or_404(self.queryset, pk=pk)
+        user.delete()
+        return Response({'success': True, 'message': 'User deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
+class CreateUserViewSet(BaseUserViewSet):
+    queryset = User.objects.filter(is_tradeperson=False, is_business=False, is_distributor=False, is_deliverer=False)
+    #serializer_class = CreateUserSerializer
 
 
-@api_view(['DELETE'])
-@permission_classes([IsAdminUser])
-def deleteUser(request, pk):
-    userForDeletion = User.objects.get(id=pk)
-    userForDeletion.delete()
-    return Response('User was deleted')
+class BaseAuthViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+
+    @staticmethod
+    def login_user(request, serializer_class):
+        serializer = serializer_class(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            login(request, user)
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'success': True,
+                'message': 'Login successful',
+                'user': UserSerializer(user).data,
+                'refresh': str(refresh),
+                'access': str(refresh.access_token)
+            }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    def login(self, request):
+        return self.login_user(request, UserLoginSerializer)
+
+    def logout(self, request):
+        logout(request)
+        return Response({'success': True, 'message': 'Logged out successfully'}, status=status.HTTP_200_OK)
+
+
+class LoginViewSet(BaseAuthViewSet):
+    pass
+
+
+class TradepersonViewSet(BaseUserViewSet, BaseAuthViewSet):
+    queryset = User.objects.filter(is_tradeperson=True)
+    #serializer_class = CreateTradepersonSerializer
+
+
+class BusinessViewSet(BaseUserViewSet, BaseAuthViewSet):
+    queryset = User.objects.filter(is_business=True)
+    #serializer_class = CreateBusinessSerializer
+
+
+class DistributorViewSet(BaseUserViewSet, BaseAuthViewSet):
+    queryset = User.objects.filter(is_distributor=True)
+    #serializer_class = CreateDistributorSerializer
+
+
+class DelivererViewSet(BaseUserViewSet, BaseAuthViewSet):
+    queryset = User.objects.filter(is_deliverer=True)
+    #serializer_class = CreateDelivererSerializer
+
+
+class SuperuserViewSet(BaseUserViewSet, BaseAuthViewSet):
+    queryset = User.objects.filter(is_superuser=True)
+    #serializer_class = CreateSuperuserSerializer
+
+
+class VerifyEmailView(generics.GenericAPIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, uidb64, token, *args, **kwargs):
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            return Response({'success': False, 'message': 'Invalid link'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if user and default_token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+            return Response({'success': True, 'message': 'Email verified successfully'}, status=status.HTTP_200_OK)
+        return Response({'success': False, 'message': 'Invalid token or user'}, status=status.HTTP_400_BAD_REQUEST)
+
+class ResetPasswordRequestView(generics.GenericAPIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        user = User.objects.filter(email=email).first()
+        if user:
+            new_password = request.data.get('new_password')
+            confirm_password = request.data.get('confirm_password')
+            if new_password != confirm_password:
+                return Response({'success': False, 'message': 'Passwords do not match'}, status=status.HTTP_400_BAD_REQUEST)
+            user.set_password(new_password)
+            user.save()
+            return Response({'success': True, 'message': 'Password reset successful'}, status=status.HTTP_200_OK)
+        return Response({'success': False, 'message': 'Invalid email'}, status=status.HTTP_400_BAD_REQUEST)
+
