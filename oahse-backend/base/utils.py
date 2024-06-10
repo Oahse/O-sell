@@ -3,6 +3,9 @@ from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnico
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
+import hashlib
+import hmac
+import os
 
 class Util:
     @staticmethod
@@ -122,3 +125,32 @@ class Util:
             print(e)
             return False
         return True
+    
+    
+    @staticmethod
+    def hash_password(password, salt=None):
+        if salt is None:
+            salt = os.urandom(16)  # Generate a random salt
+        
+        # Encode the password and salt
+        encoded_password = password.encode('utf-8')
+        
+        # Hash the combined bytes using SHA-256
+        hashed = hashlib.sha256(encoded_password + salt).hexdigest()
+        
+        # Return the salt and hashed password as a string
+        return f'{salt.hex()}${hashed}'
+
+    @staticmethod
+    def verify_password(stored_password, provided_password):
+        # Split the stored password into salt and hashed password
+        salt_hex, stored_hash = stored_password.split('$')
+        
+        # Decode the salt from hexadecimal to bytes
+        salt = bytes.fromhex(salt_hex)
+        
+        # Hash the provided password with the same salt
+        computed_hash = hashlib.sha256((provided_password.encode('utf-8') + salt)).hexdigest()
+        
+        # Compare the stored hash with the computed hash
+        return stored_hash == computed_hash

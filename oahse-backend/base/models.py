@@ -1,6 +1,11 @@
 import uuid
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager 
+from .utils import Util
+
 CURRENCIES = [("USD","USD"),("EUR","EUR"),("NGN","NGN"),("GBP","GBP"),
            ("PHP","PHP"),("KES","KES"),("TZS","TZS"),("UGX","UGX"),("RWF","RWF"),("BIF","BIF"),
            ]
@@ -37,7 +42,7 @@ class CustomUserManager(BaseUserManager):
 
         email = self.normalize_email(email)
         user = self.model(email=email, nin=nin, address=address, phonenumber=phonenumber, **extra_fields)
-        user.set_password(password)
+        user.password = Util.hash_password(password)
         user.save(using=self._db)
         return user
 
@@ -57,12 +62,13 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('professionname', professionname)
         return self._create_user(email, password, nin, address, phonenumber, **extra_fields)
     
-    def create_business(self, email, password, nin, address, phonenumber, businessname, websiteurl, **extra_fields):
+    def create_business(self, email, password, nin, address, phonenumber, businessname,cac, websiteurl, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_active', False)
         extra_fields.setdefault('is_superuser', False)
         extra_fields.setdefault('is_business', True)
         extra_fields.setdefault('businessname', businessname)
+        extra_fields.setdefault('cac', cac)
         extra_fields.setdefault('websiteurl', websiteurl)
         return self._create_user(email, password, nin, address, phonenumber, **extra_fields)
     
@@ -76,12 +82,13 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('websiteurl', websiteurl)
         return self._create_user(email, password, nin, address, phonenumber, **extra_fields)
     
-    def create_deliverer(self, email, password, nin, address, phonenumber, deliverername,websiteurl, **extra_fields):
+    def create_deliverer(self, email, password, nin, address, phonenumber, deliverername,cac,websiteurl, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_active', False)
         extra_fields.setdefault('is_superuser', False)
         extra_fields.setdefault('is_deliverer', True)
         extra_fields.setdefault('deliverername', deliverername)
+        extra_fields.setdefault('cac', cac)
         extra_fields.setdefault('websiteurl', websiteurl)
         return self._create_user(email, password, nin, address, phonenumber, **extra_fields)
 
@@ -98,6 +105,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=240)
     last_name = models.CharField(max_length=255)
     email = models.EmailField(db_index=True, unique=True, max_length=254)
+    password = models.CharField(max_length=255555)
     phonenumber = models.CharField(max_length=20, null=True, blank=True)
     nin = models.CharField(max_length=20, null=True, blank=True)
     passport = models.CharField(max_length=20, null=True, blank=True)
@@ -111,7 +119,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     avgratings = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
 
     is_tradeperson = models.BooleanField(default=False)
-    professiontitle = models.CharField(max_length=200, null=True, blank=False )
+    professionname = models.ForeignKey(Profession, on_delete=models.SET_NULL, null=True, blank=True)
     regulations = models.JSONField(null=True, blank=True)
 
     is_business = models.BooleanField(default=False)
@@ -127,7 +135,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     date_joined = models.CharField(max_length=200, null=True, blank=True)
     updatedAt = models.CharField(max_length=200, null=True, blank=False )
-    last_login = models.CharField(max_length=200, null=True, blank=True)
+    last_login = models.DateTimeField(auto_now=True)
     last_login_location = models.JSONField(null=True, blank=True)
 
     objects = CustomUserManager()
@@ -141,8 +149,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-
-
+    
+    def verify_password(self,provided_password):
+        return Util.verify_password(self.password,provided_password)
+        
 ## Address models-----------------------------------------------------------------------------------------
 class Address(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -358,3 +368,37 @@ class Transaction(models.Model):
     debit = models.BooleanField(default=False)
     last_login_location = models.JSONField(null=True, blank=True)#{lat,long}
     createdAt = models.CharField(max_length=200, null=True, blank=True)
+
+
+class About(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    company_name = models.CharField(max_length=200)
+    story = models.TextField(blank=True, null=True)
+    logo = models.TextField(blank=True, null=True)
+    phonenumberpre = models.CharField(max_length=15)
+    phonenumber = models.CharField(max_length=15)
+    emailone = models.EmailField(max_length=200)
+    emailtwo = models.EmailField(max_length=200, blank=True, null=True)
+    emailthree = models.EmailField(max_length=200, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    mission = models.TextField(blank=True, null=True)
+    values = models.TextField(blank=True, null=True)
+    achievements = models.JSONField(blank=True, null=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+    branches = models.JSONField(blank=True, null=True)
+    policies = models.TextField(blank=True, null=True)
+    socials = models.JSONField(blank=True, null=True)
+    account_details = models.JSONField(blank=True, null=True)
+
+    def __str__(self):
+        return self.company_name
+
+    class Meta:
+        ordering = ['-created_date']
+
+
+@receiver(pre_save, sender=About)
+def limit_about_instance(sender, instance, **kwargs):
+    if About.objects.exists() and not instance.pk:
+        raise ValidationError("Only one instance of About is allowed")

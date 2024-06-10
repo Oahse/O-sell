@@ -1,26 +1,14 @@
-import os
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, generics
+from rest_framework import status
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from ..models import User, About, Event, Partners, Payments, Logs
-from ..serializers import (
-    UserSerializer, AboutSerializer, EventSerializer,
-    PartnersSerializer, PaymentsSerializer, LogsSerializer,UserRegistrationSerializer, UserLoginSerializer
-)
-from rest_framework_simplejwt.tokens import RefreshToken
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth import login
-from django.conf import settings
-from django.db import connection
+from ..models import About
+from ..serializers import (AboutSerializer)
 
 
-NAME = 'LAHF'
+
+NAME = 'OAHSE'
 VERSION = '1.0.0'
 
 @method_decorator(csrf_exempt, name="dispatch")
