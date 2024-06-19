@@ -275,21 +275,21 @@ class Util:
     
 
 # Example usage
-order_data = {
-    "order_id": "123456",
-    "date": "2024-06-19",
-    "customer_name": "John Doe",
-    "customer_address": "123 Elm Street, Springfield",
-    "items": [
-        {"name": "Widget A", "quantity": 2, "price": 19.99},
-        {"name": "Widget B", "quantity": 1, "price": 29.99},
-        {"name": "Widget C", "quantity": 3, "price": 9.99},
-    ],
-    "total": 99.94
-}
+# order_data = {
+#     "order_id": "123456",
+#     "date": "2024-06-19",
+#     "customer_name": "John Doe",
+#     "customer_address": "123 Elm Street, Springfield",
+#     "items": [
+#         {"name": "Widget A", "quantity": 2, "price": 19.99},
+#         {"name": "Widget B", "quantity": 1, "price": 29.99},
+#         {"name": "Widget C", "quantity": 3, "price": 9.99},
+#     ],
+#     "total": 99.94
+# }
 
-pdf_base64 = Util.generate_pdf_receipt_in_memory(order_data, "oahse_logo.png")
-print(pdf_base64)
+# pdf_base64 = Util.generate_pdf_receipt_in_memory(order_data, "oahse_logo.png")
+# print(pdf_base64)
 
 
 # # Example usage:
