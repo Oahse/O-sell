@@ -7,12 +7,13 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import login, logout
 from django.shortcuts import get_object_or_404
+from ..utils import Util
 
 from ..models import User, Profession
 from ..serializers import (
     UserSerializer, UserLoginSerializer,BusinessSerializer,DelivererSerializer, DistributorSerializer,ProfessionSerializer,TradePersonSerializer
 )
-from ..utils import Util
+
 
 
 def send_verification_email(request, user, email, type, subject):

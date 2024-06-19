@@ -282,7 +282,24 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.name)
-
+## quotation model ----------------------------------------------
+class Quotation(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    quotation_by = models.CharField(max_length=200, null=True, blank=True)
+    items = models.JSONField(default=list,null=True, blank=True)#{id, name, qty, image}
+    signature = models.TextField(null=True, blank=True)
+    createdAt = models.CharField(max_length=200, null=True, blank=True)
+    updatedAt = models.CharField(max_length=200, null=True, blank=True)
+    
+    @property
+    def count_items(self):
+        # Check the type of items and return the count accordingly
+        if isinstance(self.items, (list, tuple, set)):
+            return len(self.items)
+        elif isinstance(self.items, dict):
+            return len(self.items.keys())
+        return 0  # If items is not a list, tuple, set, or dict, return 0
+    
 ## categories model----------------------------------------------------------------------------
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -322,6 +339,7 @@ class Message(models.Model):
     body = models.TextField(null=True, blank=True)
     files = models.JSONField(null=True, blank=True)#{name, desc, date, url}
     createdat = models.CharField(max_length=200, null=True, blank=True)
+
 class DeliveryTracker(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     userid = models.CharField(max_length=200, null=True, blank=True)
@@ -338,11 +356,13 @@ class DeliveryTracker(models.Model):
     createdat = models.CharField(max_length=200, null=True, blank=True)
     updatedat = models.CharField(max_length=200, null=True, blank=True)
     deliveryaddress = models.CharField(max_length=200, null=True, blank=True)
+
 class LoggedIn(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     ownerid = models.CharField(max_length=200, null=True, blank=True)##user|tradeperson|business|dleiverer|distributor
     last_login_location = models.JSONField(null=True, blank=True)#{lat,long}
     last_login_time = models.CharField(max_length=200, null=True, blank=True)
+
 class Transaction(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     reason = models.CharField(max_length=200, null=True, blank=True)

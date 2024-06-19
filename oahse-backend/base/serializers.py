@@ -2,7 +2,7 @@ from dataclasses import fields
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .utils import Util
-from .models import Address, User, Profession, Product, About
+from .models import Address, User, Profession, Product, About, Quotation, OrderItem
 
 def authenticate(email=None, password=None, **kwargs):
     try:
@@ -204,3 +204,42 @@ class AboutSerializer(serializers.ModelSerializer):
             'achievements', 'created_date', 'updated_date', 'branches',
             'policies', 'socials', 'account_details'
         ]
+
+class QuotationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Quotation
+        fields = ['id', 'quotation_by', 'items', 'signature','createdAt', 'updatedAt']
+    
+    def create(self, validated_data):
+        items_data = validated_data.pop('items')
+        print(validated_data)
+        for item in items_data:
+            # Ensure the item has all the required fields
+            if not all(k in item for k in ('productid', 'qty', 'name', 'image')):
+                raise serializers.ValidationError("Each item must contain 'productid', 'qty', 'name', 'image'.")
+        
+        quotation = Quotation.objects.create(**validated_data)
+        quotation.items = items_data
+        quotation.save()
+        return quotation
+
+    def update(self, instance, validated_data):
+        items_data = validated_data.pop('items')
+        for item in items_data:
+            # Ensure the item has all the required fields
+            if not all(k in item for k in ('productid', 'qty', 'name', 'image')):
+                raise serializers.ValidationError("Each item must contain 'productid', 'qty', 'name', 'image'")
+        
+        instance.quotation_by = validated_data.get('quotation_by', instance.quotation_by)
+        instance.signature = validated_data.get('signature', instance.signature)
+        instance.items = items_data
+        instance.save()
+        return instance
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
