@@ -23,10 +23,20 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('base.urls.about_urls')),
-    #path('api/product/', include('base.urls.product_urls')),
+    path('api/products/', include('base.urls.product_urls')),
     path('api/users/', include('base.urls.user_urls')), 
     path('api/address/', include('base.urls.address_urls')),
     path('api/quotations/', include('base.urls.quotation_urls')),
+    path('api/categories/', include('base.urls.category_urls')),
+    path('api/orders/', include('base.urls.order_urls')),
+    path('api/carts/', include('base.urls.cart_urls')),
+    path('api/transactions/', include('base.urls.transaction_urls')),
+    path('api/deliverytrackers/', include('base.urls.deliverytracker_urls')),
+    path('api/messages/', include('base.urls.messages_urls')),
+    # path('api/notifications/', include('base.urls.notification_urls')),
+    # path('api/reviews/', include('base.urls.review_urls')),
+    # path('api/reports/', include('base.urls.report_urls')),
+    # path('api/invoices/', include('base.urls.invoice_urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,26 +1,26 @@
-from rest_framework import viewsets, serializers, status
+# views.py
+from rest_framework import viewsets, status
 from rest_framework.response import Response
-from ..models import Product
-from ..serializers import ProductSerializer
+from ..models import Message
+from ..serializers import MessageSerializer
 
-class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+class MessageViewSet(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            self.perform_create(serializer)
-            headers = self.get_success_headers(serializer.data)
+            message = serializer.save()
             response_data = {
                 'success': True,
-                'message': 'Product created successfully',
+                'message': 'Message created successfully',
                 'data': serializer.data
             }
-            return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
+            return Response(response_data, status=status.HTTP_201_CREATED)
         return Response({
             'success': False,
-            'message': 'Failed to create product',
+            'message': 'Failed to create message',
             'data': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
@@ -29,7 +29,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance)
         response_data = {
             'success': True,
-            'message': 'Product retrieved successfully',
+            'message': 'Message retrieved successfully',
             'data': serializer.data
         }
         return Response(response_data)
@@ -42,13 +42,13 @@ class ProductViewSet(viewsets.ModelViewSet):
             self.perform_update(serializer)
             response_data = {
                 'success': True,
-                'message': 'Product updated successfully',
+                'message': 'Message updated successfully',
                 'data': serializer.data
             }
             return Response(response_data)
         return Response({
             'success': False,
-            'message': 'Failed to update product',
+            'message': 'Failed to update message',
             'data': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
@@ -57,8 +57,8 @@ class ProductViewSet(viewsets.ModelViewSet):
         self.perform_destroy(instance)
         response_data = {
             'success': True,
-            'message': 'Product deleted successfully',
-            'data': None  # No data to return after deletion
+            'message': 'Message deleted successfully',
+            'data': None
         }
         return Response(response_data, status=status.HTTP_204_NO_CONTENT)
 
@@ -69,7 +69,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(page, many=True)
             response_data = {
                 'success': True,
-                'message': 'Products retrieved successfully',
+                'message': 'Messages retrieved successfully',
                 'data': serializer.data
             }
             return self.get_paginated_response(response_data)
@@ -77,8 +77,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         response_data = {
             'success': True,
-            'message': 'Products retrieved successfully',
+            'message': 'Messages retrieved successfully',
             'data': serializer.data
         }
         return Response(response_data)
-

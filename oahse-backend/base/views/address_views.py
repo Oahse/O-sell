@@ -42,7 +42,7 @@ class AddressViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
-        return Response({'success': True, 'message': 'Address deleted successfully'})
+        return Response({'success': True, 'message': 'Address deleted successfully','data': None})
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())

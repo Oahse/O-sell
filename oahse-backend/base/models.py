@@ -9,6 +9,7 @@ from .utils import Util
 CURRENCIES = [("USD","USD"),("EUR","EUR"),("NGN","NGN"),("GBP","GBP"),
            ("PHP","PHP"),("KES","KES"),("TZS","TZS"),("UGX","UGX"),("RWF","RWF"),("BIF","BIF"),
            ]
+DELIVERYSTATUSES = ['shipped', 'processing', 'out for delivery', 'delivered', 'pending', 'canceled', 'returned']
 DATETIMEFORMAT = '%Y-%m-%d %H:%M:%S'
 
 def get_profile_image_filepath(self, filename):
@@ -92,11 +93,11 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('websiteurl', websiteurl)
         return self._create_user(email, password, nin, address, phonenumber, **extra_fields)
 
-    def create_superuser(self, email, password, nin, address, phonenumber, **extra_fields):
+    def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_active', True)
         extra_fields.setdefault('is_superuser', True)
-        return self._create_user(email, password, nin, address, phonenumber, **extra_fields)
+        return self._create_user(email, password, **extra_fields)
 
 # Create your User Model here.
 class User(AbstractBaseUser, PermissionsMixin):
@@ -258,30 +259,18 @@ class Order(models.Model):
         max_digits=1000000000, decimal_places=2, null=True, blank=True)
     totalPrice = models.DecimalField(
         max_digits=1000000000, decimal_places=2, null=True, blank=True)
+    currency = models.CharField(choices=CURRENCIES,max_length=200, null=True, blank=True)
     isPaid = models.BooleanField(default=False)
     paidAt = models.CharField(max_length=200, null=True, blank=True)
     isDelivered = models.BooleanField(default=False)
     deliveredAt = models.CharField(max_length=200, null=True, blank=True)
     deliveredBy = models.CharField(max_length=200, null=True, blank=True)
-    createdAt = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return str(self.createdAt)
-
-## orderItem model-----------------------------------------------------------------------------------------
-class OrderItem(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    productid = models.CharField(max_length=200, null=True, blank=True)
-    orderid = models.CharField(max_length=200, null=True, blank=True)
-    name = models.CharField(max_length=200, null=True, blank=True)
-    userid = models.CharField(max_length=200, null=True, blank=True)
-    qty = models.IntegerField(null=True, blank=True, default=0)
-    price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
-    files = models.JSONField(null=True, blank=True)#{name, desc, date, url}
     createdAt = models.CharField(max_length=200, null=True, blank=True)
+    items = models.JSONField(null=True, blank=True) #{productid, name, image, qty, price, description}
 
     def __str__(self):
-        return str(self.name)
+        return str(self.id)+'  '+self.totalPrice+' by '+self.userid+' at '+self.createdAt
+
 ## quotation model ----------------------------------------------
 class Quotation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -315,6 +304,7 @@ class Category(models.Model):
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200, null=True, blank=True)
+    image = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     currency = models.CharField(choices=CURRENCIES,max_length=200, null=True, blank=True)
@@ -337,8 +327,12 @@ class Message(models.Model):
     deletedat = models.CharField(max_length=200, null=True, blank=True)
     read = models.BooleanField(default=False)
     body = models.TextField(null=True, blank=True)
-    files = models.JSONField(null=True, blank=True)#{name, desc, date, url}
+    files = models.JSONField(null=True, blank=True)#{name, desc, date, content, url}
     createdat = models.CharField(max_length=200, null=True, blank=True)
+    updatedat = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.body
 
 class DeliveryTracker(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -357,6 +351,9 @@ class DeliveryTracker(models.Model):
     updatedat = models.CharField(max_length=200, null=True, blank=True)
     deliveryaddress = models.CharField(max_length=200, null=True, blank=True)
 
+    def __str__(self):
+        return self.currentstat
+    
 class LoggedIn(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     ownerid = models.CharField(max_length=200, null=True, blank=True)##user|tradeperson|business|dleiverer|distributor
@@ -388,7 +385,24 @@ class Transaction(models.Model):
     debit = models.BooleanField(default=False)
     last_login_location = models.JSONField(null=True, blank=True)#{lat,long}
     createdAt = models.CharField(max_length=200, null=True, blank=True)
+    qrcode = models.TextField(null=True, blank=True)
+    receipt = models.TextField(null=True, blank=True)
 
+class Cart(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    userid = models.CharField(max_length=200, null=True, blank=True)
+    products= models.JSONField(null=True, blank=True)#{productid, name, image, qty, price, description}
+    total = models.DecimalField(
+        max_digits=1000000000, decimal_places=2, null=True, blank=True)
+    total_discount = models.DecimalField(
+        max_digits=1000000000, decimal_places=2, null=True, blank=True)
+    total_tax = models.DecimalField(
+        max_digits=1000000000, decimal_places=2, null=True, blank=True)
+    createdat = models.CharField(max_length=200, null=True, blank=True)
+    updatedat = models.CharField(max_length=200, null=True, blank=True)
+    location = models.JSONField(null=True, blank=True)#{lat,long}
+    address = models.CharField(max_length=200, null=True, blank=True)
+    ipaddress= models.CharField(max_length=200, null=True, blank=True)
 
 class About(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -416,7 +430,6 @@ class About(models.Model):
 
     class Meta:
         ordering = ['-created_date']
-
 
 @receiver(pre_save, sender=About)
 def limit_about_instance(sender, instance, **kwargs):

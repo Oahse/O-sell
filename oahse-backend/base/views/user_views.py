@@ -76,7 +76,6 @@ class BaseUserViewSet(viewsets.ModelViewSet):
         return Response({'success': False, 'message': f'Failed to register {usertype}', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None):
-        print(pk,"==============")
         user = get_object_or_404(self.queryset, pk=pk)
         serializer = self.get_serializer(user)
         filtered_data = filter_queryset(self.filterparam, serializer)
@@ -103,7 +102,7 @@ class BaseUserViewSet(viewsets.ModelViewSet):
         user = get_object_or_404(self.queryset, pk=pk)
         usertype = self.filterparam.replace('is_', '')
         user.delete()
-        return Response({'success': True, 'message': f'{usertype} deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'success': True, 'message': f'{usertype} deleted successfully','data': None}, status=status.HTTP_204_NO_CONTENT)
 
 class CreateUserViewSet(BaseUserViewSet):
     queryset = User.objects.filter(is_tradeperson=False, is_business=False, is_distributor=False, is_deliverer=False)

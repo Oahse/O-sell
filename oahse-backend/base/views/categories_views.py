@@ -1,11 +1,12 @@
+# views.py
 from rest_framework import viewsets, serializers, status
 from rest_framework.response import Response
-from ..models import Product
-from ..serializers import ProductSerializer
+from ..models import Category
+from ..serializers import CategorySerializer
 
-class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -14,14 +15,14 @@ class ProductViewSet(viewsets.ModelViewSet):
             headers = self.get_success_headers(serializer.data)
             response_data = {
                 'success': True,
-                'message': 'Product created successfully',
+                'message': 'Category created successfully',
                 'data': serializer.data
             }
             return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
         return Response({
             'success': False,
-            'message': 'Failed to create product',
-            'data': serializer.errors
+            'message': 'Failed to create category',
+            'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, *args, **kwargs):
@@ -29,7 +30,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance)
         response_data = {
             'success': True,
-            'message': 'Product retrieved successfully',
+            'message': 'Category retrieved successfully',
             'data': serializer.data
         }
         return Response(response_data)
@@ -42,14 +43,14 @@ class ProductViewSet(viewsets.ModelViewSet):
             self.perform_update(serializer)
             response_data = {
                 'success': True,
-                'message': 'Product updated successfully',
+                'message': 'Category updated successfully',
                 'data': serializer.data
             }
             return Response(response_data)
         return Response({
             'success': False,
-            'message': 'Failed to update product',
-            'data': serializer.errors
+            'message': 'Failed to update category',
+            'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, *args, **kwargs):
@@ -57,7 +58,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         self.perform_destroy(instance)
         response_data = {
             'success': True,
-            'message': 'Product deleted successfully',
+            'message': 'Category deleted successfully',
             'data': None  # No data to return after deletion
         }
         return Response(response_data, status=status.HTTP_204_NO_CONTENT)
@@ -69,7 +70,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(page, many=True)
             response_data = {
                 'success': True,
-                'message': 'Products retrieved successfully',
+                'message': 'Categories retrieved successfully',
                 'data': serializer.data
             }
             return self.get_paginated_response(response_data)
@@ -77,8 +78,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         response_data = {
             'success': True,
-            'message': 'Products retrieved successfully',
+            'message': 'Categories retrieved successfully',
             'data': serializer.data
         }
         return Response(response_data)
-
