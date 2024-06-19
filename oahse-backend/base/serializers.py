@@ -1,8 +1,8 @@
 from dataclasses import fields
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
 from .utils import Util
-from .models import Address, User, Profession, Product, About, Quotation, OrderItem
+from datetime import datetime
+from .models import Address, User, Profession, Product, About, Quotation, Order, Category, Cart, Transaction, Message, DeliveryTracker,DELIVERYSTATUSES
 
 def authenticate(email=None, password=None, **kwargs):
     try:
@@ -68,7 +68,7 @@ class UserSerializer(serializers.ModelSerializer):
             user = User.objects.create_deliverer(email=email, password=password, nin=nin, address=address, phonenumber=phonenumber, deliverername = deliverername, cac=cac,websiteurl=websiteurl, **validated_data)
         
         elif is_superuser:
-            user = User.objects.create_superuser(email=email, password=password, nin=nin, address=address, phonenumber=phonenumber,**validated_data)
+            user = User.objects.create_superuser(email=email, password=password, **validated_data)
         else:
             user = User.objects.create_user(email=email, password=password, nin=nin, address=address, phonenumber=phonenumber,**validated_data)
         
@@ -176,7 +176,17 @@ class UserLoginSerializer(serializers.Serializer):
         attrs['user'] = user
         return attrs
 
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'icon']
+
 class ProductSerializer(serializers.ModelSerializer):
+    files = serializers.JSONField(required=False, allow_null=True)
+    location = serializers.JSONField(required=False, allow_null=True)
+    
     """
     Serializer for the Product model.
     """
@@ -184,8 +194,64 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
-###Address Serializers---------------------
+    def create(self, validated_data):
+        files_data = validated_data.pop('files')
+        if files_data:
+            for file in files_data:
+                # Ensure the item has all the required fields
+                if not all(k in file for k in ('name', 'desc', 'date', 'url')):
+                    raise serializers.ValidationError("Each item must contain; 'name', 'desc', 'date', 'url'.")
+        
+        locations_data = validated_data.pop('location')
+        if locations_data:
+            for loc in locations_data:
+                # Ensure the item has all the required fields
+                if not loc in ('lat', 'long'):
+                    raise serializers.ValidationError("Each item must contain; 'lat', 'long'.")
+        
+        
+        product = Product.objects.create(**validated_data)
+        product.files = files_data
+        product.location = locations_data
+        product.save()
+        return product
 
+    def update(self, instance, validated_data):
+        # Handle 'files' data
+        files_data = validated_data.pop('files', None)
+        if files_data is not None:
+            for file in files_data:
+                # Ensure the item has all the required fields
+                if not all(k in file for k in ('name', 'desc', 'date', 'url')):
+                    raise serializers.ValidationError("Each file item must contain 'name', 'desc', 'date', 'url'.")
+        
+        # Handle 'location' data
+        locations_data = validated_data.pop('location', None)
+        if locations_data is not None:
+            for loc in locations_data:
+                # Ensure the item has all the required fields
+                if not loc in ('lat', 'long'):
+                    raise serializers.ValidationError("Each location item must contain 'lat', 'long'.")
+        
+        # Update instance fields
+        instance.name = validated_data.get('name', instance.name)
+        instance.image = validated_data.get('image', instance.image)
+        instance.description = validated_data.get('description', instance.description)
+        instance.price = validated_data.get('price', instance.price)
+        instance.currency = validated_data.get('currency', instance.currency)
+        instance.createdat = validated_data.get('createdat', instance.createdat)
+        instance.updatedat = validated_data.get('updatedat', instance.updatedat)
+        instance.deletedat = validated_data.get('deletedat', instance.deletedat)
+        instance.deleted = validated_data.get('deleted', instance.deleted)
+        instance.category = validated_data.get('category', instance.category)
+        instance.businessid = validated_data.get('businessid', instance.businessid)
+        instance.address = validated_data.get('address', instance.address)
+        
+        # Save the instance
+        instance.save()
+        return instance
+
+###Address Serializers---------------------
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
@@ -213,7 +279,6 @@ class QuotationSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         items_data = validated_data.pop('items')
-        print(validated_data)
         for item in items_data:
             # Ensure the item has all the required fields
             if not all(k in item for k in ('productid', 'qty', 'name', 'image')):
@@ -238,8 +303,223 @@ class QuotationSerializer(serializers.ModelSerializer):
         return instance
 
 
-class OrderItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = OrderItem
-        fields = '__all__'
+class OrderSerializer(serializers.ModelSerializer):
+    items = serializers.JSONField()
 
+    class Meta:
+        model = Order
+        fields = ['id', 'userid', 'paymentMethod', 'taxPrice', 'shippingPrice', 'totalPrice', 'currency', 'isPaid', 'paidAt', 'isDelivered', 'deliveredAt', 'deliveredBy', 'createdAt', 'items']
+
+    def validate_items(self, items_data):
+        # Validate each item in the items list
+        for item in items_data:
+            if not all(k in item for k in ('productid', 'name', 'image', 'qty', 'price', 'description')):
+                raise serializers.ValidationError("Each item must contain 'productid', 'name', 'image', 'qty', 'price', and 'description'.")
+        return items_data
+
+    def create(self, validated_data):
+        items_data = self.validate_items(validated_data.pop('items'))
+        order = Order.objects.create(**validated_data)
+        order.items = items_data
+        order.save()
+        return order
+
+    def update(self, instance, validated_data):
+        items_data = self.validate_items(validated_data.pop('items'))
+        
+        instance.userid = validated_data.get('userid', instance.userid)
+        instance.paymentMethod = validated_data.get('paymentMethod', instance.paymentMethod)
+        instance.taxPrice = validated_data.get('taxPrice', instance.taxPrice)
+        instance.shippingPrice = validated_data.get('shippingPrice', instance.shippingPrice)
+        instance.totalPrice = validated_data.get('totalPrice', instance.totalPrice)
+        instance.currency = validated_data.get('currency', instance.currency)
+        instance.isPaid = validated_data.get('isPaid', instance.isPaid)
+        instance.paidAt = validated_data.get('paidAt', instance.paidAt)
+        instance.isDelivered = validated_data.get('isDelivered', instance.isDelivered)
+        instance.deliveredAt = validated_data.get('deliveredAt', instance.deliveredAt)
+        instance.deliveredBy = validated_data.get('deliveredBy', instance.deliveredBy)
+        instance.createdAt = validated_data.get('createdAt', instance.createdAt)
+        instance.items = items_data
+        instance.save()
+        return instance
+
+class CartSerializer(serializers.ModelSerializer):
+    products = serializers.JSONField()
+    location = serializers.JSONField()
+
+    class Meta:
+        model = Cart
+        fields = [
+            'id', 'userid', 'products', 'total', 'total_discount', 
+            'total_tax', 'createdat', 'updatedat', 'location', 'address', 'ipaddress'
+        ]
+
+    def validate_products(self, products_data):
+        for product in products_data:
+            if not all(k in product for k in ('productid', 'name', 'image', 'qty', 'price', 'description')):
+                raise serializers.ValidationError("Each product must contain 'productid', 'name', 'image', 'qty', 'price', and 'description'.")
+        return products_data
+
+    def validate_location(self, location_data):
+        if not all(k in location_data for k in ('lat', 'long')):
+            raise serializers.ValidationError("Location must contain 'lat' and 'long'.")
+        return location_data
+
+    def create(self, validated_data):
+        products_data = self.validate_products(validated_data.pop('products'))
+        location_data = self.validate_location(validated_data.pop('location', {}))
+        cart = Cart.objects.create(**validated_data)
+        cart.products = products_data
+        cart.location = location_data
+        cart.save()
+        return cart
+
+    def update(self, instance, validated_data):
+        products_data = self.validate_products(validated_data.pop('products', instance.products))
+        location_data = self.validate_location(validated_data.pop('location', instance.location))
+        
+        instance.userid = validated_data.get('userid', instance.userid)
+        instance.total = validated_data.get('total', instance.total)
+        instance.total_discount = validated_data.get('total_discount', instance.total_discount)
+        instance.total_tax = validated_data.get('total_tax', instance.total_tax)
+        instance.createdat = validated_data.get('createdat', instance.createdat)
+        instance.updatedat = validated_data.get('updatedat', instance.updatedat)
+        instance.address = validated_data.get('address', instance.address)
+        instance.ipaddress = validated_data.get('ipaddress', instance.ipaddress)
+        instance.products = products_data
+        instance.location = location_data
+        instance.save()
+        return instance
+
+
+class TransactionSerializer(serializers.ModelSerializer):
+    last_login_location = serializers.JSONField()
+
+    class Meta:
+        model = Transaction
+        fields = [
+            'id', 'reason', 'orderid', 'orderamount', 'totalamount', 'serviceid', 'payeeid',
+            'currency', 'payerid', 'payeebank', 'payerbank', 'transaction_fees', 'walletid',
+            'status', 'receivername', 'sendername', 'debit', 'last_login_location', 'createdAt', 'qrcode'
+        ]
+
+    def create(self, validated_data):
+        transaction = Transaction.objects.create(**validated_data)
+        
+        # Generate QR code if not provided
+        if not transaction.qrcode:
+            data_to_encode = f"Transaction ID: {transaction.id}\nTotal Amount: {transaction.totalamount}\nCurrency: {transaction.currency}"
+            # import os
+            # print(os.getcwd(),"======================")
+            transaction.qrcode = Util.gen_qrcode(data_to_encode,'base/oashe_logo.png')
+            transaction.save()
+        if not transaction.receipt:
+            order_data = {
+                "order_id": "123456",
+                "date": "2024-06-19",
+                "customer_name": "John Doe",
+                "customer_address": "123 Elm Street, Springfield",
+                "items": [
+                    {"name": "Widget A", "quantity": 2, "price": 19.99},
+                    {"name": "Widget B", "quantity": 1, "price": 29.99},
+                    {"name": "Widget C", "quantity": 3, "price": 9.99},
+                ],
+                "total": 99.94
+            }
+            transaction.receipt = Util.generate_pdf_receipt_in_memory(order_data,'base/oashe_logo.png')
+            transaction.save()
+        
+        return transaction
+
+
+
+class MessageSerializer(serializers.ModelSerializer):
+    files = serializers.JSONField()
+
+    class Meta:
+        model = Message
+        fields = [
+            'id', 'senderid', 'receiverid', 'editable', 'deletable', 'deletedat', 'read', 'body', 
+            'files', 'createdat', 'updatedat'
+        ]
+
+    def create(self, validated_data):
+        return Message.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.senderid = validated_data.get('senderid', instance.senderid)
+        instance.receiverid = validated_data.get('receiverid', instance.receiverid)
+        instance.editable = validated_data.get('editable', instance.editable)
+        instance.deletable = validated_data.get('deletable', instance.deletable)
+        instance.deletedat = validated_data.get('deletedat', instance.deletedat)
+        instance.read = validated_data.get('read', instance.read)
+        instance.body = validated_data.get('body', instance.body)
+        instance.files = validated_data.get('files', instance.files)
+        instance.createdat = validated_data.get('createdat', instance.createdat)
+        instance.updatedat = validated_data.get('updatedat', instance.updatedat)
+        instance.save()
+        return instance
+ 
+
+
+class DeliveryTrackerSerializer(serializers.ModelSerializer):
+    listofstats = serializers.JSONField()
+    prevstats = serializers.JSONField()
+    currentstat = serializers.JSONField()
+
+    class Meta:
+        model = DeliveryTracker
+        fields = [
+            'id', 'userid', 'sent', 'listofstats', 'prevstats', 'currentstat', 
+            'received', 'receivedby', 'receivedbyimage', 'receivedbysignatureornin', 
+            'receivedbysignatureorninverified', 'receivedat', 'createdat', 'updatedat', 'deliveryaddress'
+        ]
+
+    def validate_status_timestamp(self, stats):
+        allowed_statuses = DELIVERYSTATUSES
+        
+        if not isinstance(stats, list):
+            raise serializers.ValidationError("The field must be a list of dictionaries.")
+
+        for stat in stats:
+            if 'status' not in stat or 'timestamp' not in stat:
+                raise serializers.ValidationError("Each stat must contain 'status' and 'timestamp'.")
+            if stat['status'] not in allowed_statuses:
+                raise serializers.ValidationError(f"Invalid status value for ->'{stat['status']}'.")
+            try:
+                datetime.fromisoformat(stat['timestamp'])
+            except ValueError:
+                raise serializers.ValidationError("Invalid timestamp format. It should be in ISO 8601 format.")
+
+        return stats
+
+    def validate(self, data):
+        if 'listofstats' in data:
+            data['listofstats'] = self.validate_status_timestamp(data['listofstats'])
+        if 'prevstats' in data:
+            data['prevstats'] = self.validate_status_timestamp(data['prevstats'])
+        if 'currentstat' in data:
+            data['currentstat'] = self.validate_status_timestamp([data['currentstat']])[0]  # Validate as list with one item
+
+        return data
+
+    def create(self, validated_data):
+        return DeliveryTracker.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.userid = validated_data.get('userid', instance.userid)
+        instance.sent = validated_data.get('sent', instance.sent)
+        instance.listofstats = validated_data.get('listofstats', instance.listofstats)
+        instance.prevstats = validated_data.get('prevstats', instance.prevstats)
+        instance.currentstat = validated_data.get('currentstat', instance.currentstat)
+        instance.received = validated_data.get('received', instance.received)
+        instance.receivedby = validated_data.get('receivedby', instance.receivedby)
+        instance.receivedbyimage = validated_data.get('receivedbyimage', instance.receivedbyimage)
+        instance.receivedbysignatureornin = validated_data.get('receivedbysignatureornin', instance.receivedbysignatureornin)
+        instance.receivedbysignatureorninverified = validated_data.get('receivedbysignatureorninverified', instance.receivedbysignatureorninverified)
+        instance.receivedat = validated_data.get('receivedat', instance.receivedat)
+        instance.createdat = validated_data.get('createdat', instance.createdat)
+        instance.updatedat = validated_data.get('updatedat', instance.updatedat)
+        instance.deliveryaddress = validated_data.get('deliveryaddress', instance.deliveryaddress)
+        instance.save()
+        return instance

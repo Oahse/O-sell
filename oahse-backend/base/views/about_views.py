@@ -54,5 +54,5 @@ class AboutAPIView(APIView):
         about = About.objects.first()
         if about:
             about.delete()
-            return Response({'success': 'true', 'message': 'Event deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            return Response({'success': 'true', 'message': 'Event deleted successfully','data': None}, status=status.HTTP_204_NO_CONTENT)
         return Response({'success': 'false', 'message': 'Event not found'}, status=status.HTTP_404_NOT_FOUND)

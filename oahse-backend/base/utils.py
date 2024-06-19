@@ -4,8 +4,16 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 import hashlib
-import hmac
+import io
 import os
+import base64
+from io import BytesIO
+from PIL import Image
+import qrcode
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+from reportlab.pdfgen import canvas
+from reportlab.lib import colors
 
 class Util:
     @staticmethod
@@ -154,3 +162,146 @@ class Util:
         
         # Compare the stored hash with the computed hash
         return stored_hash == computed_hash
+    
+    @staticmethod
+    def gen_qrcode(data_to_encode, logo):
+
+        # Create QR code instance
+        qr = qrcode.QRCode(
+            version=1,  # Controls the size of the QR Code
+            error_correction=qrcode.constants.ERROR_CORRECT_H,  # Higher error correction
+            box_size=10,  # Size of each box in the QR code
+            border=4,  # Border size
+        )
+
+        # Add data to the instance
+        qr.add_data(data_to_encode)
+        qr.make(fit=True)
+
+        # Create an image from the QR Code instance
+        qr_img = qr.make_image(fill='black', back_color='white').convert('RGB')
+
+        # Load the logo image
+        logo = Image.open(logo)
+
+        # Calculate dimensions
+        qr_width, qr_height = qr_img.size
+        logo_width, logo_height = logo.size
+
+        # Scale the logo to fit into the QR code
+        logo_size = qr_width // 4
+        logo = logo.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
+
+        # Calculate logo position
+        logo_pos = ((qr_width - logo_size) // 2, (qr_height - logo_size) // 2)
+
+        # Paste the logo image into the QR code image
+        qr_img.paste(logo, logo_pos, logo)
+
+        # # Save the final image
+        # qr_img.save('qr_with_logo.png')
+
+        # Save the final image to a bytes buffer
+        buffered = BytesIO()
+        qr_img.save(buffered, format="PNG")
+        
+        
+        # Encode the image to base64
+        img_str = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+        return img_str
+
+    def image_to_base64(image_path):
+        with open(image_path, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+        return encoded_string
+
+    def base64_to_image(base64_string, output_path):
+        image_data = base64.b64decode(base64_string)
+        with open(output_path, "wb") as image_file:
+            image_file.write(image_data)
+    
+    def pdf_to_base64(pdf_path):
+        with open(pdf_path, "rb") as pdf_file:
+            encoded_string = base64.b64encode(pdf_file.read()).decode('utf-8')
+        return encoded_string
+    
+    def base64_to_pdf(base64_string, output_path):
+        with open(output_path, "wb") as pdf_file:
+            pdf_file.write(base64.b64decode(base64_string))
+
+    @staticmethod
+    def generate_pdf_receipt_in_memory(order_data, logo_path):
+        buffer = io.BytesIO()
+        
+        c = canvas.Canvas(buffer, pagesize=letter)
+        width, height = letter
+
+        logo = Image.open(logo_path)
+        logo_width, logo_height = logo.size
+        aspect = logo_height / float(logo_width)
+        logo_width = 2 * inch
+        logo_height = logo_width * aspect
+        c.drawImage(logo_path, (width - logo_width) / 2, height - logo_height - 20, logo_width, logo_height)
+
+        text = c.beginText(1 * inch, height - logo_height - 50)
+        text.setFont("Helvetica", 12)
+        text.setFillColor(colors.black)
+
+        text.textLine(f"Order ID: {order_data['order_id']}")
+        text.textLine(f"Date: {order_data['date']}")
+        text.textLine(f"Customer: {order_data['customer_name']}")
+        text.textLine(f"Address: {order_data['customer_address']}")
+        text.textLine("")
+        text.textLine("Items:")
+        
+        for item in order_data['items']:
+            text.textLine(f"- {item['name']} (x{item['quantity']}): ${item['price']:.2f}")
+        
+        text.textLine("")
+        text.textLine(f"Total: ${order_data['total']:.2f}")
+
+        c.drawText(text)
+        c.save()
+
+        # Get the PDF binary data
+        buffer.seek(0)
+        pdf_data = buffer.getvalue()
+        buffer.close()
+
+        # Convert PDF binary data to base64
+        pdf_base64 = base64.b64encode(pdf_data).decode('utf-8')
+        return pdf_base64
+    
+
+# Example usage
+order_data = {
+    "order_id": "123456",
+    "date": "2024-06-19",
+    "customer_name": "John Doe",
+    "customer_address": "123 Elm Street, Springfield",
+    "items": [
+        {"name": "Widget A", "quantity": 2, "price": 19.99},
+        {"name": "Widget B", "quantity": 1, "price": 29.99},
+        {"name": "Widget C", "quantity": 3, "price": 9.99},
+    ],
+    "total": 99.94
+}
+
+pdf_base64 = Util.generate_pdf_receipt_in_memory(order_data, "oahse_logo.png")
+print(pdf_base64)
+
+
+# # Example usage:
+# data = "https://www.example.com"
+# logo_path = "oahse_logo.png"
+
+# # Generate QR code with logo and convert to base64
+# qr_code_base64 = Util.gen_qrcode(data, logo_path)
+# print("QR Code Base64:", qr_code_base64)
+
+# # Convert base64 back to image
+# output_path = "qr_with_logo.png"
+# Util.base64_to_image(qr_code_base64, output_path)
+# print("Image saved to:", output_path)
+    

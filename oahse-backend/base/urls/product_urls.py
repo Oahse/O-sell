@@ -1,16 +1,12 @@
-from django.urls import path
-from base.views import product_views as views
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-)
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from ..views.product_views import ProductViewSet
 
+# Create a router and register our viewsets with it
+router = DefaultRouter()
+router.register(r'', ProductViewSet)
+
+# The API URLs are now determined automatically by the router
 urlpatterns = [
-    
-    path('products', views.getProducts, name='products' ), 
-    path('products/create', views.createProduct, name='product-create' ), 
-    path('products/upload', views.uploadProductImage, name='product-image-Upload' ),
-    path('products/<str:pk>/', views.getProduct, name='product' ),
-    path('products/update/<str:pk>/', views.updateProduct, name='product-update' ),
-    path('products/delete/<str:pk>/', views.deleteProduct, name='product-delete' ),
-
+    path('', include(router.urls)),
 ]
