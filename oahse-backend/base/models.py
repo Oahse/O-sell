@@ -24,12 +24,10 @@ def parsedatetoint(datefield):
 class Profession(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=200, null=True, blank=False )
-    isActive = models.BooleanField(default=True)
     createdAt = models.CharField(max_length=200, null=True, blank=False )
     updatedAt = models.CharField(max_length=200, null=True, blank=False )
     regulations = models.JSONField(null=True, blank=True)
     
-
     def __str__(self):
         return self.title
     
@@ -193,22 +191,31 @@ class Review(models.Model):
 
     def __str__(self):
         return {'id':self.id, 'title':self.title, 'body':self.body, 'userid':self.userid, 'files':self.files, 'status':self.status, 'productid':self.productid, 'delivererid':self.delivererid, 'distributorid':self.distributorid, 'rating':self.rating, 'createdAt':self.createdAt}
+
 class Comments(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     body = models.TextField(null=True, blank=True)
     userid = models.CharField(max_length=200, null=True, blank=False )
     files = models.JSONField(null=True, blank=True)#{name, desc, date, url}
-    reviewid = models.CharField(max_length=200, null=True, blank=False )
+    reviewid = models.CharField(max_length=200, null=True, blank=True )
     createdAt = models.CharField(max_length=200, null=True, blank=False )
     
+    def __str__(self) -> str:
+        return {'id':self.id, 'body':self.body, 'userid':self.userid, 'files':self.files,'reviewid':self.reviewid, 'createdAt':self.createdAt}
+
 class Job(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200, null=True, blank=False )
     ownerid = models.CharField(max_length=200, null=True, blank=False )
     description = models.TextField(null=True, blank=True)
     url_link = models.CharField(max_length=200, null=True, blank=False )
-    files = models.JSONField(null=True, blank=True)#{name, desc, date, url}
-    difficulty = models.IntegerField(null=True, blank=True, default=1)
+    files = models.JSONField(null=True, blank=True)#{name, desc, date, content, url}
+    DIFFICULTY_CHOICES = [
+        (1, 'Low'),
+        (2, 'Medium'),
+        (3, 'High'),
+    ]
+    difficulty = models.IntegerField(null=True, blank=True, default=1, choices=DIFFICULTY_CHOICES)
     requiredProfession = models.ForeignKey(Profession, on_delete=models.SET_NULL, null=True)
     deleted = models.BooleanField(default=False)
     createdAt = models.CharField(max_length=200, null=True, blank=False )
@@ -228,9 +235,9 @@ class Job(models.Model):
 ## services models-----------------------------------------------------------------------------------------
 class Service(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    jobid = models.CharField(max_length=200, null=True, blank=False )
-    tradepersonid = models.CharField(max_length=200, null=True, blank=False )
-    accepted = models.BooleanField(default=False)
+    jobid = models.CharField(max_length=200, null=False, blank=False )
+    tradepersonid = models.CharField(max_length=200, null=False, blank=False )
+    accepted = models.BooleanField(default=False) 
     started = models.BooleanField(default=False)
     starteddate = models.CharField(max_length=200, null=True, blank=False )
     inprogress = models.BooleanField(default=False)
@@ -240,10 +247,10 @@ class Service(models.Model):
     files = models.JSONField(null=True, blank=True)#{name, desc, date, url}
     reviewid = models.CharField(max_length=200, null=True, blank=False )
     createdAt = models.CharField(max_length=200, null=True, blank=False )
+    updatedAt = models.CharField(max_length=200, null=True, blank=False )
     location = models.JSONField(null=True, blank=True)#{lat,long}
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True )
     price = models.DecimalField(max_digits=1000000000, decimal_places=2, null=True, blank=True )
-    
 
     def __str__(self):
         return self.id+'  '+self.price
@@ -354,11 +361,6 @@ class DeliveryTracker(models.Model):
     def __str__(self):
         return self.currentstat
     
-class LoggedIn(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    ownerid = models.CharField(max_length=200, null=True, blank=True)##user|tradeperson|business|dleiverer|distributor
-    last_login_location = models.JSONField(null=True, blank=True)#{lat,long}
-    last_login_time = models.CharField(max_length=200, null=True, blank=True)
 
 class Transaction(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

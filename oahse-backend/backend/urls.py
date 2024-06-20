@@ -33,10 +33,12 @@ urlpatterns = [
     path('api/transactions/', include('base.urls.transaction_urls')),
     path('api/deliverytrackers/', include('base.urls.deliverytracker_urls')),
     path('api/messages/', include('base.urls.messages_urls')),
+    path('api/jobs/', include('base.urls.jobs_urls')),
+    path('api/services/', include('base.urls.service_urls')),
+    path('api/reviews/', include('base.urls.reviews_urls')),
+    path('api/comments/', include('base.urls.comments_urls')),
     # path('api/notifications/', include('base.urls.notification_urls')),
-    # path('api/reviews/', include('base.urls.review_urls')),
     # path('api/reports/', include('base.urls.report_urls')),
-    # path('api/invoices/', include('base.urls.invoice_urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

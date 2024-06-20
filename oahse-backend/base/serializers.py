@@ -2,7 +2,7 @@ from dataclasses import fields
 from rest_framework import serializers
 from .utils import Util
 from datetime import datetime
-from .models import Address, User, Profession, Product, About, Quotation, Order, Category, Cart, Transaction, Message, DeliveryTracker,DELIVERYSTATUSES
+from .models import Address, User, Profession, Product, About, Quotation, Order, Category, Cart, Transaction, Message, DeliveryTracker, Job, Service,Review,Comments,DELIVERYSTATUSES
 
 def authenticate(email=None, password=None, **kwargs):
     try:
@@ -431,8 +431,6 @@ class TransactionSerializer(serializers.ModelSerializer):
         
         return transaction
 
-
-
 class MessageSerializer(serializers.ModelSerializer):
     files = serializers.JSONField()
 
@@ -460,8 +458,6 @@ class MessageSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
  
-
-
 class DeliveryTrackerSerializer(serializers.ModelSerializer):
     listofstats = serializers.JSONField()
     prevstats = serializers.JSONField()
@@ -523,3 +519,102 @@ class DeliveryTrackerSerializer(serializers.ModelSerializer):
         instance.deliveryaddress = validated_data.get('deliveryaddress', instance.deliveryaddress)
         instance.save()
         return instance
+
+class JobSerializer(serializers.ModelSerializer):
+    files = serializers.JSONField()
+    location = serializers.JSONField()
+
+    class Meta:
+        model = Job
+        fields = [
+            'id', 'name', 'ownerid', 'description', 'url_link', 'files',
+            'difficulty', 'requiredProfession', 'deleted', 'createdAt', 'endDate',
+            'updatedAt', 'started', 'completed', 'completeddate', 'completedby',
+            'address', 'location'
+        ]
+
+    def validate_files(self, value):
+        if not isinstance(value, list):
+            raise serializers.ValidationError("Files must be a list.")
+        for file in value:
+            if not all(key in file for key in ('name', 'desc', 'date', 'content', 'url')):
+                raise serializers.ValidationError(
+                    "Each file must contain 'name', 'desc', 'date', 'content', and 'url'.")
+        return value
+
+    def validate_location(self, value):
+        if not isinstance(value, dict):
+            raise serializers.ValidationError("Location must be a dictionary.")
+        if not all(key in value for key in ('lat', 'long')):
+            raise serializers.ValidationError("Location must contain 'lat' and 'long'.")
+        return value
+
+    def create(self, validated_data):
+        return Job.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
+    
+class ServiceSerializer(serializers.ModelSerializer):
+    files = serializers.JSONField(required=False)
+    location = serializers.JSONField(required=False)
+
+    class Meta:
+        model = Service
+        fields = ['id', 'jobid', 'tradepersonid', 'accepted', 'started', 'starteddate', 'inprogress', 'completed', 'completeddate', 'description', 'files', 'reviewid', 'createdAt', 'location', 'user', 'price']
+        read_only_fields = ['id', 'createdAt', 'updatedAt', 'user']
+
+    def validate_files(self, value):
+        if not isinstance(value, list):
+            raise serializers.ValidationError("Files must be a list of objects")
+        for file in value:
+            if not all(k in file for k in ('name', 'desc', 'date', 'url')):
+                raise serializers.ValidationError("Each file must contain 'name', 'desc', 'date', and 'url'")
+        return value
+
+    def validate_location(self, value):
+        if not isinstance(value, dict):
+            raise serializers.ValidationError("Location must be a dictionary")
+        if not all(k in value for k in ('lat', 'long')):
+            raise serializers.ValidationError("Location must contain 'lat' and 'long'")
+        return value
+    
+    def create(self, validated_data):
+        return Service.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ['id', 'title', 'body', 'userid', 'files', 'status', 'productid', 'delivererid', 'distributorid', 'rating', 'createdAt']
+        read_only_fields = ['id', 'createdAt']
+
+    def validate_files(self, value):
+        if not isinstance(value, list):
+            raise serializers.ValidationError("Files must be a list of objects")
+        for file in value:
+            if not all(k in file for k in ('name', 'desc', 'date', 'url')):
+                raise serializers.ValidationError("Each file must contain 'name', 'desc', 'date', and 'url'")
+        return value
+
+class CommentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = ['id', 'body', 'userid', 'files', 'reviewid', 'createdAt']
+        read_only_fields = ['id', 'createdAt']
+
+    def validate_files(self, value):
+        if not isinstance(value, list):
+            raise serializers.ValidationError("Files must be a list of objects")
+        for file in value:
+            if not all(k in file for k in ('name', 'desc', 'date', 'url')):
+                raise serializers.ValidationError("Each file must contain 'name', 'desc', 'date', and 'url'")
+        return value
