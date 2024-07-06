@@ -1,199 +1,186 @@
-/* Styles for the default state of the button */
-/* Navbar */
-
-.navbar {
-  padding-bottom: 1px;
-  border-bottom: solid 1px #e8e8e8;
-  background-color: white;
-  box-shadow: 0 3px 6px -2px rgba(0, 0, 0, 0.12),
-    0 6px 16px -11px rgba(0, 0, 0, 0.08);
-  position: sticky;
+/* 
+home page
+ */
+ .home-background {
+  content: '';
+  border-bottom-left-radius: 10% 6%;
+  border-bottom-right-radius: 50% 70%;
+  position: absolute;
   top: 0;
-  margin-bottom: 20px;
-  z-index: 99990;
+  z-index: -1;
+  width: 100%;
+  background-color: #ffc107;
+  height: 40%;
 }
 
-.nav-header {
-  background-color: white;
-  border-bottom: 0;
-  padding: 0 4px 0 24px;
+.segmented-wrapper {
+  position: fixed;
+  top: 58px;
+  left: 2%;
+  left: 50%; /* Move the element to the center horizontally */
+  transform: translateX(-50%); /* Adjust for half of the element's width */
+  z-index: 1000; /* Adjust the z-index as needed */
+  padding: 4px 4px; /* Optional: Add padding for spacing */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: Add a shadow for depth */
+  width: 335px;
+}
+
+.demo-loadmore-list {
+  min-height: 350px;
+}
+
+
+
+/* ResponsiveHeader.css */
+.header {
+  background: #fff9c4;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 8px #f0f1f2;
 }
 
 .logo {
-  width: 200px;
-  float: left;
-}
-
-.logo-img  {
-  margin-top: 8px;
-  margin-left: -8px;
-  margin-right: 8px;
-}
-.logo-text{
-  margin-left: 8px;
-  font-weight: 400;
-  color: black;
+  color: #333;
   font-size: 24px;
+  font-weight: bold;
 }
 
-.navbar-menu {
-  margin-right: 8px;
-  float: right;
-}
-.navbar-menu .ant-layout-header {
-  padding: 0 20px;
-}
-
-.navbar-menu .ant-menu-horizontal {
-  border-bottom: 0;
-}
-
-.navbar-menu .ant-menu-item {
-  padding-bottom: 0px;
-}
-
-.navbar-menu .nav-links {
-  float: left;
-}
-
-.navbar-menu .rightMenu {
-  float: right;
-}
-
-.nav-link{
-  margin: 6px;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid transparent;
-  color: black;
-  font-size: 14px;
-}
-.nav-link:hover{
-  border-color: #ffc400;
-  background-color: #ffc400 !important;
-  color:black !important;
-}
-
-.menuButton {
-  float: right;
-  height: 32px;
-  padding: 6px;
-  margin-top: 14px;
-  display: none;
-  background: none;
-  margin-right: 10px;
-}
-
-.ant-drawer-body {
-  padding: 0;
-}
-
-.ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
-.ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
-  display: inline-block;
-  width: 100%;
-}
-
-.ant-drawer-body .ant-menu-horizontal {
+.menu {
+  background: transparent;
   border-bottom: none;
+  display: flex;
+  align-items: center;
 }
 
-.ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover {
-  border-bottom-color: transparent;
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
 
-.username {
-  display: none;
-  margin-left: 8px;
+.menu-links {
+  display: flex;
+  align-items: center;
 }
 
-@media (max-width: 767px) {
-  .menuButton {
-    display: block;
-    margin-right: 10px;
+.header-link {
+  margin-right: 20px;
+  color: #333;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.btn-login {
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 10px;
   }
 
-  .nav-links,
-  .rightMenu {
+  .logo {
+    font-size: 20px;
+  }
+
+  .menu-item {
+    font-size: 16px;
+  }
+
+  .menu-links {
     display: none;
   }
+}
 
-  .logo a {
-    margin-left: -10px;
+/* body---- */
+
+.header-bottom {
+  display: none; /* Hide by default */
+}
+
+@media (max-width: 768px) {
+  .header-bottom {
+    display: block; /* Show on mobile */
   }
+}
 
-  .ant-drawer-title > .brand-font {
-    margin-bottom: 0;
+.ant-segmented,
+.ant-segmented-group{
+    background-color: #ffc107 !important;
+}
+.segmented-wrapper {
+  position: fixed;
+  bottom: 0;
+  top: 90vh;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  max-height:fit-content;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+
+}
+
+
+.segmented-wrapper .ant-segmented-item {
+  flex: 1;
+  text-align: center;
+  border-radius: 4px;
+  color: #333;
+}
+
+.segmented-wrapper .ant-segmented-item .ant-segmented-item-label{
+  padding: 2px;
+}
+.segmented-wrapper .ant-segmented-item-selected{
+  background-color: #fff ;
+  border-radius: 4px;
+  color: #000;
+  
+}
+
+.segmented-wrapper .ant-segmented-item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.segmented-wrapper .ant-segmented-item-content .anticon {
+  font-size: 18px;
+}
+
+.segmented-wrapper .ant-segmented-item-content .ant-segmented-item-text {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+@media (min-width: 769px) {
+  .segmented-wrapper {
+    display: none;
   }
+}
 
-  .username {
-    display: inline-block;
+
+/* footer */
+@media (max-width: 768px) {
+  .footer {
+    display: none;
   }
+  
 }
-
-/* Navbar End */
-
-
-
-
-
-.ant-menu-item-active::after {
-  color: aqua !important;
-}
-.ant-menu-title-content a:hover{
-  color: #ffc107 !important;
-}
-
-.ant-btn {
-  border-color: #ffc107;
-  background-color: #ffc107;
-  cursor: pointer;
-}
-
-/* Styles for the button on hover ant-btn-primary */
-.ant-btn:hover {
-  color: black  !important;
-  background-color: white !important;
-  border-color: #ffc107 !important;
-}
-
-/* Styles for the button icon on hover */
-.ant-btn:hover .anticon,
-.ant-btn:focus .anticon,
-.ant-btn:active .anticon {
-  color: black !important; /* Change icon color to black on hover, focus, and active */
-}
-
-/* Styles for the input border on hover */
-.ant-input:hover,
-.ant-input:focus {
-  box-shadow: none !important;
-  border-color: #ffc107 !important;
-}
-
-.ant-pagination-item:hover,
-.ant-pagination-next:hover,
-.ant-pagination-previous:hover {
-  background-color: #ffefb8 !important;
-}
-.ant-pagination-item-active {
-  border-color: #ffc107 !important;
-}
-.ant-pagination-item-active a {
-  color: black !important; /* Change text color of active pagination item to black */
-}
-.ant-pagination-item-ellipsis {
-  color: #ffefb8 !important; /* Change color of ellipsis to match background */
-}
-.ant-pagination-item-link-icon {
-  color: #ffc107 !important; /* Change color of pagination icon */
-}
-
-
-.landing-brands{
-  background-color: #ffc107 ;
-}
-
 .ant-layout-footer{
   background: #1E1E1E;
   color: white;
@@ -231,37 +218,96 @@
   color: #ffc107;
 }
 
-.store{
-  text-decoration: none;
-  color: white;
-  padding: 6px;
-  margin: 6px;
-  width: '100%';
-  min-width: 120px;
-  border:1px solid white;
-  border-radius: 8px;
-  display: inline-flex;
+/* profile page-------------- */
+.profile-page {
+  height: 100vh;
+}
+
+.header {
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+  display: flex;
   align-items: center;
 }
-.store:hover {
+
+.username {
+  margin: 0 10px;
+}
+
+.header-right {
+  font-size: 24px;
+}
+
+.settings-icon {
+  cursor: pointer;
+}
+
+.content {
+  padding: 20px;
+  background: #fff;
+}
+
+.ant-list-item-meta-title a {
+  font-size: 16px;
+  color: #1890ff;
+}
+
+
+.ant-btn {
+  border-color: #ffc107;
+  background-color: #ffc107;
+  cursor: pointer;
+}
+/* Styles for the button on hover ant-btn-primary */
+.ant-btn:hover {
+  color: black  !important;
+  background-color: white !important;
   border-color: #ffc107 !important;
-  color: #ffc107 !important;
 }
 
-.store img {
-  width: 40px;
-  margin-right: 4px;
+/* Styles for the button icon on hover */
+.ant-btn:hover .anticon,
+.ant-btn:focus .anticon,
+.ant-btn:active .anticon {
+  color: black !important; /* Change icon color to black on hover, focus, and active */
 }
 
-.bottom{
-  text-decoration: none;
-  color: #ffc107;
-  margin-right: 8px;
-  align-self: center;
+/* input */
+.ant-input-outlined {
+  padding: 8px !important;
+  border: 2px solid #fff !important;
+  border-radius: 4px !important;
 }
-.bottom:hover {
-  color:#fff;
+/* Styles for the input border on hover */
+.ant-input-outlined:hover,
+.ant-input-outlined:focus
+.ant-select-outlined:hover,
+.ant-select-focused {
+  box-shadow: none !important;
+  border-color: #fff !important;
 }
-.bottom-col small{
-  align-self: center;
+.ant-select-outlined{
+  border: 2px solid #fff !important;
+  border-radius: 4px !important;
+}
+
+.filtericon{
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+
+.ant-list-item{
+  padding: 2px !important;
+}
+.recharts-wrapper{
+  width:'100%';
+  height:'100%';
 }

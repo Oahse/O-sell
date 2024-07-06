@@ -8,7 +8,7 @@ const { Footer } = Layout;
 
 const FooterComponent = ({ name }) => {
   return (
-    <Footer>
+    <Footer className='footer'>
       <h3 className='footer-title'>{name}</h3>
       <Row gutter={[20, 8]} justify="center">
        
