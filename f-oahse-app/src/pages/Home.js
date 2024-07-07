@@ -7,6 +7,7 @@ import { Container} from 'react-bootstrap';
 import { useLocation ,Link } from 'react-router-dom';
 import CartPage from './Cart';
 import TradespersonSearch from './Engineers';
+import Shop from './Shop';
 import ProfilePage from './Profile';
 import { UserOutlined, ShoppingCartOutlined, CustomerServiceOutlined, ShopOutlined, HomeOutlined } from '@ant-design/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,7 +48,7 @@ function Home() {
           
             return <TradespersonSearch DATA={DATA} />;
         } else if (value === 'Shop') {
-            return <CartPage DATA={DATA} />;
+            return <Shop DATA={DATA} />;
         } else if (value ==='Cart'){
             return <CartPage DATA={DATA} />;
         }else if (value ==='Account') {
@@ -61,65 +62,65 @@ function Home() {
         
 
     };
-
   return (
-    <div className="home-background">
-        <ResponsiveHeader />
-        <Container fluid className='py-3 d-flex flex-column align-items-center header-bottom'>
-            <Segmented
-                    defaultValue={alignValue}
-                    onChange={(value) => setAlignValue(value)}
-                    options={[
-                      {
-                        label: (
-                          <span>
-                            <HomeOutlined style={{fontSize:'18px'}} /> {alignValue === 'Home' ? 'Home' : null}
-                          </span>
-                        ),
-                        value: 'Home'
-                      },
-                      {
-                        label: (
-                          <span>
-                            <FontAwesomeIcon icon={faWrench} style={{fontSize:'18px'}} /> {alignValue === 'Tradesperson' ? 'Tradesperson' : null}
-                          </span>
-                        ),
-                        value: 'Tradesperson'
-                      },
-                      {
-                        label: (
-                          <span>
-                            <ShopOutlined style={{fontSize:'18px'}} /> {alignValue === 'Shop' ? 'Shop' : null}
-                          </span>
-                        ),
-                        value: 'Shop'
-                      },
-                      {
-                        label: (
-                          <span>
-                            <ShoppingCartOutlined style={{fontSize:'18px'}} /> {alignValue === 'Cart' ? 'Cart' : null}
-                          </span>
-                        ),
-                        value: 'Cart'
-                      },
-                      {
-                        label: (
-                          <span>
-                            <UserOutlined style={{fontSize:'18px'}} /> {alignValue === 'Account' ? 'Account' : null}
-                          </span>
-                        ),
-                        value: 'Account'
-                      },
-                    ]}
-                    className="segmented-wrapper"
-                    
-            />
-            <div style={{width:'100%', marginTop:'20px'}}>
-                {renderPanel(alignValue)}
-            </div>
-        </Container>
-
-        <Footer/>
+    <div className='bg-home bg-light'>
+      <div className="home-background">
+          <ResponsiveHeader />
+          <Container fluid className='py-3 d-flex flex-column align-items-center header-bottom'>
+              <Segmented
+                      defaultValue={alignValue}
+                      onChange={(value) => setAlignValue(value)}
+                      options={[
+                        {
+                          label: (
+                            <span>
+                              <HomeOutlined style={{fontSize:'18px'}} /> {alignValue === 'Home' ? 'Home' : null}
+                            </span>
+                          ),
+                          value: 'Home'
+                        },
+                        {
+                          label: (
+                            <span>
+                              <FontAwesomeIcon icon={faWrench} style={{fontSize:'18px'}} /> {alignValue === 'Tradesperson' ? 'Tradesperson' : null}
+                            </span>
+                          ),
+                          value: 'Tradesperson'
+                        },
+                        {
+                          label: (
+                            <span>
+                              <ShopOutlined style={{fontSize:'18px'}} /> {alignValue === 'Shop' ? 'Shop' : null}
+                            </span>
+                          ),
+                          value: 'Shop'
+                        },
+                        {
+                          label: (
+                            <span>
+                              <ShoppingCartOutlined style={{fontSize:'18px'}} /> {alignValue === 'Cart' ? 'Cart' : null}
+                            </span>
+                          ),
+                          value: 'Cart'
+                        },
+                        {
+                          label: (
+                            <span>
+                              <UserOutlined style={{fontSize:'18px'}} /> {alignValue === 'Account' ? 'Account' : null}
+                            </span>
+                          ),
+                          value: 'Account'
+                        },
+                      ]}
+                      className="segmented-wrapper"
+                      
+              />
+              <div style={{width:'100%', marginTop:'20px'}}>
+                  {renderPanel(alignValue)}
+              </div>
+          </Container>
+          <Footer/>
+      </div>
     </div>
   );
 }
