@@ -1,40 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu,Avatar } from 'antd';
+import { Layout, Menu,Avatar, Button } from 'antd';
 import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
-
+import oahselogo from '../assets/oahse_logo.png';
 const { Header } = Layout;
 
-const linkStyles = {
-  marginRight: '20px',
-  color: '#333',
-  fontSize: '18px',
-  textDecoration: 'none',
-};
 
-const ResponsiveHeader = () => {
+
+const ResponsiveHeader = ({defaultValue,onChange}) => {
+  const linkStyles = {
+    backgroundColor: '#ffc107',
+    boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.1)',
+  };
+
   return (
     <Header className="header">
-      <div className="logo">MyApp</div>
+      <div className="logo"><img src={oahselogo} alt="oahselogo" width={48} />Oahse</div>
       <div className="menu-links">
-        <Link to="/" className="header-link" style={linkStyles}>Home</Link>
-        <Link to="/about" className="header-link" style={linkStyles}>About</Link>
-        <Link to="/find" className="header-link" style={linkStyles}>Find</Link>
-        <Link to="/products" className="header-link" style={linkStyles}>Store</Link>
-        <Link to="/contact" className="header-link" style={linkStyles}>Contact Us</Link>
-        <Link to="/profile" className="header-link" style={linkStyles}>Hi, Rufai</Link>
-        <button className="btn-login" style={{ padding: '5px 10px', cursor: 'pointer' }}>Login</button>
+        <span className="header-link" style={(defaultValue==='Home')?linkStyles:null} onClick={() => onChange('Home')}>Home</span>
+        <span className="header-link" style={(defaultValue==='Tradesperson')?linkStyles:null} onClick={() => onChange('Tradesperson')}>TradesPerson</span>
+        <span className="header-link" style={(defaultValue==='Jobs')?linkStyles:null} onClick={() => onChange('Jobs')}>Jobs</span>
+        <span className="header-link" style={(defaultValue==='Shop')?linkStyles:null} onClick={() => onChange('Shop')}>Shop</span>
       </div>
       <Menu mode="horizontal" className="menu">
-        <Avatar shape="square" size={32} icon={<ShoppingCartOutlined />} className='m-1' />
-        <Avatar shape="square" size={32} icon={<UserOutlined />} className='m-1' />
-            {/* <Menu.Item key="cart">
-            <Avatar shape="square" size={32} icon={<ShoppingCartOutlined />} />
-            <Avatar shape="square" size={32} icon={<UserOutlined />} />
-            </Menu.Item>
-            <Menu.Item key="profile">
-            <Avatar shape="square" size={32} icon={<UserOutlined />} />
-            </Menu.Item> */}
+        <Avatar eventKey="cart" shape="square" size={32} icon={<i className='fa-light fa-cart-shopping'></i>} className='m-1 menu-item' onClick={() => onChange('Cart')} />
+        <Avatar eventKey="profile" shape="square" size={32} icon={<i className='fa-light fa-user'></i>} className='m-1 menu-item' onClick={() => onChange('Account')} />
       </Menu>
     </Header>
   );

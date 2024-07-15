@@ -66,23 +66,40 @@ home page
   align-items: center;
 }
 
-.menu-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
 
 .menu-links {
   display: flex;
+  justify-self: right;
   align-items: center;
 }
 
 .header-link {
   margin-right: 20px;
   color: #333;
-  font-size: 18px;
+  font-size: 14px;
   text-decoration: none;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.header-link:hover{
+  background-color: #ffc107;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+  cursor: pointer;
+}
+
+.menu-item:hover{
+  background-color: #ffc107;
+  color: #000;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn-login {
@@ -140,6 +157,7 @@ home page
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   border-radius: 8px;
+  transform: translateX(-50%); /* Adjust for half of the element's width */
 
 }
 
@@ -183,15 +201,47 @@ home page
     display: none;
   }
 }
+.posters,
+.categories,
+.new-releases {
+  /* Ensure the element scrolls */
+  display: flex;
+  overflow: scroll;
+  padding: 10px 0;
+}
 
+.posters::-webkit-scrollbar,
+.categories::-webkit-scrollbar,
+.new-releases::-webkit-scrollbar {
+  display: none;
+}
 
+/* Optional: Also hide scrollbar for other parts if needed */
+.posters::-webkit-scrollbar-thumb,
+.categories::-webkit-scrollbar-thumb,
+.new-releases::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.posters::-webkit-scrollbar-track,
+.categories::-webkit-scrollbar-track,
+.new-releases::-webkit-scrollbar-track {
+  display: none;
+}
+
+.recommended-card {
+  margin: 0px;
+  padding: 2px !important;
+}
 /* footer */
-@media (max-width: 768px) {
+.footer{
+  margin-top: auto;
+}
+/* @media (max-width: 768px) {
   .footer {
     display: none;
-  }
-  
-}
+  } 
+} */
 .ant-layout-footer{
   background: #1E1E1E;
   color: white;
@@ -228,6 +278,13 @@ home page
 .footer-listitem:active{
   color: #ffc107;
 }
+.store{
+  border: 1.5px solid white;
+  border-radius: 8px;
+  padding: 12px;
+  text-decoration: none;
+  color: white;
+}
 
 /* profile page-------------- */
 .profile-page {
@@ -261,8 +318,10 @@ home page
 }
 
 .content {
+  margin-top: 12px;
   padding: 20px;
   background: #fff;
+  border-radius: 8px;
 }
 
 .ant-list-item-meta-title a {
@@ -274,11 +333,13 @@ home page
 .ant-btn {
   border-color: #ffc107;
   background-color: #ffc107;
+  height: 40px;
+  min-width: 40px;
   cursor: pointer;
 }
 /* Styles for the button on hover ant-btn-primary */
 .ant-btn:hover {
-  color: black  !important;
+  color: black !important;
   background-color: white !important;
   border-color: #ffc107 !important;
 }
@@ -315,17 +376,12 @@ home page
   box-shadow: none !important;
   border: 1.5px solid #ffc107 !important;
 }
-/* Styles for the input border on hover */
-.ant-input-outlined:hover,
-.ant-input-outlined:focus{
-  box-shadow: none !important;
-  border: 1.5px solid #ffc107 !important;
-}
+
 
 
 .filtericon{
   background-color: #fff;
-  border-radius: 4px;
+  border-radius: 4px !important;
   cursor: pointer;
 }
 
@@ -333,6 +389,10 @@ home page
 .ant-list-item{
   padding: 2px !important;
 }
+.list-icons {
+  margin-top: 0px; /* Default for mobile */
+}
+
 .recharts-wrapper{
   width:'100%';
   height:'100%';
@@ -364,4 +424,74 @@ home page
 }
 .ant-pagination-item-link-icon {
   color: #ffc107 !important; /* Change color of pagination icon */
+}
+
+/* Chat Room------------------------ */
+.chat-room {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.user-details {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.chat-container {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #fafafa;
+  margin-bottom: 10px;
+}
+
+.message {
+  margin: 10px 0;
+}
+
+.message.sent {
+  text-align: right;
+}
+
+.message.received {
+  text-align: left;
+}
+
+.message span {
+  background-color: #e6f7ff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.message.received span {
+  background-color: #f0f0f0;
+}
+
+.message-form {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #f0f0f0;
+  background-color: #fff;
+}
+
+.message-input {
+  flex: 1;
+  margin-right: 10px;
 }

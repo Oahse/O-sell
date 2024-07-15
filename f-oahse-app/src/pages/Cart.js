@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import { Table, Button, Input, Pagination, Typography } from 'antd';
-import { SettingOutlined, SearchOutlined } from '@ant-design/icons';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-
+import { Table, Button, Input, Pagination, Typography, Empty } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import Search from '../components/Search';
 const { Text } = Typography;
 
 const CartPage = () => {
-    const name = "Cart Page";
-    const [iconColor, setIconColor] = useState('black');
-    const [navbarBg, setNavbarBg] = useState('light');
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(10); // Number of projects per page
@@ -23,6 +18,8 @@ const CartPage = () => {
                 name: `Product ${i}`,
                 price: Math.floor(Math.random() * 100) + 1,
                 quantity: Math.floor(Math.random() * 10) + 1,
+                image: `https://via.placeholder.com/150?text=Product+${i}`, // Placeholder image
+                available: i % 5 !== 0, // Mark some items as unavailable
             });
         }
         return dummyItems;
@@ -33,14 +30,13 @@ const CartPage = () => {
     // Calculate total price
     const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-    // Filter projects based on search term
+    // Filter projects based on search term but always include unavailable items
     const filteredProjects = cartItems.filter((item) =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) || !item.available
     );
 
     // Calculate pagination values
     const totalProjects = filteredProjects.length;
-    const totalPages = Math.ceil(totalProjects / pageSize);
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = Math.min(startIndex + pageSize, totalProjects);
 
@@ -52,7 +48,12 @@ const CartPage = () => {
     // Columns configuration for the table
     const columns = [
         {
-            title: 'Product Name',
+            dataIndex: 'image',
+            key: 'image',
+            render: (text) => <img src={text} alt="product" style={{ width: 30, height: 30 }} />,
+        },
+        {
+            title: 'Name',
             dataIndex: 'name',
             key: 'name',
         },
@@ -63,7 +64,7 @@ const CartPage = () => {
             render: (text) => `$${text}`,
         },
         {
-            title: 'Quantity',
+            title: 'Qty',
             dataIndex: 'quantity',
             key: 'quantity',
         },
@@ -72,7 +73,7 @@ const CartPage = () => {
     // Custom footer component
     const Bottom = () => (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Text strong style={{width:'60px'}}>Total Price: ${totalPrice}</Text>
+            <Text strong style={{ width: '60px' }}>Total Price: ${totalPrice}</Text>
             {totalProjects > pageSize && (
                 <Pagination
                     size="small"
@@ -80,51 +81,44 @@ const CartPage = () => {
                     pageSize={pageSize}
                     total={totalProjects}
                     onChange={handlePageChange}
-                    itemRender={(current, type, originalElement) => {
-                        if (current === 4 || current === 5) {
-                            return null; // Hide page numbers 4 and 5
-                        }
-                        return originalElement;
-                    }}
                 />
             )}
         </div>
     );
 
-    const searchtable = () =>{
-        console.log('=====================');
+    const searchtable = () => {
+        console.log('Search clicked');
     }
+
     const [inputMessage, setInputMessage] = useState('');
     const handleSendMessage = () => {
-        console.log('=====================');
+        console.log('Send clicked');
     };
-    
+
     return (
         <div>
-            <Header iconColor={iconColor} navbarBg={navbarBg} />
-            <div className="content m-2">
-                <Input 
-                    value={inputMessage}
-                    onChange={(e) => setInputMessage(e.target.value)}
-                    onSearch={handleSendMessage}
-                    addonAfter={<SearchOutlined style={{cursor:'pointer'}}  onClick={searchtable}/>} 
-                    defaultValue="Type your message..."
-                    style={{marginTop: '60px'}}
-                /> 
-                <Table
-                    dataSource={filteredProjects.slice(startIndex, endIndex)}
-                    columns={columns}
-                    pagination={false}
-                    footer={Bottom}
-                    scroll={{ y: 400 }} // Adjust the height of the table
-                    
-                />
-                <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Button to={{pathname:`/profile/payments/${1455}`}} state='1456' text='Checkout' style={{ alignSelf: "center" }} />
-                </div>
+            <Search value={inputMessage} handleSearch={searchtable} showDrawer={null} onChange={(e) => setInputMessage(e.target.value)} />
 
+            <div className="content">
+                
+                {filteredProjects.length > 0 ? (
+                    <Table
+                        dataSource={filteredProjects.slice(startIndex, endIndex)}
+                        columns={columns}
+                        pagination={false}
+                        footer={Bottom}
+                        scroll={{ y: 400 }} // Adjust the height of the table
+                        rowKey="id"
+                    />
+                ) : (
+                    <Empty description="No items in the cart" />
+                )}
+                <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Button type="primary" style={{ alignSelf: "center" }}>
+                        <i class="fa-light fa-credit-card"></i>Checkout
+                    </Button>
+                </div>
             </div>
-            <Footer className='footer'/>
         </div>
     );
 };

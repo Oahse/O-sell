@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Row, Col } from 'antd';
+import { Layout, Row, Col, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import google from '../assets/google_play.png';
 import apple from '../assets/apple.png';
@@ -47,19 +47,19 @@ const FooterComponent = ({ name }) => {
           </ul>
           
         </Col>
-        <Col xs={12} sm={24} md={6} lg={6} xl={6}>
-          <div>
+        <Col xs={12} sm={24} md={6} lg={6} xl={6} className='p-0'>
+          <div className='mb-2 mr-2'>
             
             <Link className='store' to="https://www.google.com" target="_blank" rel="noopener noreferrer">
-              <img src={google} alt="Google Play" className='img' /> Google
+              <img src={google} alt="Google Play" width={40} /> Google
             </Link>
           </div>
           
-            <div>
-            <Link className='store' to="https://www.google.com" target="_blank" rel="noopener noreferrer">
-              <img src={apple} alt="App Store" className='img' />
-              <span>Apple</span>
-            </Link>
+            <div className='mt-2'>
+              <Link className='store' to="https://www.google.com" target="_blank" rel="noopener noreferrer">
+                <img src={apple} alt="App Store" width={40} />
+                <span>Apple</span>
+              </Link>
             </div>
         </Col>
       </Row>

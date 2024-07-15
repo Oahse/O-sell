@@ -1,130 +1,178 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Button, Form, Space, Slider, Card, List, Drawer, Select, Avatar, Pagination } from 'antd';
+import { Input, Button, Form, Space, Slider, Card, List, Drawer, Select, Avatar} from 'antd';
 import { BorderOutlined, CheckCircleOutlined, ControlOutlined, SearchOutlined } from '@ant-design/icons';
 import countriesData from '../components/countries.json';
 import gears from '../assets/gears.jpg';
+import ProductsData from '../components/productsData';
+import Pagination from "../components/Pagination";
+import Search from '../components/Search';
 const { Option } = Select;
-
-const ProductsData = [
-    {
-      id: 'd0b9f24a-cd6a-4cfc-82f2-d8d18f13c6e1',
-      name: 'Smartphone XYZ Pro',
-      category: { name: 'Electronics', icon: 'https://example.com/electronics-icon.png' },
-      price: 999.99,
-      currency: 'USD',
-      image: 'https://images.unsplash.com/photo-1590491416349-60dfb63d3bfc',
-      description: 'The latest XYZ Pro smartphone with high-resolution camera and long battery life.',
-      files: [
-        { name: 'User Manual', desc: 'Complete user guide', date: '2024-01-01', url: 'https://example.com/user-manual.pdf' }
-      ],
-      createdat: '2024-01-01',
-      updatedat: '2024-01-01',
-      deletedat: null,
-      deleted: false,
-      businessid: 'business123',
-      address: '123 Tech Street, New York City, NY 10001, USA',
-      location: { lat: 40.7128, long: -74.0060 },
-    },
-    {
-      id: 'eae7a065-013c-4b4f-8e89-1046a4b5688d',
-      name: '4K Ultra HD TV',
-      category: { name: 'Electronics', icon: 'https://example.com/electronics-icon.png' },
-      price: 799.99,
-      currency: 'USD',
-      image: 'https://images.unsplash.com/photo-1601970707486-f9cfa77d8c4a',
-      description: 'Experience the best in home entertainment with this 4K Ultra HD TV.',
-      files: [
-        { name: 'Product Brochure', desc: 'Detailed product specifications', date: '2024-01-10', url: 'https://example.com/product-brochure.pdf' }
-      ],
-      createdat: '2024-01-10',
-      updatedat: '2024-01-10',
-      deletedat: null,
-      deleted: false,
-      businessid: 'business124',
-      address: '456 Home Avenue, Los Angeles, CA 90001, USA',
-      location: { lat: 34.0522, long: -118.2437 },
-    },
-    {
-      id: 'b5f47f08-d1c1-4a56-b3de-9d3f51d5ebd3',
-      name: 'Cordless Drill Kit',
-      category: { name: 'Tools', icon: 'https://example.com/tools-icon.png' },
-      price: 129.99,
-      currency: 'USD',
-      image: 'https://images.unsplash.com/photo-1591585432951-fb0f6e21f0b3',
-      description: 'A versatile cordless drill kit for all your DIY and professional needs.',
-      files: [
-        { name: 'Drill Kit Instructions', desc: 'Instructions for using the drill kit', date: '2024-02-01', url: 'https://example.com/drill-kit-instructions.pdf' }
-      ],
-      createdat: '2024-02-01',
-      updatedat: '2024-02-01',
-      deletedat: null,
-      deleted: false,
-      businessid: 'business125',
-      address: '789 Construction Road, Guadalajara, Jalisco 44100, Mexico',
-      location: { lat: 20.6597, long: -103.3496 },
-    },
-    {
-      id: 'cdd83215-3347-49a5-b591-08a01c1d519f',
-      name: 'Espresso Machine',
-      category: { name: 'Appliances', icon: 'https://example.com/appliances-icon.png' },
-      price: 349.99,
-      currency: 'USD',
-      image: 'https://images.unsplash.com/photo-1609265938746-d5c43e3c94e2',
-      description: 'Make your favorite espresso drinks at home with this high-quality espresso machine.',
-      files: [
-        { name: 'Maintenance Guide', desc: 'How to maintain the espresso machine', date: '2024-03-01', url: 'https://example.com/maintenance-guide.pdf' }
-      ],
-      createdat: '2024-03-01',
-      updatedat: '2024-03-01',
-      deletedat: null,
-      deleted: false,
-      businessid: 'business126',
-      address: '101 Coffee Lane, Paris, Île-de-France 75001, France',
-      location: { lat: 48.8566, long: 2.3522 },
-    },
-    {
-      id: '1d4a1f67-56a8-4b8b-908b-4b8b8f0edbbf',
-      name: 'Portable Air Conditioner',
-      category: { name: 'Appliances', icon: 'https://example.com/appliances-icon.png' },
-      price: 249.99,
-      currency: 'USD',
-      image: 'https://images.unsplash.com/photo-1609466656159-f37f1ae5ef28',
-      description: 'Keep your room cool and comfortable with this efficient portable air conditioner.',
-      files: [
-        { name: 'Installation Instructions', desc: 'How to install the air conditioner', date: '2024-04-01', url: 'https://example.com/installation-instructions.pdf' }
-      ],
-      createdat: '2024-04-01',
-      updatedat: '2024-04-01',
-      deletedat: null,
-      deleted: false,
-      businessid: 'business127',
-      address: '202 Cool Street, Accra, Greater Accra Region, Ghana',
-      location: { lat: 5.6037, long: -0.1870 },
-    },
-    {
-      id: '8d8b9e2f-342f-4c3a-91fd-b9b2b2cfa3b1',
-      name: 'Noise-Canceling Headphones',
-      category: { name: 'Electronics', icon: 'https://example.com/electronics-icon.png' },
-      price: 199.99,
-      currency: 'USD',
-      image: 'https://images.unsplash.com/photo-1591669526645-d3a7120fc5d8',
-      description: 'Immerse yourself in your music with these top-of-the-line noise-canceling headphones.',
-      files: [
-        { name: 'Product Specifications', desc: 'Detailed specifications of the headphones', date: '2024-05-01', url: 'https://example.com/product-specifications.pdf' }
-      ],
-      createdat: '2024-05-01',
-      updatedat: '2024-05-01',
-      deletedat: null,
-      deleted: false,
-      businessid: 'business128',
-      address: '303 Audio Avenue, Rome, Lazio 00100, Italy',
-      location: { lat: 41.9028, long: 12.4964 },
-    },
-    // Add more products as needed
-  ];
   
-
-const categories = ['Plumber', 'Electrician', 'Carpenter', 'Painter'];
+const categories = [
+  {
+    id: 1,
+    name: 'Civil Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/1768/1768788.png',
+    title: 'Civil Engineering'
+  },
+  {
+    id: 2,
+    name: 'Mechanical Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/1080/1080521.png',
+    title: 'Mechanical Engineering'
+  },
+  {
+    id: 3,
+    name: 'Electrical Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/3075/3075977.png',
+    title: 'Electrical Engineering'
+  },
+  {
+    id: 4,
+    name: 'Chemical Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/3063/3063018.png',
+    title: 'Chemical Engineering'
+  },
+  {
+    id: 5,
+    name: 'Software Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/4248/4248443.png',
+    title: 'Software Engineering'
+  },
+  {
+    id: 6,
+    name: 'Environmental Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/1754/1754280.png',
+    title: 'Environmental Engineering'
+  },
+  {
+    id: 7,
+    name: 'Aerospace Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2072/2072262.png',
+    title: 'Aerospace Engineering'
+  },
+  {
+    id: 8,
+    name: 'Biomedical Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2004/2004650.png',
+    title: 'Biomedical Engineering'
+  },
+  {
+    id: 9,
+    name: 'Industrial Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2081/2081767.png',
+    title: 'Industrial Engineering'
+  },
+  {
+    id: 10,
+    name: 'Nuclear Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2303/2303764.png',
+    title: 'Nuclear Engineering'
+  },
+  {
+    id: 11,
+    name: 'Petroleum Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2042/2042291.png',
+    title: 'Petroleum Engineering'
+  },
+  {
+    id: 12,
+    name: 'Structural Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/3011/3011988.png',
+    title: 'Structural Engineering'
+  },
+  {
+    id: 13,
+    name: 'Automotive Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/3082/3082031.png',
+    title: 'Automotive Engineering'
+  },
+  {
+    id: 14,
+    name: 'Marine Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/1163/1163540.png',
+    title: 'Marine Engineering'
+  },
+  {
+    id: 15,
+    name: 'Materials Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2058/2058750.png',
+    title: 'Materials Engineering'
+  },
+  {
+    id: 16,
+    name: 'Mining Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2084/2084860.png',
+    title: 'Mining Engineering'
+  },
+  {
+    id: 17,
+    name: 'Geotechnical Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/167/167778.png',
+    title: 'Geotechnical Engineering'
+  },
+  {
+    id: 18,
+    name: 'Agricultural Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/1945/1945735.png',
+    title: 'Agricultural Engineering'
+  },
+  {
+    id: 19,
+    name: 'Systems Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/753/753345.png',
+    title: 'Systems Engineering'
+  },
+  {
+    id: 20,
+    name: 'Robotics Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/1827/1827456.png',
+    title: 'Robotics Engineering'
+  },
+  {
+    id: 21,
+    name: 'Telecommunications Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2202/2202211.png',
+    title: 'Telecommunications Engineering'
+  },
+  {
+    id: 22,
+    name: 'Construction Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2965/2965293.png',
+    title: 'Construction Engineering'
+  },
+  {
+    id: 23,
+    name: 'Textile Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2361/2361820.png',
+    title: 'Textile Engineering'
+  },
+  {
+    id: 24,
+    name: 'Biotechnology Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/3126/3126516.png',
+    title: 'Biotechnology Engineering'
+  },
+  {
+    id: 25,
+    name: 'Instrumentation Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2825/2825636.png',
+    title: 'Instrumentation Engineering'
+  },
+  {
+    id: 26,
+    name: 'Safety Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/3082/3082016.png',
+    title: 'Safety Engineering'
+  },
+  {
+    id: 27,
+    name: 'Nanotechnology Engineering',
+    logo: 'https://cdn-icons-png.flaticon.com/512/2316/2316076.png',
+    title: 'Nanotechnology Engineering'
+  }
+];
+  
 const posters = [
     {
         title: 'Latest Software',
@@ -203,126 +251,143 @@ const ManufacturersData = [
 
 ]
 const Shop = () => {
-  const [manufacturer, setManufacturer] = useState(ManufacturersData[0]);
-  const [category, setCategory] = useState('');
-  const [country, setCountry] = useState('');
-  const [state, setState] = useState('');
-  const [city, setCity] = useState('');
+  const [selectedmanufacturer, setManufacturer] = useState(ManufacturersData[0]);
   const [filteredProducts, setFilteredProducts] = useState(ProductsData);
-  const [visible, setVisible] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortOrder, setSortOrder] = useState('none'); // 'none', 'asc', 'desc'
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All Categories');
+  const [sortBy, setSortBy] = useState('relevance');
+  const [showDrawer, setShowDrawer] = useState(false);
+  const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 12 });
 
 
   useEffect(() => {
-    handleSearch();
-  }, [searchTerm, country, state, city, category, sortOrder]);
-
-  
-  const handleSearch = () => {
-    let filtered = ProductsData.filter((product) => {
-      return (
-        (searchTerm ? product.name.toLowerCase().includes(searchTerm.toLowerCase()) : true) &&
-        (country ? product.address.includes(country) : true) &&
-        (state ? product.address.includes(state) : true) &&
-        (city ? product.address.includes(city) : true) &&
-        (category ? product.category.name === category : true)
-      );
+    let filtered = ProductsData.filter(product => {
+      const matchesSearchQuery = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory = selectedCategory === 'All Categories' || product.category.name === selectedCategory;
+      const matchesPriceRange = product.price >= priceRange[0] && product.price <= priceRange[1];
+      return matchesSearchQuery && matchesCategory && matchesPriceRange;
     });
 
-    // Apply sorting based on the sortOrder state
-    if (sortOrder === 'asc') {
+    if (sortBy === 'price-asc') {
       filtered.sort((a, b) => a.price - b.price);
-    } else if (sortOrder === 'desc') {
+    } else if (sortBy === 'price-desc') {
       filtered.sort((a, b) => b.price - a.price);
+    } else if (sortBy === 'name-asc') {
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === 'name-desc') {
+      filtered.sort((a, b) => b.name.localeCompare(a.name));
     }
 
     setFilteredProducts(filtered);
-    setVisible(false); // Close the drawer after searching
+  }, [searchQuery, selectedCategory, sortBy, priceRange]);
+
+  const handleSearch = () => {
+    setPagination({ ...pagination, page: 1 });
+  };
+  const handleCategoryChange = (value) => {
+    setSelectedCategory(value);
   };
 
-  const showDrawer = () => {
-    setVisible(true);
+  const handleSortChange = (value) => {
+    setSortBy(value);
   };
 
-  const onClose = () => {
-    setVisible(false);
+  const handleDrawerOpen = () => {
+    setShowDrawer(true);
   };
 
-  const handlePageChange = (page, pageSize) => {
-    setCurrentPage(page);
-    setPageSize(pageSize);
+  const handleDrawerClose = () => {
+    setShowDrawer(false);
   };
+
+  const handlePriceChange = (value) => {
+    setPriceRange(value);
+  };
+
+  const handlePaginationChange = (page, pageSize) => {
+    setPagination({ page, pageSize });
+  };
+
+  const paginatedProducts = filteredProducts.slice((pagination.page - 1) * pagination.pageSize, pagination.page * pagination.pageSize);
+
 
   return (
     <div style={{ padding: '8px' }}>
-      <div className='d-flex justify-space-between align-items-center'>
-        <Input
-          placeholder="Search for any product"
-          prefix={<SearchOutlined style={{ fontSize: '18px', fontWeight: 'bold' }} />}
-          style={{ width: '100%', marginRight: '10px' }}
-          onPressEnter={handleSearch}
-        />
-        <Avatar shape="square" size={42} icon={<ControlOutlined rotate={90} />} className='filtericon m-1 px-3' onClick={showDrawer} style={{ color: 'black' }} />
-      </div>
+      <Search handleSearch={handleSearch} showDrawer={handleDrawerOpen} onChange={(e) => setSearchQuery(e.target.value)} />
 
       {/* Drawer for filters */}
       <Drawer
         title="Filters"
         placement="right"
-        onClose={onClose}
-        visible={visible}
+        closable={true}
+        onClose={handleDrawerClose}
+        visible={showDrawer}
         width={400}
       >
-        <Form layout="vertical">
-          <Form.Item label="Manufacturer">
+        <div style={{ marginBottom: 16 }}>
+          <span>Manufacturers</span>
             <Select
               placeholder="Select a Manufacturer"
-              value={manufacturer}
+              value={selectedmanufacturer}
               onChange={(value) => setManufacturer(value)}
             >
-              {ManufacturersData.map((c) => (
-                <Option key={c.name} value={c.name}>
-                  {c.name}
+              <Option value="All Manufacturers">All Manufacturers</Option>
+              {ManufacturersData.map((manufacturer) => (
+                <Option key={manufacturer.name} value={manufacturer.name}>
+                  <Avatar src={manufacturer.logo} size="small" style={{ marginRight: 8 }} />
+                  {manufacturer.name}
                 </Option>
               ))}
             </Select>
-          </Form.Item>
+          </div>
           
-          <Form.Item label="Category">
+          <div style={{ marginBottom: 16 }}>
+          <span>Categories</span>
+          <Select
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            style={{ width: '100%' }}
+          >
+            <Option value="All Categories">All Categories</Option>
+            {categories.map(category => (
+              <Option key={category.id} value={category.title}>
+                <Avatar src={category.logo} size="small" style={{ marginRight: 8 }} />
+                {category.name}
+              </Option>
+            ))}
+          </Select>
+          </div>
+
+          <div style={{ marginBottom: 16 }}>
+            <span>Price Range: ${priceRange[0]} - ${priceRange[1]}</span>
+            <Slider
+              range
+              min={priceRange[0]}
+              max={priceRange[1]}
+              value={priceRange}
+              onChange={handlePriceChange}
+              style={{ marginTop: 10 }}
+            />
+          </div>
+          
+          <div style={{ marginBottom: 16 }}>
+            <span>Sort By:</span>
             <Select
-              placeholder="Select a category"
-              value={category}
-              onChange={(value) => setCategory(value)}
+              value={sortBy}
+              onChange={handleSortChange}
+              style={{ width: '100%', marginTop: 10 }}
             >
-              <Option value="">All Categories</Option>
-              <Option value="Electronics">Electronics</Option>
-              <Option value="Tools">Tools</Option>
-              <Option value="Appliances">Appliances</Option>
+              <Option value="relevance">Relevance</Option>
+              <Option value="price-asc">Price: Low to High</Option>
+              <Option value="price-desc">Price: High to Low</Option>
+              <Option value="name-asc">Name: A to Z</Option>
+              <Option value="name-desc">Name: Z to A</Option>
             </Select>
-          </Form.Item>
-          <Form.Item label="Sort by Price">
-            <Select
-              placeholder="Sort by price"
-              value={sortOrder}
-              onChange={(value) => setSortOrder(value)}
-            >
-              <Option value="none">None</Option>
-              <Option value="asc">Price: Low to High</Option>
-              <Option value="desc">Price: High to Low</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" onClick={handleSearch}>
-              Apply Filters
-            </Button>
-          </Form.Item>
-        </Form>
+          </div>
       </Drawer>
-      <div style={{ display: 'flex', overflowX: 'auto', padding: '10px 0' }}>
-      {posters.map((item) => (
+      <div className='posters'>
+        {posters.map((item) => (
             <div key={item.title} style={{ flex: '0 0 auto', marginRight: '10px' }}>
                 <Card
                         hoverable
@@ -363,55 +428,122 @@ const Shop = () => {
                     </Card>
             </div>
         ))}
-        </div>
-        <div style={{ display: 'flex', overflowX: 'auto', padding: '10px 0' }}>
+      </div>
 
-        {categories.map((item) => (
+      <div className='d-flex justify-content-between mt-4' ><span>Categories</span> <small>See All</small></div>
+      <div className='categories'>
+          {categories.map((item) => (
             <div key={item.name} style={{ flex: '0 0 auto', marginRight: '10px' }}>
               <Card
                 hoverable
                 bordered={false}
                 size="small"
-                title={item.name}
-                extra={<Avatar shape="square" size={26} className={`rounded-1 ${item.verified ? 'text-success' : 'text-white'} bg-light`} icon={<CheckCircleOutlined />} />}
-                cover={<img alt="example" className='rounded-0' src={item.image} />}
-                style={{ width: 100, borderRadius: '160px' }}
+                cover={<img alt={item.name} className='rounded-0' src={item.logo} />}
+                style={{ width: 100, borderRadius: '160px', padding:'10px' }}
               >
                 <Card.Meta
-                  title={item.name}
-                  description={`${item.distance} miles. ${item.city}, ${item.state}, ${item.country}`}
+                  description={item.name}
+                  style={{
+                    fontSize: '10px',
+                    padding: '0px',
+                  }}
                 />
               </Card>
             </div>
           ))}
+      </div>
+
+      <div style={{ marginTop: '14px' }}>
+        <div className='d-flex justify-content-between' ><span>New Releases</span> <small>See All</small></div>
+        <small>Found: <span className={`${(filteredProducts.length>0)?'text-success':'text-danger'}`}>{filteredProducts.length}</span></small> 
+        <div className='new-releases'>
+          {filteredProducts.map((item) => (
+            <div key={item.title} style={{ flex: '0 0 auto', marginRight: '10px' }}>
+              <div className="ant-card ant-card-bordered ant-card-hoverable css-dev-only-do-not-override-f7vrd6" style={{borderRadius: '160px', padding:'8px',width:'150px' }}>
+                  <div className="ant-card-cover">
+                    <img alt={item.name} src={item.image} style={{height: '120px' }} />
+                  </div>
+                  <div className="ant-card-body recommended-card">
+                    <Card.Meta
+                      title={item.name}
+                      style={{
+                        fontSize: '12px',
+                        padding: '0px',
+                      }}
+                      description={
+                        <div>
+                          <span>{item.businessid}
+                            <Avatar shape="circle" size={20} className={`ms-1 rounded-1 ${!item.verified ? 'text-success' : 'text-white'} bg-light`} icon={<CheckCircleOutlined />} />
+                          </span>
+                          <div className='fw-bold'>${item.price.toFixed(2)}</div>
+                        </div>
+                      }
+                      
+                    />
+                    <span className="d-flex justify-content-end mt-2">
+                      <Avatar shape="square" size={26} icon={<i className="fa-light fa-eye text-white"></i>} />
+                      <Avatar className='ms-1' shape="square" size={26} icon={<i className="fa-light fa-cart-plus text-success"></i>} />
+                    </span>
+                  </div>
+                </div>
+            </div>
+            ))}
         </div>
-      <div style={{ marginTop: '20px' }}>
-        <span>Found: {filteredProducts.length}</span>
+      </div>
+      
+      <div style={{ marginTop: '14px' }}>
+        <div className='d-flex justify-content-between'><span>Recommended</span> <small>See All</small></div>
+        <small>Found: <span className={`${(paginatedProducts.length>0)?'text-success':'text-danger'}`}>{paginatedProducts.length}</span></small>
         <List
-          grid={{ gutter: 16, column: 4 }}
-          dataSource={filteredProducts.slice((currentPage - 1) * pageSize, currentPage * pageSize)}
+          grid={{ gutter: 4,
+            xs: 2,   // mobile
+           sm: 4,   // tablet
+           md: 4,   // laptop
+           lg: 6,   // desktop
+           xl: 6,   // extra-large screens 
+           }}
+           dataSource={paginatedProducts}
           renderItem={item => (
-            <List.Item>
-              <Card
-                hoverable
-                cover={<img alt={item.name} src={item.image} />}
-              >
-                <Card.Meta
-                  avatar={<Avatar src={item.category.icon} />}
-                  title={item.name}
-                  description={`$${item.price}`}
-                />
-              </Card>
+            <List.Item key={item.title}>
+              <div className="ant-card ant-card-bordered ant-card-hoverable css-dev-only-do-not-override-f7vrd6" style={{borderRadius: '160px', padding:'8px' }}>
+                <div className="ant-card-cover">
+                  <img alt={item.name} src={item.image} style={{height: '120px' }} />
+                </div>
+                <div className="ant-card-body recommended-card">
+                  <Card.Meta
+                    title={item.name}
+                    style={{
+                      fontSize: '12px',
+                      padding: '0px',
+                    }}
+                    description={
+                      <div>
+                        <span>{item.businessid}
+                          <Avatar shape="circle" size={20} className={`ms-1 rounded-1 ${!item.verified ? 'text-success' : 'text-white'} bg-light`} icon={<CheckCircleOutlined />} />
+                        </span>
+                        <div className='fw-bold'>${item.price.toFixed(2)}</div>
+                      </div>
+                    }
+                    
+                  />
+                  <span className="d-flex justify-content-end mt-2">
+                    <Avatar shape="square" size={26} icon={<i className="fa-light fa-eye text-white"></i>} />
+                    <Avatar className='ms-1' shape="square" size={26} icon={<i className="fa-light fa-cart-plus text-success"></i>} />
+                  </span>
+                </div>
+              </div>
             </List.Item>
           )}
         />
+        <div style={{ textAlign: 'center', marginBottom: '100px' }}>
         <Pagination
-          style={{ marginTop: '20px' }}
-          current={currentPage}
-            pageSize={pageSize}
-            total={filteredProducts.length}
-            onChange={handlePageChange}
+          current={pagination.page}
+          pageSize={pagination.pageSize}
+          total={filteredProducts.length}
+          onChange={handlePaginationChange}
+          style={{ marginTop: 10, textAlign: 'center' }}
         />
+        </div>
       </div>
     </div>
   );

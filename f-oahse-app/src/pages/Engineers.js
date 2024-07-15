@@ -1,49 +1,263 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Button, Form, Space, Slider, Card, List, Skeleton,   Drawer, Select, Avatar, Pagination } from 'antd';
+import { Input, Button, Form, Space, Slider, Card, List, Skeleton,   Drawer, Select, Avatar} from 'antd';
 import { BorderOutlined, CheckCircleOutlined, ControlOutlined, SearchOutlined,EyeOutlined, MessageOutlined } from '@ant-design/icons';
 import countriesData from '../components/countries.json';
 import {Link} from "react-router-dom";
+import Pagination from "../components/Pagination";
+import Search from "../components/Search";
 
 const { Option } = Select;
 
 const tradespeopleData = [
-  { name: 'John Doe', country: 'USA', state: 'New York', city: 'New York City', profession: 'Plumber', distance: 10, image: 'https://via.placeholder.com/150' },
-  { name: 'Jane Smith', country: 'USA', state: 'California', city: 'Los Angeles', profession: 'Electrician', distance: 20, image: 'https://via.placeholder.com/150' },
-  { name: 'Carlos Gomez', country: 'Mexico', state: 'Jalisco', city: 'Guadalajara', profession: 'Carpenter', distance: 15, image: 'https://via.placeholder.com/150' },
-  { name: 'Marie Curie', country: 'France', state: 'Île-de-France', city: 'Paris', profession: 'Painter', distance: 5, image: 'https://via.placeholder.com/150' },
-  { name: 'Kofi Annan', country: 'Ghana', state: 'Greater Accra', city: 'Accra', profession: 'Plumber', distance: 25, image: 'https://via.placeholder.com/150' },
-  { name: 'Nina Ricci', country: 'Italy', state: 'Lazio', city: 'Rome', profession: 'Electrician', distance: 30, image: 'https://via.placeholder.com/150' },
-  { name: 'Li Wei', country: 'China', state: 'Beijing', city: 'Beijing', profession: 'Carpenter', distance: 12, image: 'https://via.placeholder.com/150' },
-  { name: 'Olga Ivanov', country: 'Russia', state: 'Moscow', city: 'Moscow', profession: 'Painter', distance: 18, image: 'https://via.placeholder.com/150' },
-  { name: 'Samir Khan', country: 'India', state: 'Maharashtra', city: 'Mumbai', profession: 'Plumber', distance: 8, image: 'https://via.placeholder.com/150' },
-  { name: 'Ahmed Fahmy', country: 'Egypt', state: 'Cairo', city: 'Cairo', profession: 'Electrician', distance: 22, image: 'https://via.placeholder.com/150' },
-  { name: 'Sara Connor', country: 'Australia', state: 'New South Wales', city: 'Sydney', profession: 'Carpenter', distance: 7, image: 'https://via.placeholder.com/150' },
-  { name: 'Tom Hiddleston', country: 'UK', state: 'England', city: 'London', profession: 'Painter', distance: 10, image: 'https://via.placeholder.com/150' },
-  { name: 'Hiroshi Tanaka', country: 'Japan', state: 'Tokyo', city: 'Tokyo', profession: 'Plumber', distance: 6, image: 'https://via.placeholder.com/150' },
-  { name: 'Luis Fernandez', country: 'Spain', state: 'Madrid', city: 'Madrid', profession: 'Electrician', distance: 14, image: 'https://via.placeholder.com/150' },
-  { name: 'Fatima Zahra', country: 'Morocco', state: 'Rabat-Salé-Kénitra', city: 'Rabat', profession: 'Carpenter', distance: 13, image: 'https://via.placeholder.com/150' },
-  { name: 'Amara Oumar', country: 'Nigeria', state: 'Lagos', city: 'Lagos', profession: 'Painter', distance: 9, image: 'https://via.placeholder.com/150' },
-  { name: 'Bruce Wayne', country: 'USA', state: 'Illinois', city: 'Chicago', profession: 'Plumber', distance: 20, image: 'https://via.placeholder.com/150' },
-  { name: 'Peter Parker', country: 'USA', state: 'New York', city: 'Queens', profession: 'Electrician', distance: 11, image: 'https://via.placeholder.com/150' },
-  { name: 'Clark Kent', country: 'USA', state: 'Kansas', city: 'Smallville', profession: 'Carpenter', distance: 16, image: 'https://via.placeholder.com/150' },
-  { name: 'Diana Prince', country: 'USA', state: 'Washington D.C.', city: 'Washington D.C.', profession: 'Painter', distance: 12, image: 'https://via.placeholder.com/150' },
-  { name: 'Logan Howlett', country: 'Canada', state: 'Alberta', city: 'Calgary', profession: 'Plumber', distance: 21, image: 'https://via.placeholder.com/150' },
-  { name: 'Charles Xavier', country: 'USA', state: 'New York', city: 'Westchester', profession: 'Electrician', distance: 14, image: 'https://via.placeholder.com/150' },
-  { name: 'Victor Von Doom', country: 'Latveria', state: 'Doomstadt', city: 'Doomstadt', profession: 'Carpenter', distance: 10, image: 'https://via.placeholder.com/150' },
-  { name: 'Stephen Strange', country: 'USA', state: 'New York', city: 'New York City', profession: 'Painter', distance: 5, image: 'https://via.placeholder.com/150' },
-  { name: 'Wade Wilson', country: 'Canada', state: 'Ontario', city: 'Toronto', profession: 'Plumber', distance: 18, image: 'https://via.placeholder.com/150' },
-  { name: "T'Challa", country: 'Wakanda', state: 'Central Wakanda', city: 'Birnin Zana', profession: 'Electrician', distance: 25, image: 'https://via.placeholder.com/150' },
-  { name: 'Barry Allen', country: 'USA', state: 'Missouri', city: 'Central City', profession: 'Carpenter', distance: 20, image: 'https://via.placeholder.com/150' },
-  { name: 'Arthur Curry', country: 'USA', state: 'Maine', city: 'Amnesty Bay', profession: 'Painter', distance: 8, image: 'https://via.placeholder.com/150' },
-  { name: 'Hal Jordan', country: 'USA', state: 'California', city: 'Coast City', profession: 'Plumber', distance: 22, image: 'https://via.placeholder.com/150' },
-  { name: 'Selina Kyle', country: 'USA', state: 'New York', city: 'Gotham City', profession: 'Electrician', distance: 12, image: 'https://via.placeholder.com/150' },
+  {
+    id: '1',
+    title: 'Mr.',
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'john.doe@example.com',
+    phonenumber: '1234567890',
+    nin: 'A123456789',
+    passport: 'X1234567',
+    image: 'https://via.placeholder.com/150',
+    address: '1',
+    is_staff: false,
+    is_active: true,
+    is_superuser: false,
+    verified: true,
+    verifiedAt: '2022-01-01',
+    avgratings: 4.5,
+    is_tradeperson: true,
+    professionname: { name: 'Plumber' },
+    regulations: ['Regulation A', 'Regulation B'],
+    websiteurl: 'https://johndoe.com',
+    last_login: '2024-07-07',
+    country: 'USA',
+    state: 'New York',
+    city: 'New York City',
+    distance: 10,
+  },
+  {
+    id: '2',
+    title: 'Ms.',
+    first_name: 'Jane',
+    last_name: 'Smith',
+    email: 'jane.smith@example.com',
+    phonenumber: '0987654321',
+    nin: 'B987654321',
+    passport: 'Y7654321',
+    image: 'https://via.placeholder.com/150',
+    address: '2',
+    is_staff: false,
+    is_active: true,
+    is_superuser: false,
+    verified: false,
+    verifiedAt: '2022-02-02',
+    avgratings: 4.8,
+    is_tradeperson: true,
+    professionname: { name: 'Electrician' },
+    regulations: ['Regulation C', 'Regulation D'],
+    websiteurl: 'https://janesmith.com',
+    last_login: '2024-07-07',
+    country: 'USA',
+    state: 'California',
+    city: 'Los Angeles',
+    distance: 20,
+  },
+  {
+    id: '3',
+    title: 'Mr.',
+    first_name: 'Carlos',
+    last_name: 'Gomez',
+    email: 'carlos.gomez@example.com',
+    phonenumber: '2345678901',
+    nin: 'C234567890',
+    passport: 'Z2345678',
+    image: 'https://via.placeholder.com/150',
+    address: '3',
+    is_staff: false,
+    is_active: true,
+    is_superuser: false,
+    verified: true,
+    verifiedAt: '2022-03-03',
+    avgratings: 4.3,
+    is_tradeperson: true,
+    professionname: { name: 'Carpenter' },
+    regulations: ['Regulation E', 'Regulation F'],
+    websiteurl: 'https://carlosgomez.com',
+    last_login: '2024-07-07',
+    country: 'Mexico',
+    state: 'Jalisco',
+    city: 'Guadalajara',
+    distance: 15,
+  },
+  {
+    id: '4',
+    title: 'Mme.',
+    first_name: 'Marie',
+    last_name: 'Curie',
+    email: 'marie.curie@example.com',
+    phonenumber: '3456789012',
+    nin: 'D345678901',
+    passport: 'A3456789',
+    image: 'https://via.placeholder.com/150',
+    address: '4',
+    is_staff: false,
+    is_active: true,
+    is_superuser: false,
+    verified: true,
+    verifiedAt: '2022-04-04',
+    avgratings: 4.9,
+    is_tradeperson: true,
+    professionname: { name: 'Painter' },
+    regulations: ['Regulation G', 'Regulation H'],
+    websiteurl: 'https://mariecurie.com',
+    last_login: '2024-07-07',
+    country: 'France',
+    state: 'Île-de-France',
+    city: 'Paris',
+    distance: 5,
+  },
+  {
+    id: '5',
+    title: 'Mr.',
+    first_name: 'Kofi',
+    last_name: 'Annan',
+    email: 'kofi.annan@example.com',
+    phonenumber: '4567890123',
+    nin: 'E456789012',
+    passport: 'B4567890',
+    image: 'https://via.placeholder.com/150',
+    address: '5',
+    is_staff: false,
+    is_active: true,
+    is_superuser: false,
+    verified: true,
+    verifiedAt: '2022-05-05',
+    avgratings: 4.6,
+    is_tradeperson: true,
+    professionname: { name: 'Plumber' },
+    regulations: ['Regulation I', 'Regulation J'],
+    websiteurl: 'https://kofiannan.com',
+    last_login: '2024-07-07',
+    country: 'Ghana',
+    state: 'Greater Accra',
+    city: 'Accra',
+    distance: 25,
+  },
+  {
+    id: '6',
+    title: 'Ms.',
+    first_name: 'Nina',
+    last_name: 'Ricci',
+    email: 'nina.ricci@example.com',
+    phonenumber: '5678901234',
+    nin: 'F567890123',
+    passport: 'C5678901',
+    image: 'https://via.placeholder.com/150',
+    address: '6',
+    is_staff: false,
+    is_active: true,
+    is_superuser: false,
+    verified: true,
+    verifiedAt: '2022-06-06',
+    avgratings: 4.7,
+    is_tradeperson: true,
+    professionname: { name: 'Electrician' },
+    regulations: ['Regulation K', 'Regulation L'],
+    websiteurl: 'https://ninaricci.com',
+    last_login: '2024-07-07',
+    country: 'Italy',
+    state: 'Lazio',
+    city: 'Rome',
+    distance: 30,
+  },
+  {
+    id: '7',
+    title: 'Mr.',
+    first_name: 'Li',
+    last_name: 'Wei',
+    email: 'li.wei@example.com',
+    phonenumber: '6789012345',
+    nin: 'G678901234',
+    passport: 'D6789012',
+    image: 'https://via.placeholder.com/150',
+    address: '7',
+    is_staff: false,
+    is_active: true,
+    is_superuser: false,
+    verified: true,
+    verifiedAt: '2022-07-07',
+    avgratings: 4.8,
+    is_tradeperson: true,
+    professionname: { name: 'Carpenter' },
+    regulations: ['Regulation M', 'Regulation N'],
+    websiteurl: 'https://liwei.com',
+    last_login: '2024-07-07',
+    country: 'China',
+    state: 'Beijing',
+    city: 'Beijing',
+    distance: 12,
+  },
+  {
+    id: '8',
+    title: 'Ms.',
+    first_name: 'Olga',
+    last_name: 'Ivanov',
+    email: 'olga.ivanov@example.com',
+    phonenumber: '7890123456',
+    nin: 'H789012345',
+    passport: 'E7890123',
+    image: 'https://via.placeholder.com/150',
+    address: '8',
+    is_staff: false,
+    is_active: true,
+    is_superuser: false,
+    verified: true,
+    verifiedAt: '2022-08-08',
+    avgratings: 4.4,
+    is_tradeperson: true,
+    professionname: { name: 'Painter' },
+    regulations: ['Regulation O', 'Regulation P'],
+    websiteurl: 'https://olgaivanov.com',
+    last_login: '2024-07-07',
+    country: 'Russia',
+    state: 'Moscow',
+    city: 'Moscow',
+    distance: 18,
+  },
+  {
+    id: '9',
+    title: 'Mr.',
+    first_name: 'Samir',
+    last_name: 'Khan',
+    email: 'samir.khan@example.com',
+    phonenumber: '8901234567',
+    nin: 'I890123456',
+    passport: 'F8901234',
+    image: 'https://via.placeholder.com/150',
+    address: '9',
+    is_staff: false,
+    is_active: true,
+    is_superuser: false,
+    verified: true,
+    verifiedAt: '2022-09-09',
+    avgratings: 4.3,
+    is_tradeperson: true,
+    professionname: { name: 'Plumber' },
+    regulations: ['Regulation Q', 'Regulation R'],
+    websiteurl: 'https://samirkhan.com',
+    last_login: '2024-07-07',
+    country: 'India',
+    state: 'Maharashtra',
+    city: 'Mumbai',
+    distance: 8,
+  }
 ];
 
 
 const professions = ['Plumber', 'Electrician', 'Carpenter', 'Painter'];
 
 const TradespersonSearch = () => {
-  const [location, setLocation] = useState('');
   const [miles, setMiles] = useState(10);
   const [profession, setProfession] = useState('');
   const [country, setCountry] = useState('');
@@ -85,7 +299,7 @@ const TradespersonSearch = () => {
       setCities([]);
     }
     setCity('');
-  }, [state]);
+  }, [state, country]);
 
   const handleSearch = () => {
     const filtered = tradespeopleData.filter((person) => {
@@ -116,22 +330,14 @@ const TradespersonSearch = () => {
   
   return (
     <div style={{ padding: '8px'}}>
-      <div className='d-flex justify-space-between align-items-center'>
-        <Input
-          placeholder="Search for tradesperson"
-          prefix={<SearchOutlined style={{ fontSize: '18px', fontWeight: 'bold' }} />}
-          style={{ width: '100%', marginRight: '10px' }}
-          onPressEnter={handleSearch}
-        />
-        <Avatar shape="square" size={42} icon={<ControlOutlined rotate={90} />} className='filtericon m-1 px-3' onClick={showDrawer} style={{ color: 'black' }} />
-      </div>
+      <Search handleSearch={handleSearch} showDrawer={showDrawer} />
 
       {/* Drawer for filters */}
       <Drawer
         title="Filter Tradespeople"
         placement="right"
         onClose={onClose}
-        visible={visible}
+        open={visible}
         width={300}
       >
         <Form layout="vertical">
@@ -201,7 +407,7 @@ const TradespersonSearch = () => {
           </Form.Item>
           <Form.Item>
             <Space>
-              <Button type="primary" onClick={handleSearch}>
+              <Button onClick={handleSearch}>
                 Search
               </Button>
               <Button
@@ -228,41 +434,54 @@ const TradespersonSearch = () => {
              xs: 1,   // mobile
             sm: 2,   // tablet
             md: 4,   // laptop
-            lg: 6,   // desktop
-            xl: 8,   // extra-large screens 
+            lg: 5,   // desktop
+            xl: 5,   // extra-large screens 
             }}
           dataSource={filteredTradespeople.slice((currentPage - 1) * pageSize, currentPage * pageSize)}
           renderItem={(item) => (
             <List.Item>
-              <Card
-                hoverable
-                size="small"
-                title={item.name}
-                style={{height: '210px'}}
-                extra={<Avatar shape="square" size={26} className={`rounded-1 ${item.verified ? 'text-success' : 'text-white'} bg-light`} icon={<CheckCircleOutlined />} />}
-              >
-                <Skeleton avatar title={false} loading={item.loading} active>
-                    <List.Item.Meta
-                    avatar={<Avatar size={48} src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${2}`} style={{ backgroundColor: item.type === 'sent' ? '#cf1322' : '#3f8600' }}>{2 + 1}</Avatar>}
-                    title={item.profession}
-                    description={`${item.distance} miles.  ${item.city}, ${item.state}, ${item.country}`}
+              <Link to={{pathname:`/tradesperson/${item.id}/view`}} state={{user: item}} className='text-decoration-none'>
+                  <Card
+                    hoverable
+                    size="small"
+                    title={item.first_name +'' + item.last_name}
+                    style={{height: '190px'}}
                     
-                    />
+                    extra={<Avatar shape="square" size={26} className={`rounded-1 ${item.verified ? 'text-success' : 'text-white'} bg-light`} icon={<CheckCircleOutlined />} />}
+                  >
+                    <Skeleton avatar title={false} loading={item.loading} active>
+                        <List.Item.Meta
+                        avatar={<Avatar size={54} src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${item.id}` || `${parseInt(item.id) + 1}`} style={{ backgroundColor: item.type === 'sent' ? '#cf1322' : '#3f8600' }} />}
+                        title={item.professionname.name}
+                        description={<div>
+                          <p className='small m-0'>{item.distance} miles,</p>
+                          <p className='small m-0'>{(item.city.length>12)?item.city.slice(0,11):item.city},</p>
+                          <p className='small m-0'>{(item.state.length>12)?item.state.slice(0,11):item.state},</p>
+                          <p className='m-0'>{(item.country.length>12)?item.country.slice(0,11):item.country}</p>
+                        </div>}
+                        
+                        />
+                        
+                    </Skeleton>
+                    <div className='list-icons d-flex justify-content-end'>
+                          <Link to={{pathname:`/tradesperson/${item.id}/chat`}} state={{user: item}} className='text-decoration-none'>
+                            <Avatar shape="square" size={26} className={`rounded-1 text-dark ms-2`} icon={<EyeOutlined  style={{ fontSize: '1.2rem', cursor: 'pointer' }} />} />
+                          </Link> 
+                          <Link to={{pathname:`/tradesperson/${item.id}/chat`}} state={{person: item}} className='text-decoration-none'>    
+                            <Avatar  shape="square" size={26} className={`rounded-1 text-dark ms-2`} icon={<MessageOutlined  style={{ fontSize: '1.2rem', cursor: 'pointer' }} />} />
+                          </Link>
+                        </div>
                     
-                </Skeleton>
-                <div className='mt-2 d-flex justify-content-end'>
-                      <Avatar shape="square" size={26} className={`rounded-1 text-dark ms-2`} icon={<EyeOutlined  style={{ fontSize: '1.2rem', cursor: 'pointer' }} />} />
-                      <Avatar shape="square" size={26} className={`rounded-1 text-dark ms-2`} icon={<MessageOutlined  style={{ fontSize: '1.2rem', cursor: 'pointer' }} />} />
-                    </div>
-              </Card>
+                  </Card>
+              </Link>
             </List.Item>
           )}
         />
         <div style={{ textAlign: 'center', marginBottom: '100px' }}>
           <Pagination
-            current={currentPage}
+            currentPage={currentPage}
             pageSize={pageSize}
-            total={filteredTradespeople.length}
+            totallength={filteredTradespeople.length}
             onChange={handlePageChange}
           />
         </div>
