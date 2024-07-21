@@ -369,7 +369,7 @@ function Home (props){
                          <div>
                             <img src={CIPAC_cover_photo} alt='news' width='100%'/>
                         </div>
-                        <h5>SPAWN Engineering Fest 2024</h5>
+                        <h5>Oahse Engineering Fest 2024</h5>
                         <p>
                             Order your materials from our online store 
                             and experience and on-time supply/ delivery of your quality materials.
@@ -380,7 +380,7 @@ function Home (props){
                          <div>
                             <img src={CIPAC_cover_photo} alt='news' width='100%'/>
                         </div>
-                        <h5>SPAWN Engineering Fest 2024</h5>
+                        <h5>Oahse Engineering Training Programs and Certification </h5>
                         <p>
                             Order your materials from our online store 
                             and experience and on-time supply/ delivery of your quality materials.
@@ -391,7 +391,7 @@ function Home (props){
                         <div>
                             <img src={CIPAC_cover_photo} alt='news' width='100%'/>
                         </div>
-                        <h5>SPAWN Engineering Fest 2024</h5>
+                        <h5>Oahse Project 2025</h5>
                         <p>
                             Order your materials from our online store 
                             and experience and on-time supply/ delivery of your quality materials.

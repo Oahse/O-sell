@@ -1,9 +1,11 @@
 import { React, useState, useEffect, useRef, faTimes, 
-        faBars, faBell,Navbar, Nav,logo, Link,faMapMarkerAlt,faCartShopping, NavDropdown} from '../components/all_imports';
+        faBars, faBell,Navbar, Nav, Link,faMapMarkerAlt,faCartShopping, NavDropdown} from '../components/all_imports';
 
 import Btn from './Button';
 import Icon from './Icon';
 import './Header.css';
+import icon from '../assets/oahse-icon.png'
+import logo from '../assets/oahse-logo.png'
 import { LinkContainer } from 'react-router-bootstrap'
 
 
@@ -64,7 +66,7 @@ const Header = (props) => {
             {isMobile ? (
                     <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight} justify-content='between' style={{margin:margin, padding:'8px', backgroundColor:navbarBg}}>
                         <Navbar.Brand href="/" style={linkstyles}>
-                            <img alt="" src={logo} width="50" height="30" className="d-inline-block align-top"/>{' '}
+                            <img alt="" src={icon} width="50" height="30" className="d-inline-block align-top"/>{' '}
                             {isSmallMobile ? (<span> </span>):(<span style={{'color':iconColor, 'fontWeight':'bold'}}>Oahse</span>)}
                         </Navbar.Brand>
                         <div className="ms-auto d-flex align-items-center">
@@ -83,8 +85,8 @@ const Header = (props) => {
                 ) : (
                     <Navbar className="header-bg" bg={navbarBg} variant="light" fixed='top' expand="lg" ref={navbarheight}  justify-content='between' style={{margin:margin, padding:'8px'}}>
                         <Navbar.Brand href="/" style={linkstyles}>
-                            <img alt="" src={logo} width="50" height="30" className="d-inline-block align-top"/>{' '}
-                            <span style={{'color':iconColor,'fontWeight':'bold'}}>Oahse</span>
+                            <img alt="" src={icon} width="50" height="50" className="d-inline-block align-top"/>{' '}
+                            <span style={{'color':iconColor,'fontWeight':'bold'}}><img src={logo} alt='logo' width='80' height='40' /></span>
                         </Navbar.Brand>
                         <div className="ms-auto links">
                             <Link to="/" className="header-link" style={linkstyles} onClick={()=>setactive(this)} >Home</Link>

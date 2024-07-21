@@ -12,7 +12,7 @@ import IconButton from '../components/Iconbutton';
 import Icon from '../components/Icon';
 import Footer from '../components/Footer';
 import { Col, Container, Row } from 'react-bootstrap';
-import cover from '../assets/coverphoto.jpg'
+import cover from '../assets/coverphoto3.jpg'
 import photo1 from '../assets/photo1.jpg'
 import rocket from '../assets/rocket.jpg'
 import metalogo from '../assets/Meta-Logo2.png'
@@ -170,7 +170,7 @@ function About() {
                         </div>
                     </div>
                   ):
-                  (<div className='image-text row px-4'>
+                  (<div className='image-text row px-4' style={{color: 'white'}}>
                       <div className='col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8  float-left'>
                         <h1>Your Engineering Services <br/>
                             Made Easier,
@@ -330,7 +330,7 @@ function About() {
                         <h2>Quality Policy Statement</h2>
                         <hr/>
                         <p>
-                           At SPAWN, we are dedicated to delivering only the best products and services <br/>
+                           At Oahse, we are dedicated to delivering only the best products and services <br/>
                             with multiple access channels and built-in back-up services at every point of connection, <br/>
                             our technical operators undergo rigorous background checks and verifications <br/> 
                             to give you all the assurances you need. <br/>
