@@ -17,7 +17,7 @@ router.register(r'professions', ProfessionViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('login/', LoginViewSet.as_view({'post': 'login'}), name='login'),
-    path('logout/', LoginViewSet.as_view({'post': 'logout'}), name='login'),
+    path('logout/', LoginViewSet.as_view({'post': 'logout'}), name='logout'),
     path('verify-email/<uidb64>/<token>/', VerifyEmailView.as_view(), name='verify-email'),
     path('password-reset/', ResetPasswordRequestView.as_view(), name='password-reset-request')
 ]
