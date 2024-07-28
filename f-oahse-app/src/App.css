@@ -1,3 +1,15 @@
+/*
+color theme 
+ */
+ :root {
+  --primary-color: #000000;
+  --secondary-color: white;
+  --background-color: #597387;
+  --text-color: #2c3e50;
+  --light-test-color:white;
+  --border-color:#597387;
+}
+
 /* 
 home page
  */
@@ -21,7 +33,7 @@ home page
   top: 0;
   z-index: -1;
   width: 100%;
-  background-color: #ffc107;
+  background-color: var(--background-color);
   height: 40%;
 }
 .segmented-wrapper {
@@ -75,7 +87,7 @@ home page
 
 .header-link {
   margin-right: 20px;
-  color: #333;
+  color: var(--text-color);
   font-size: 14px;
   text-decoration: none;
   height: 40px;
@@ -88,28 +100,22 @@ home page
 }
 
 .header-link:hover{
-  background-color: #ffc107;
+  background-color: var(--background-color);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .menu-item {
   cursor: pointer;
+  background-color: var(--background-color);
 }
 
 .menu-item:hover{
-  background-color: #ffc107;
-  color: #000;
+  background-color: var(--background-color);
+  color: var(--text-color);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.btn-login {
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: #ff5722;
-  color: white;
-  border: none;
-  border-radius: 4px;
-}
+
 
 @media (max-width: 768px) {
   .header {
@@ -141,9 +147,12 @@ home page
   }
 }
 
+.ant-icon{
+  color: var(--light-test-color);
+}
 .ant-segmented,
 .ant-segmented-group{
-    background-color: #ffc107 !important;
+    background-color: var(--background-color) !important;
 }
 .segmented-wrapper {
   position: fixed;
@@ -166,7 +175,7 @@ home page
   flex: 1;
   text-align: center;
   border-radius: 4px;
-  color: #333;
+  color: var(--light-test-color);
 }
 
 .segmented-wrapper .ant-segmented-item .ant-segmented-item-label{
@@ -175,7 +184,7 @@ home page
 .segmented-wrapper .ant-segmented-item-selected{
   background-color: #fff ;
   border-radius: 4px;
-  color: #000;
+  color: var(--text-color);
   
 }
 
@@ -243,12 +252,12 @@ home page
   } 
 } */
 .ant-layout-footer{
-  background: #1E1E1E;
+  background: var(--background-color);
   color: white;
 }
 .footer-title{
   font-size: 30px;
-  color: #ffc107;
+  color: var(--background-color);
   margin:0px;
 }
 .footer-list{
@@ -273,10 +282,10 @@ home page
   font-size: 14px;
 }
 .footer-listitem:hover{
-  color: #ffc107;
+  color: var(--background-color);
 }
 .footer-listitem:active{
-  color: #ffc107;
+  color: var(--background-color);
 }
 .store{
   border: 1.5px solid white;
@@ -331,24 +340,24 @@ home page
 
 
 .ant-btn {
-  border-color: #ffc107;
-  background-color: #ffc107;
+  background-color: var(--light-test-color);
+  color: var(--text-color);
+  border: 2.5px solid var(--light-test-color);
   height: 40px;
   min-width: 40px;
   cursor: pointer;
 }
 /* Styles for the button on hover ant-btn-primary */
 .ant-btn:hover {
-  color: black !important;
-  background-color: white !important;
-  border-color: #ffc107 !important;
+  color: var(--text-color) !important;
+  border-color: var(--background-color) !important;
 }
 
 /* Styles for the button icon on hover */
 .ant-btn:hover .anticon,
 .ant-btn:focus .anticon,
 .ant-btn:active .anticon {
-  color: black !important; /* Change icon color to black on hover, focus, and active */
+  color: var(--text-color) !important; /* Change icon color to black on hover, focus, and active */
 }
 
 /* input */
@@ -374,7 +383,7 @@ home page
 .ant-select-selector:active,
 .ant-select-open .ant-select-selector {
   box-shadow: none !important;
-  border: 1.5px solid #ffc107 !important;
+  border: 1.5px solid var(--background-color) !important;
 }
 
 
@@ -412,18 +421,18 @@ home page
 .ant-pagination-item:hover,
 .ant-pagination-next:hover,
 .ant-pagination-previous:hover {
-  background-color: #ffc107 !important;
+  background-color: var(--background-color) !important;
   color: white !important;
 }
 .ant-pagination-item-active {
-  border-color: #ffc107 !important;
+  border-color: var(--background-color) !important;
 }
 
 .ant-pagination-item-ellipsis {
   color: #fceec6 !important; /* Change color of ellipsis to match background */
 }
 .ant-pagination-item-link-icon {
-  color: #ffc107 !important; /* Change color of pagination icon */
+  color: var(--background-color) !important; /* Change color of pagination icon */
 }
 
 /* Chat Room------------------------ */

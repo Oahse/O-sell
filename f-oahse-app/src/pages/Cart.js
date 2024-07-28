@@ -48,14 +48,10 @@ const CartPage = () => {
     // Columns configuration for the table
     const columns = [
         {
-            dataIndex: 'image',
-            key: 'image',
-            render: (text) => <img src={text} alt="product" style={{ width: 30, height: 30 }} />,
-        },
-        {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
+            render: (image, text) => <span><img src={image} alt="product" style={{ width: 30, height: 30 }} />{`$${text}`}</span>,
         },
         {
             title: 'Price',
@@ -114,7 +110,7 @@ const CartPage = () => {
                     <Empty description="No items in the cart" />
                 )}
                 <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Button type="primary" style={{ alignSelf: "center" }}>
+                    <Button  style={{ alignSelf: "center" }}>
                         <i class="fa-light fa-credit-card"></i>Checkout
                     </Button>
                 </div>

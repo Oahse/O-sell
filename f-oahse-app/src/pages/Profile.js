@@ -88,43 +88,53 @@ function ProfilePage() {
 
             <Row className='p-3 mb-3 text-center' lg={4} md={4} sm={3}>
                 <Col className='mb-5'>
-                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Dashboard'}} style={{textDecoration:'none', color:'black'}}>
+                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Dashboard'}} style={{textDecoration:'none', color:'black', cursor:'pointer'}}>
                         <h1><i className="fa-duotone fa-file-chart-column"></i></h1>
                         <h4>Reports</h4>
                     </Link>
                 </Col>
 
                 <Col className='mb-5'>
-                    <h1><i className="fa-duotone fa-heart-circle-check"></i></h1>
-                    <h4>Saved Items</h4>
+                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Dashboard'}} style={{textDecoration:'none', color:'black', cursor:'pointer'}}>
+                            
+                        <h1><i className="fa-duotone fa-heart-circle-check"></i></h1>
+                        <h4>Saved Items</h4>
+                    </Link>
                 </Col>
 
                 <Col className='mb-5'>
-                    <h1><i className="fa-duotone fa-star-sharp-half"></i></h1>
-                    <h4>Reviews</h4>
+                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Dashboard'}} style={{textDecoration:'none', color:'black', cursor:'pointer'}}>    
+                        <h1><i className="fa-duotone fa-star-sharp-half"></i></h1>
+                        <h4>Reviews</h4>
+                    </Link>
                 </Col>
 
                 <Col className='mb-5'>
-                    <h1><i className="fa-light fa-files"></i></h1>
-                    <h4>Submissions</h4>
+                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Dashboard'}} style={{textDecoration:'none', color:'black', cursor:'pointer'}}>
+                        <h1><i className="fa-light fa-files"></i></h1>
+                        <h4>Submissions</h4>
+                    </Link>
                 </Col>
 
                 <Col className='mb-5'>
-                    <h1><i className="fa-duotone fa-map-location-dot"></i></h1>
-                    <h4>Address Book</h4>
+                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Dashboard'}} style={{textDecoration:'none', color:'black', cursor:'pointer'}}>   
+                        <h1><i className="fa-duotone fa-map-location-dot"></i></h1>
+                        <h4>Address Book</h4>
+                    </Link>
                 </Col>
 
                 <Col className='mb-5'>
-                     
-                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Transactions'}} style={{textDecoration:'none', color:'black'}}>
+                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Transactions'}} style={{textDecoration:'none', color:'black', cursor:'pointer'}}>
                         <h1><i className="fa-duotone fa-wallet"></i></h1>
                         <h4>Payment</h4>
                     </Link>
                 </Col>
 
                 <Col className='mb-5'>
-                <h1><i className="fa-light fa-right-from-bracket"></i></h1>
-                    <h4>Logout</h4>
+                    <Link to={{pathname:`/profile/reports/${1455}`}} state={{indexpage:'Dashboard'}} style={{textDecoration:'none', color:'black', cursor:'pointer'}}>    
+                        <h1><i className="fa-light fa-right-from-bracket"></i></h1>
+                        <h4>Logout</h4>
+                    </Link>
                 </Col>
             </Row>
         </Container>        
