@@ -8,6 +8,7 @@ color theme
   --text-color: #2c3e50;
   --light-test-color:white;
   --border-color:#597387;
+  --hover-color:#c8d3db;
 }
 
 /* 
@@ -100,7 +101,13 @@ home page
 }
 
 .header-link:hover{
+  background-color: var(--hover-color);
+  color: var(--text-color);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+.header-link:active{
   background-color: var(--background-color);
+  color: var(--light-test-color);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -112,6 +119,11 @@ home page
 .menu-item:hover{
   background-color: var(--background-color);
   color: var(--text-color);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+.header-link:active{
+  background-color: var(--background-color);
+  color: var(--light-test-color);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -418,22 +430,22 @@ home page
 .ant-card:hover{
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-.ant-pagination-item:hover,
-.ant-pagination-next:hover,
-.ant-pagination-previous:hover {
+.ant-pagination-item:hover{
   background-color: var(--background-color) !important;
   color: white !important;
 }
 .ant-pagination-item-active {
-  border-color: var(--background-color) !important;
+  border-color: var(--border-color) !important;
 }
 
 .ant-pagination-item-ellipsis {
-  color: #fceec6 !important; /* Change color of ellipsis to match background */
+  color: var(--background-color) !important; /* Change color of ellipsis to match background */
 }
-.ant-pagination-item-link-icon {
-  color: var(--background-color) !important; /* Change color of pagination icon */
+.ant-pagination-item-link:hover {
+  border-color: var(--border-color);
+  background-color: var(--background-color) ;
 }
+
 
 /* Chat Room------------------------ */
 .chat-room {

@@ -541,7 +541,6 @@ const Shop = () => {
           pageSize={pagination.pageSize}
           total={filteredProducts.length}
           onChange={handlePaginationChange}
-          style={{ marginTop: 10, textAlign: 'center' }}
         />
         </div>
       </div>
